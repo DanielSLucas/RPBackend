@@ -4,7 +4,10 @@
   "port": 5432,
   "username": "postgres",
   "password": "docker",
-  "database": "RPSist",
+  "database": "postgres",
+  "entities": [
+    "./src/models/*.ts"
+  ],
   "migrations": [
     "./src/database/migrations/*.ts"
   ],

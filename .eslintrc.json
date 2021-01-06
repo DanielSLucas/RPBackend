@@ -15,11 +15,14 @@
         "sourceType": "module"
     },
     "plugins": [
-        "@typescript-eslint"
+        "@typescript-eslint",
+        "prettier"
     ],
     "rules": {
       "prettier/prettier": "error",
       "class-methods-use-this":"off",
+      "no-useless-constructor":"off",
+      "camelcase": "off",
       "import/extensions": [
         "error",
         "ignorePackages",
