@@ -1,7 +1,6 @@
-import { getCustomRepository } from 'typeorm';
-
-import Product from '../models/Product';
-import ProductsRepository from '../repositories/ProductsRepository';
+import { inject, injectable } from 'tsyringe';
+import Product from '../infra/typeorm/entities/Product';
+import IProductsRepository from '../repositories/IProductsRepository';
 
 interface Request {
   name: string;
@@ -10,23 +9,25 @@ interface Request {
   product_type: 'Bolos' | 'Arranjos' | 'Outros';
 }
 
+@injectable()
 class CreateProductService {
+  constructor(
+    @inject('ProductsRepository')
+    private productsRepository: IProductsRepository,
+  ) {}
+
   public async execute({
     name,
     quantity,
     value,
     product_type,
   }: Request): Promise<Product> {
-    const productsRepository = getCustomRepository(ProductsRepository);
-
-    const product = await productsRepository.create({
+    const product = await this.productsRepository.create({
       name,
       quantity,
       value,
       product_type,
     });
-
-    await productsRepository.save(product);
 
     return product;
   }
