@@ -2,6 +2,7 @@ import FakeProductsRepository from '../repositories/fakes/FakeProductRepository'
 import DeleteProductService from './DeleteProductService';
 import CreateProductService from './CreateProductService';
 import ListProductsService from './ListProductsService';
+import AppError from '../../../shared/errors/AppError';
 
 describe('DeleteProduct', () => {
   it('should be able to delete a specified product', async () => {
@@ -37,6 +38,6 @@ describe('DeleteProduct', () => {
 
     await expect(
       deleteProduct.execute('a-nonexistent-product-id'),
-    ).rejects.toBeInstanceOf(Error);
+    ).rejects.toBeInstanceOf(AppError);
   });
 });

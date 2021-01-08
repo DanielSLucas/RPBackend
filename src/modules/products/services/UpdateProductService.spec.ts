@@ -1,3 +1,4 @@
+import AppError from '../../../shared/errors/AppError';
 import FakeProductsRepository from '../repositories/fakes/FakeProductRepository';
 import CreateProductService from './CreateProductService';
 import UpdateProductService from './UpdateProductService';
@@ -44,6 +45,6 @@ describe('UpdateProduct', () => {
         value: 150,
         product_type: 'Bolos',
       }),
-    ).rejects.toBeInstanceOf(Error);
+    ).rejects.toBeInstanceOf(AppError);
   });
 });

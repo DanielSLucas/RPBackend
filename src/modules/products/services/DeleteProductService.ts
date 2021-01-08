@@ -1,4 +1,5 @@
 import { inject, injectable } from 'tsyringe';
+import AppError from '../../../shared/errors/AppError';
 import IProductsRepository from '../repositories/IProductsRepository';
 
 @injectable()
@@ -12,7 +13,7 @@ class DeleteProductService {
     const productExists = await this.productsRepository.findById(product_id);
 
     if (!productExists) {
-      throw new Error('Product not found');
+      throw new AppError('Product not found', 404);
     }
 
     await this.productsRepository.delete(productExists);

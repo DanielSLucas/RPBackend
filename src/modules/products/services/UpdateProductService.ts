@@ -1,4 +1,5 @@
 import { inject, injectable } from 'tsyringe';
+import AppError from '../../../shared/errors/AppError';
 import Product from '../infra/typeorm/entities/Product';
 import IProductsRepository from '../repositories/IProductsRepository';
 
@@ -27,7 +28,7 @@ class UpdateProductService {
     const productExists = await this.productsRepository.findById(product_id);
 
     if (!productExists) {
-      throw new Error('Product not found');
+      throw new AppError('Product not found', 404);
     }
 
     const updatedProduct = await this.productsRepository.update(productExists, {

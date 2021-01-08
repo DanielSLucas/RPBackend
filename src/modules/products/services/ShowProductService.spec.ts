@@ -1,3 +1,4 @@
+import AppError from '../../../shared/errors/AppError';
 import FakeProductsRepository from '../repositories/fakes/FakeProductRepository';
 import CreateProductService from './CreateProductService';
 import ShowProductService from './ShowProductService';
@@ -26,6 +27,6 @@ describe('ShowProduct', () => {
 
     await expect(
       showProduct.execute('a-nonexistent-product-id'),
-    ).rejects.toBeInstanceOf(Error);
+    ).rejects.toBeInstanceOf(AppError);
   });
 });
