@@ -3,8 +3,8 @@ Back-end para sistema de gestão e locação de materiais.
 
 ### Rota de produtos
   **`/products`**
-- [POST]: Cria um produto.
-  > - Recebe como corpo da resquisição:
+- `[**POST**]`: Cria um produto.
+  - Recebe como corpo da resquisição:
 
       "{
         "name": "Bolo Caro",
@@ -13,7 +13,7 @@ Back-end para sistema de gestão e locação de materiais.
         "product_type": "Bolos"
       }"
 
-  > - Retorna:
+  - Retorna:
 
       "{
         "name": "Bolo Caro",
