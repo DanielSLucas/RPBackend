@@ -9,7 +9,7 @@ Back-end para sistema de gestão e locação de materiais.
 
       {
         "name": "Bolo Caro",
-        "quantity": "20",
+        "quantity": 20,
         "value": 2000,
         "product_type": "Bolos"
       }
@@ -18,7 +18,7 @@ Back-end para sistema de gestão e locação de materiais.
 
       {
         "name": "Bolo Caro",
-        "quantity": "20",
+        "quantity": 20,
         "value": 2000,
         "product_type": "Bolos",
         "id": "fec6998e-316d-4f86-9ef6-b1dc114f870c",
@@ -37,7 +37,7 @@ Back-end para sistema de gestão e locação de materiais.
 
       {
         "name": "Bolo Caro",
-        "quantity": "20",
+        "quantity": 20,
         "value": 2000,
         "product_type": "Bolos"
       }
