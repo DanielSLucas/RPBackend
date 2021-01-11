@@ -2,12 +2,19 @@ import AppError from '../../../shared/errors/AppError';
 import FakeHashProvider from '../providers/hashProvider/fakes/FakeHashProvider';
 import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
 import CreateUserService from './CreateUserService';
+import AuthenticateUserService from './AuthenticateUserService';
 
-describe('CreateUser', () => {
-  it('should be able to create a new user', async () => {
+describe('AuthenticateUser', () => {
+  it('should be able to authenticate', async () => {
     const fakeUsersRepository = new FakeUsersRepository();
     const fakeHashProvider = new FakeHashProvider();
+
     const createUser = new CreateUserService(
+      fakeUsersRepository,
+      fakeHashProvider,
+    );
+
+    const authenticateUser = new AuthenticateUserService(
       fakeUsersRepository,
       fakeHashProvider,
     );
@@ -20,21 +27,25 @@ describe('CreateUser', () => {
       role: 'ADM',
     });
 
-    expect(user).toHaveProperty('id');
-    expect(user).toEqual({
-      id: user.id,
-      name: 'Daniel Lucas',
+    const response = await authenticateUser.execute({
       email: 'daniellucas-pms@hotmail.com',
       password: 'ddll9000',
-      whatsapp: '12981025796',
-      role: 'ADM',
     });
+
+    expect(response).toHaveProperty('token');
+    expect(response.user).toEqual(user);
   });
 
-  it('should not be able to create a new user with same email from another', async () => {
+  it('should not be able to authenticate with an invalid email', async () => {
     const fakeUsersRepository = new FakeUsersRepository();
     const fakeHashProvider = new FakeHashProvider();
+
     const createUser = new CreateUserService(
+      fakeUsersRepository,
+      fakeHashProvider,
+    );
+
+    const authenticateUser = new AuthenticateUserService(
       fakeUsersRepository,
       fakeHashProvider,
     );
@@ -48,12 +59,39 @@ describe('CreateUser', () => {
     });
 
     await expect(
-      createUser.execute({
-        name: 'Daniel Lucas',
-        email: 'daniellucas-pms@hotmail.com',
+      authenticateUser.execute({
+        email: 'anInvalidUser@email.com',
         password: 'ddll9000',
-        whatsapp: '12981025796',
-        role: 'ADM',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
+
+  it('should not be able to authenticate with wrong password', async () => {
+    const fakeUsersRepository = new FakeUsersRepository();
+    const fakeHashProvider = new FakeHashProvider();
+
+    const createUser = new CreateUserService(
+      fakeUsersRepository,
+      fakeHashProvider,
+    );
+
+    const authenticateUser = new AuthenticateUserService(
+      fakeUsersRepository,
+      fakeHashProvider,
+    );
+
+    await createUser.execute({
+      name: 'Daniel Lucas',
+      email: 'daniellucas-pms@hotmail.com',
+      password: 'ddll9000',
+      whatsapp: '12981025796',
+      role: 'ADM',
+    });
+
+    await expect(
+      authenticateUser.execute({
+        email: 'daniellucas-pms@hotmail.com',
+        password: 'wrongPassword',
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
