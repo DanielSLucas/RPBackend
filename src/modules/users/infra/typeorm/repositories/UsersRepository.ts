@@ -32,10 +32,43 @@ class UsersRepository implements IUsersRepository {
     return user;
   }
 
+  public async update(
+    user: User,
+    { name, email, password, whatsapp, role }: ICreateUserDTO,
+  ): Promise<User> {
+    Object.assign(user, {
+      name,
+      email,
+      password,
+      whatsapp,
+      role,
+    });
+
+    await this.ormRepository.save(user);
+
+    return user;
+  }
+
+  public async delete(user: User): Promise<void> {
+    await this.ormRepository.remove(user);
+  }
+
   public async findOneByEmail(email: string): Promise<User | undefined> {
     const user = await this.ormRepository.findOne({ where: { email } });
 
     return user;
+  }
+
+  public async findById(id: string): Promise<User | undefined> {
+    const user = await this.ormRepository.findOne({ where: { id } });
+
+    return user;
+  }
+
+  public async findAll(): Promise<User[]> {
+    const users = await this.ormRepository.find();
+
+    return users;
   }
 }
 

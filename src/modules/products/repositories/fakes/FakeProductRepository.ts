@@ -14,7 +14,7 @@ class ProductRepository implements IProductRepository {
     return findProduct;
   }
 
-  public async listAll(): Promise<Product[]> {
+  public async findAll(): Promise<Product[]> {
     return this.products;
   }
 

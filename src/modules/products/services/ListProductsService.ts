@@ -10,7 +10,7 @@ class ListProductsService {
   ) {}
 
   public async execute(): Promise<Product[]> {
-    const products = await this.productsRepository.listAll();
+    const products = await this.productsRepository.findAll();
 
     return products;
   }
