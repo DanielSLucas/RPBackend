@@ -3,7 +3,7 @@ import { sign } from 'jsonwebtoken';
 
 import AppError from '../../../shared/errors/AppError';
 import User from '../infra/typeorm/entities/User';
-import IUsersRepository from '../repositories/IUsersRespository';
+import IUsersRepository from '../repositories/IUsersRepository';
 
 import authConfig from '../../../config/auth';
 import IHashProvider from '../providers/hashProvider/models/IHashProvider';

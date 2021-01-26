@@ -1,12 +1,12 @@
 import { inject, injectable } from 'tsyringe';
 import AppError from '../../../shared/errors/AppError';
-import IUsersRespository from '../repositories/IUsersRespository';
+import IUsersRepository from '../repositories/IUsersRepository';
 
 @injectable()
 class DeleteUserService {
   constructor(
     @inject('UsersRepository')
-    private usersRepository: IUsersRespository,
+    private usersRepository: IUsersRepository,
   ) {}
 
   public async execute(user_id: string): Promise<void> {

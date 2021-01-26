@@ -1,9 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 
 import User from '../infra/typeorm/entities/User';
-import IUsersRepository from '../repositories/IUsersRespository';
-import IHashProvider from '../providers/hashProvider/models/IHashProvider';
-import AppError from '../../../shared/errors/AppError';
+import IUsersRepository from '../repositories/IUsersRepository';
 
 @injectable()
 class ListUsersService {
