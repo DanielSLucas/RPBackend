@@ -24,6 +24,12 @@ class CustomersRepository implements ICustomersRepository {
     return customer;
   }
 
+  public async findAll(): Promise<Customer[]> {
+    const customers = await this.ormRepository.find();
+
+    return customers;
+  }
+
   public async create({
     name,
     whatsapp,
@@ -38,6 +44,21 @@ class CustomersRepository implements ICustomersRepository {
     await this.ormRepository.save(customer);
 
     return customer;
+  }
+
+  public async update(
+    customer: Customer,
+    { name, whatsapp, cpf }: ICreateCustomerDTO,
+  ): Promise<Customer> {
+    Object.assign(customer, { name, whatsapp, cpf });
+
+    await this.ormRepository.save(customer);
+
+    return customer;
+  }
+
+  public async delete(customer: Customer): Promise<void> {
+    await this.ormRepository.remove(customer);
   }
 }
 
