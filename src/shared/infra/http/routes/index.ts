@@ -1,5 +1,6 @@
 import { Router } from 'express';
 
+import adressesRouter from '../../../../modules/addresses/infra/http/routes/addresses.routes';
 import customerRouter from '../../../../modules/customers/infra/http/routes/customers.routes';
 import productsRouter from '../../../../modules/products/infra/http/routes/products.routes';
 import sessionRouter from '../../../../modules/users/infra/http/routes/session.routes';
@@ -15,5 +16,6 @@ routes.use(ensureAuthenticated);
 routes.use('/products', productsRouter);
 routes.use('/users', usersRouter);
 routes.use('/customers', customerRouter);
+routes.use('/addresses', adressesRouter);
 
 export default routes;
