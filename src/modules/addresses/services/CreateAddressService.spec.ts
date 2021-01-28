@@ -5,18 +5,25 @@ import FakeCustomersRepository from '../../customers/repositories/fakes/FakeCust
 import CreateAddressService from './CreateAddressService';
 import CreateCustomerService from '../../customers/services/CreateCustomerService';
 
-describe('CreateAddress', () => {
-  it('should be able to create a new address', async () => {
-    const fakeAddressCustomersRepository = new FakeAddressCustomersRepository();
-    const fakeAddressesRepository = new FakeAddressesRepository();
-    const fakeCustomersRepository = new FakeCustomersRepository();
+let fakeAddressCustomersRepository: FakeAddressCustomersRepository;
+let fakeAddressesRepository: FakeAddressesRepository;
+let fakeCustomersRepository: FakeCustomersRepository;
 
-    const createAddress = new CreateAddressService(
+let createAddress: CreateAddressService;
+describe('CreateAddress', () => {
+  beforeEach(() => {
+    fakeAddressCustomersRepository = new FakeAddressCustomersRepository();
+    fakeAddressesRepository = new FakeAddressesRepository();
+    fakeCustomersRepository = new FakeCustomersRepository();
+
+    createAddress = new CreateAddressService(
       fakeAddressesRepository,
       fakeAddressCustomersRepository,
       fakeCustomersRepository,
     );
+  });
 
+  it('should be able to create a new address', async () => {
     const address = await createAddress.execute({
       description: 'Casa do Douglas de Souza',
       postal_code: '12605-390',
@@ -41,17 +48,7 @@ describe('CreateAddress', () => {
   });
 
   it('should be able to create a new address for a specific customer', async () => {
-    const fakeAddressCustomersRepository = new FakeAddressCustomersRepository();
-    const fakeAddressesRepository = new FakeAddressesRepository();
-    const fakeCustomersRepository = new FakeCustomersRepository();
-
     const createCustomer = new CreateCustomerService(fakeCustomersRepository);
-
-    const createAddress = new CreateAddressService(
-      fakeAddressesRepository,
-      fakeAddressCustomersRepository,
-      fakeCustomersRepository,
-    );
 
     const customer = await createCustomer.execute({
       name: 'Daniel Lucas',
@@ -84,16 +81,6 @@ describe('CreateAddress', () => {
   });
 
   it('should not be able to create a new address for a nonexistent customer', async () => {
-    const fakeAddressCustomersRepository = new FakeAddressCustomersRepository();
-    const fakeAddressesRepository = new FakeAddressesRepository();
-    const fakeCustomersRepository = new FakeCustomersRepository();
-
-    const createAddress = new CreateAddressService(
-      fakeAddressesRepository,
-      fakeAddressCustomersRepository,
-      fakeCustomersRepository,
-    );
-
     await expect(
       createAddress.execute({
         customer_id: 'nonexistent-customer-id',
