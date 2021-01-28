@@ -24,7 +24,7 @@ class UpdateCustomerService {
     const customerExists = await this.customersRepository.findById(user_id);
 
     if (!customerExists) {
-      throw new AppError("Customer with this cpf doesn't already exists.", 400);
+      throw new AppError("Customer doesn't exist.", 400);
     }
 
     const customer = await this.customersRepository.update(customerExists, {
