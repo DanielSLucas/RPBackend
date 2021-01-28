@@ -1,6 +1,7 @@
 import { container } from 'tsyringe';
 import { Request, Response } from 'express';
 import CreateAddressService from '../../../services/CreateAddressService';
+import ListAddressesByTypeService from '../../../services/ListAddressesByTypeService';
 
 export default class AdressesController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -35,13 +36,14 @@ export default class AdressesController {
     }
   }
 
-  // public async index(request: Request, response: Response): Promise<Response> {
-  //   const listCustomers = container.resolve(ListCustomersService);
+  public async index(request: Request, response: Response): Promise<Response> {
+    const { address_type } = request.body;
+    const listAddresses = container.resolve(ListAddressesByTypeService);
 
-  //   const customers = await listCustomers.execute();
+    const addresses = await listAddresses.execute(address_type || undefined);
 
-  //   return response.json(customers);
-  // }
+    return response.json(addresses);
+  }
 
   // public async show(request: Request, response: Response): Promise<Response> {
   //   const { id } = request.params;

@@ -6,7 +6,7 @@ const adressesController = new AddressesController();
 
 const adressesRouter = Router();
 
-// adressesRouter.get('/', customersController.index);
+adressesRouter.get('/', adressesController.index);
 // adressesRouter.get('/:id', customersController.show);
 adressesRouter.post('/', adressesController.create);
 // adressesRouter.put('/:id', customersController.update);

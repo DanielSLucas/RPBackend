@@ -4,12 +4,28 @@ import IAddressesRepository from '../../../repositories/IAddressesRepository';
 
 import Address from '../entities/Address';
 
+type AddressType = 'Cobrança' | 'Salão' | 'Entrega' | 'Busca';
+
 @EntityRepository(Address)
 class AddressesRepository implements IAddressesRepository {
   private ormRepository: Repository<Address>;
 
   constructor() {
     this.ormRepository = getRepository(Address);
+  }
+
+  public async findAll(): Promise<Address[]> {
+    const addresses = await this.ormRepository.find();
+
+    return addresses;
+  }
+
+  public async findByType(address_type: AddressType): Promise<Address[]> {
+    const addresses = await this.ormRepository.find({
+      where: { address_type },
+    });
+
+    return addresses;
   }
 
   public async create({
@@ -42,12 +58,6 @@ class AddressesRepository implements IAddressesRepository {
   //   });
 
   //   return findProduct || undefined;
-  // }
-
-  // public async findAll(): Promise<Address[]> {
-  //   const products = await this.ormRepository.find();
-
-  //   return products;
   // }
 
   // public async update(
