@@ -3,10 +3,17 @@ import FakeProductsRepository from '../repositories/fakes/FakeProductRepository'
 import CreateProductService from './CreateProductService';
 import UpdateProductService from './UpdateProductService';
 
+let fakeProductRepository: FakeProductsRepository;
+
+let updateProduct: UpdateProductService;
+
 describe('UpdateProduct', () => {
+  beforeEach(() => {
+    fakeProductRepository = new FakeProductsRepository();
+    updateProduct = new UpdateProductService(fakeProductRepository);
+  });
+
   it('should be able to update a product', async () => {
-    const fakeProductRepository = new FakeProductsRepository();
-    const updateProduct = new UpdateProductService(fakeProductRepository);
     const createProduct = new CreateProductService(fakeProductRepository);
 
     const product1 = await createProduct.execute({
@@ -34,9 +41,6 @@ describe('UpdateProduct', () => {
   });
 
   it('should not be able to update a nonexistent product', async () => {
-    const fakeProductRepository = new FakeProductsRepository();
-    const updateProduct = new UpdateProductService(fakeProductRepository);
-
     await expect(
       updateProduct.execute({
         product_id: 'a-nonexistent-product-id',

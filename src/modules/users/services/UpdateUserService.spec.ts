@@ -4,15 +4,21 @@ import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
 import CreateUserService from './CreateUserService';
 import UpdateUserService from './UpdateUserService';
 
+let fakeUsersRepository: FakeUsersRepository;
+let fakeHashProvider: FakeHashProvider;
+
+let updateUser: UpdateUserService;
+
 describe('UpdateUser', () => {
+  beforeEach(() => {
+    fakeUsersRepository = new FakeUsersRepository();
+    fakeHashProvider = new FakeHashProvider();
+
+    updateUser = new UpdateUserService(fakeUsersRepository, fakeHashProvider);
+  });
+
   it('should be able to update an user ', async () => {
-    const fakeUsersRepository = new FakeUsersRepository();
-    const fakeHashProvider = new FakeHashProvider();
     const createUser = new CreateUserService(
-      fakeUsersRepository,
-      fakeHashProvider,
-    );
-    const updateUser = new UpdateUserService(
       fakeUsersRepository,
       fakeHashProvider,
     );
@@ -45,25 +51,6 @@ describe('UpdateUser', () => {
   });
 
   it('should not be able to update a nonexistent user', async () => {
-    const fakeUsersRepository = new FakeUsersRepository();
-    const fakeHashProvider = new FakeHashProvider();
-    const createUser = new CreateUserService(
-      fakeUsersRepository,
-      fakeHashProvider,
-    );
-    const updateUser = new UpdateUserService(
-      fakeUsersRepository,
-      fakeHashProvider,
-    );
-
-    await createUser.execute({
-      name: 'Daniel Lucas',
-      email: 'daniellucas-pms@hotmail.com',
-      password: 'ddll9000',
-      whatsapp: '12981025796',
-      role: 'ADM',
-    });
-
     await expect(
       updateUser.execute({
         user_id: 'nonexistent-user-id',

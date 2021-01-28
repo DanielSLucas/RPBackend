@@ -4,11 +4,19 @@ import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
 import CreateUserService from './CreateUserService';
 import ShowUserService from './ShowUserService';
 
+let fakeUsersRepository: FakeUsersRepository;
+
+let showUser: ShowUserService;
+
 describe('ShowUser', () => {
+  beforeEach(() => {
+    fakeUsersRepository = new FakeUsersRepository();
+
+    showUser = new ShowUserService(fakeUsersRepository);
+  });
+
   it('should be able to show a user', async () => {
-    const fakeUsersRepository = new FakeUsersRepository();
     const fakeHashProvider = new FakeHashProvider();
-    const showUser = new ShowUserService(fakeUsersRepository);
     const createUser = new CreateUserService(
       fakeUsersRepository,
       fakeHashProvider,
@@ -28,9 +36,6 @@ describe('ShowUser', () => {
   });
 
   it('should not be able to show a nonexistent user', async () => {
-    const fakeUsersRepository = new FakeUsersRepository();
-    const showUser = new ShowUserService(fakeUsersRepository);
-
     await expect(
       showUser.execute('a-nonexistent-user-id'),
     ).rejects.toBeInstanceOf(AppError);
