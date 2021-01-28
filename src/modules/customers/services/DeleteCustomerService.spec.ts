@@ -4,11 +4,17 @@ import CreateCustomerService from './CreateCustomerService';
 import DeleteCustomerService from './DeleteCustomerService';
 import ListCustomersService from './ListCustomersService';
 
+let fakeCustomersRepository: FakeCustomersRepository;
+let deleteCustomer: DeleteCustomerService;
+
 describe('DeleteCustomer', () => {
+  beforeEach(() => {
+    fakeCustomersRepository = new FakeCustomersRepository();
+    deleteCustomer = new DeleteCustomerService(fakeCustomersRepository);
+  });
+
   it('should be able to delete a customer', async () => {
-    const fakeCustomersRepository = new FakeCustomersRepository();
     const createCustomer = new CreateCustomerService(fakeCustomersRepository);
-    const deleteCustomer = new DeleteCustomerService(fakeCustomersRepository);
     const listCustomers = new ListCustomersService(fakeCustomersRepository);
 
     const customer1 = await createCustomer.execute({
@@ -31,9 +37,6 @@ describe('DeleteCustomer', () => {
   });
 
   it('should not be able to delete a nonexistent customer', async () => {
-    const fakeCustomersRepository = new FakeCustomersRepository();
-    const deleteCustomer = new DeleteCustomerService(fakeCustomersRepository);
-
     await expect(
       deleteCustomer.execute('nonexistent-user-id'),
     ).rejects.toBeInstanceOf(AppError);

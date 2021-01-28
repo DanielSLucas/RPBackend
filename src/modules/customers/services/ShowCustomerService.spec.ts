@@ -3,11 +3,17 @@ import FakeCustomersRepository from '../repositories/fakes/FakeCustomersReposito
 import CreateCustomerService from './CreateCustomerService';
 import ShowCustomerService from './ShowCustomerService';
 
+let fakeCustomersRepository: FakeCustomersRepository;
+let showCustomer: ShowCustomerService;
+
 describe('ShowCustomer', () => {
+  beforeEach(() => {
+    fakeCustomersRepository = new FakeCustomersRepository();
+    showCustomer = new ShowCustomerService(fakeCustomersRepository);
+  });
+
   it('should be able to show a customer', async () => {
-    const fakeCustomersRepository = new FakeCustomersRepository();
     const createCustomer = new CreateCustomerService(fakeCustomersRepository);
-    const showCustomer = new ShowCustomerService(fakeCustomersRepository);
 
     const createdCustomer = await createCustomer.execute({
       name: 'Daniel Lucas',
@@ -26,16 +32,6 @@ describe('ShowCustomer', () => {
   });
 
   it('should not be able to show a nonexistent customer', async () => {
-    const fakeCustomersRepository = new FakeCustomersRepository();
-    const createCustomer = new CreateCustomerService(fakeCustomersRepository);
-    const showCustomer = new ShowCustomerService(fakeCustomersRepository);
-
-    await createCustomer.execute({
-      name: 'Daniel Lucas',
-      whatsapp: '12981025796',
-      cpf: '46479951867',
-    });
-
     await expect(
       showCustomer.execute('nonexistent-customer-id'),
     ).rejects.toBeInstanceOf(AppError);

@@ -5,21 +5,28 @@ import FakeCustomersRepository from '../../customers/repositories/fakes/FakeCust
 import CreateAddressService from './CreateAddressService';
 import ListAddressesByTypeService from './ListAddressesByTypeService';
 
-describe('ListAddress', () => {
-  it('should be able to list all addresses', async () => {
-    const fakeAddressCustomersRepository = new FakeAddressCustomersRepository();
-    const fakeAddressesRepository = new FakeAddressesRepository();
-    const fakeCustomersRepository = new FakeCustomersRepository();
+let fakeAddressCustomersRepository: FakeAddressCustomersRepository;
+let fakeAddressesRepository: FakeAddressesRepository;
+let fakeCustomersRepository: FakeCustomersRepository;
 
-    const createAddress = new CreateAddressService(
+let createAddress: CreateAddressService;
+let listAddresses: ListAddressesByTypeService;
+
+describe('ListAddress', () => {
+  beforeEach(() => {
+    fakeAddressCustomersRepository = new FakeAddressCustomersRepository();
+    fakeAddressesRepository = new FakeAddressesRepository();
+    fakeCustomersRepository = new FakeCustomersRepository();
+
+    createAddress = new CreateAddressService(
       fakeAddressesRepository,
       fakeAddressCustomersRepository,
       fakeCustomersRepository,
     );
-    const listAddresses = new ListAddressesByTypeService(
-      fakeAddressesRepository,
-    );
+    listAddresses = new ListAddressesByTypeService(fakeAddressesRepository);
+  });
 
+  it('should be able to list all addresses', async () => {
     const address1 = await createAddress.execute({
       description: 'Endereço de cobrança',
       postal_code: '12605-390',
@@ -46,19 +53,6 @@ describe('ListAddress', () => {
   });
 
   it('should be able list addresses filtered by type', async () => {
-    const fakeAddressCustomersRepository = new FakeAddressCustomersRepository();
-    const fakeAddressesRepository = new FakeAddressesRepository();
-    const fakeCustomersRepository = new FakeCustomersRepository();
-
-    const createAddress = new CreateAddressService(
-      fakeAddressesRepository,
-      fakeAddressCustomersRepository,
-      fakeCustomersRepository,
-    );
-    const listAddresses = new ListAddressesByTypeService(
-      fakeAddressesRepository,
-    );
-
     await createAddress.execute({
       description: 'Endereço de cobrança',
       postal_code: '12605-390',
