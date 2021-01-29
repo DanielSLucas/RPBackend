@@ -1,7 +1,11 @@
 import { container } from 'tsyringe';
 import { Request, Response } from 'express';
+
 import CreateAddressService from '../../../services/CreateAddressService';
 import ListAddressesByTypeService from '../../../services/ListAddressesByTypeService';
+import ShowAddressService from '../../../services/ShowAddressService';
+import UpdateAddressService from '../../../services/UpdateAddressService';
+import DeleteAddressService from '../../../services/DeleteAddressService';
 
 export default class AdressesController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -45,38 +49,50 @@ export default class AdressesController {
     return response.json(addresses);
   }
 
-  // public async show(request: Request, response: Response): Promise<Response> {
-  //   const { id } = request.params;
+  public async show(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
 
-  //   const showCustomer = container.resolve(ShowCustomerService);
+    const showAddress = container.resolve(ShowAddressService);
 
-  //   const customer = await showCustomer.execute(id);
+    const address = await showAddress.execute(id);
 
-  //   return response.json(customer);
-  // }
+    return response.json(address);
+  }
 
-  // public async update(request: Request, response: Response): Promise<Response> {
-  //   const { id } = request.params;
-  //   const { name, whatsapp, cpf } = request.body;
+  public async update(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
+    const {
+      description,
+      postal_code,
+      city,
+      neighborhood,
+      street,
+      number,
+      address_type,
+    } = request.body;
 
-  //   const updateCustomer = container.resolve(UpdateCustomerService);
+    const updateAddress = container.resolve(UpdateAddressService);
 
-  //   const customer = await updateCustomer.execute(id, {
-  //     name,
-  //     whatsapp,
-  //     cpf,
-  //   });
+    const address = await updateAddress.execute(id, {
+      description,
+      postal_code,
+      city,
+      neighborhood,
+      street,
+      number,
+      address_type,
+    });
 
-  //   return response.json(customer);
-  // }
+    return response.json(address);
+  }
 
-  // public async delete(request: Request, response: Response): Promise<Response> {
-  //   const { id } = request.params;
+  public async delete(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
 
-  //   const deleteCustomer = container.resolve(DeleteCustomerService);
+    const deleteAddress = container.resolve(DeleteAddressService);
 
-  //   await deleteCustomer.execute(id);
+    await deleteAddress.execute(id);
 
-  //   return response.json({ message: 'Customer deleted!' });
-  // }
+    return response.json({ message: 'Address deleted!' });
+  }
 }

@@ -20,6 +20,14 @@ class AddressesRepository implements IAddressesRepository {
     return addresses;
   }
 
+  public async findById(address_id: string): Promise<Address | undefined> {
+    const findProduct = await this.ormRepository.findOne({
+      where: { id: address_id },
+    });
+
+    return findProduct || undefined;
+  }
+
   public async findByType(address_type: AddressType): Promise<Address[]> {
     const addresses = await this.ormRepository.find({
       where: { address_type },
@@ -52,33 +60,36 @@ class AddressesRepository implements IAddressesRepository {
     return address;
   }
 
-  // public async findById(id: string): Promise<Address | undefined> {
-  //   const findProduct = await this.ormRepository.findOne({
-  //     where: { id },
-  //   });
+  public async update(
+    address: Address,
+    {
+      description,
+      postal_code,
+      city,
+      neighborhood,
+      street,
+      number,
+      address_type,
+    }: ICreateAddressDTO,
+  ): Promise<Address> {
+    Object.assign(address, {
+      description,
+      postal_code,
+      city,
+      neighborhood,
+      street,
+      number,
+      address_type,
+    });
 
-  //   return findProduct || undefined;
-  // }
+    await this.ormRepository.save(address);
 
-  // public async update(
-  //   product: Address,
-  //   { name, quantity, value, product_type }: ICreateAddressDTO,
-  // ): Promise<Address> {
-  //   Object.assign(product, {
-  //     name,
-  //     quantity,
-  //     value,
-  //     product_type,
-  //   });
+    return address;
+  }
 
-  //   await this.ormRepository.save(product);
-
-  //   return product;
-  // }
-
-  // public async delete(product: Address): Promise<void> {
-  //   await this.ormRepository.remove(product);
-  // }
+  public async delete(address: Address): Promise<void> {
+    await this.ormRepository.remove(address);
+  }
 }
 
 export default AddressesRepository;

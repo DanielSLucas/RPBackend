@@ -4,10 +4,10 @@ import ICreateAddressDTO from '../dtos/ICreateAddressDTO';
 type AddressType = 'Cobrança' | 'Salão' | 'Entrega' | 'Busca';
 
 export default interface IAddressesRepository {
-  // findById(id: string): Promise<Product | undefined>;
   create(addressInfo: ICreateAddressDTO): Promise<Address>;
   findAll(): Promise<Address[]>;
+  findById(address_id: string): Promise<Address | undefined>;
   findByType(address_type: AddressType): Promise<Address[]>;
-  // update(product: Product, productInfo: ICreateProductDTO): Promise<Product>;
-  // delete(product: Product): Promise<void>;
+  update(address: Address, addressInfo: ICreateAddressDTO): Promise<Address>;
+  delete(address: Address): Promise<void>;
 }

@@ -13,6 +13,12 @@ class AddressesRepository implements IAddressesRepository {
     return this.addresses;
   }
 
+  public async findById(address_id: string): Promise<Address | undefined> {
+    const address = this.addresses.find(item => item.id === address_id);
+
+    return address;
+  }
+
   public async findByType(address_type: AddressType): Promise<Address[]> {
     const filteredAddresses = this.addresses.filter(
       address => address.address_type === address_type,
@@ -34,38 +40,26 @@ class AddressesRepository implements IAddressesRepository {
     return address;
   }
 
-  // public async update(
-  //   customer: Customer,
-  //   customerInfo: ICreateCustomerDTO,
-  // ): Promise<Customer> {
-  //   const customerIndex = this.customers.findIndex(
-  //     iten => iten.id === customer.id,
-  //   );
+  public async update(
+    address: Address,
+    addressInfo: ICreateAddressDTO,
+  ): Promise<Address> {
+    const addressIndex = this.addresses.findIndex(
+      iten => iten.id === address.id,
+    );
 
-  //   Object.assign(this.customers[customerIndex], customerInfo);
+    Object.assign(this.addresses[addressIndex], addressInfo);
 
-  //   return this.customers[customerIndex];
-  // }
+    return this.addresses[addressIndex];
+  }
 
-  // public async delete(customer: Customer): Promise<void> {
-  //   const customerIndex = this.customers.findIndex(
-  //     iten => iten.id === customer.id,
-  //   );
+  public async delete(address: Address): Promise<void> {
+    const addressIndex = this.addresses.findIndex(
+      iten => iten.id === address.id,
+    );
 
-  //   this.customers.splice(customerIndex, 1);
-  // }
-
-  // public async findById(id: string): Promise<Customer | undefined> {
-  //   const customer = this.customers.find(item => item.id === id);
-
-  //   return customer;
-  // }
-
-  // public async findByCFP(cpf: string): Promise<Customer | undefined> {
-  //   const customer = this.customers.find(item => item.cpf === cpf);
-
-  //   return customer;
-  // }
+    this.addresses.splice(addressIndex, 1);
+  }
 }
 
 export default AddressesRepository;

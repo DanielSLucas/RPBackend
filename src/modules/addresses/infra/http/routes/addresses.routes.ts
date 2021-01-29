@@ -7,9 +7,9 @@ const adressesController = new AddressesController();
 const adressesRouter = Router();
 
 adressesRouter.get('/', adressesController.index);
-// adressesRouter.get('/:id', customersController.show);
+adressesRouter.get('/:id', adressesController.show);
 adressesRouter.post('/', adressesController.create);
-// adressesRouter.put('/:id', customersController.update);
-// adressesRouter.delete('/:id', customersController.delete);
+adressesRouter.put('/:id', adressesController.update);
+adressesRouter.delete('/:id', adressesController.delete);
 
 export default adressesRouter;
