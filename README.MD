@@ -4,17 +4,23 @@ Back-end para sistema de gestão e locação de materiais.
 
 ## Autenticação
 
-  **Antes de acessar qualquer rota da API é necessário estar autenticado.** Além disso, algumas rotas requerem permissões atreladas ao cargo do usuário.
+  **Antes de acessar qualquer rota da API é necessário estar autenticado.**
+
+  Além disso, algumas rotas requerem permissões atreladas ao cargo do usuário.
 
   Cargos: 'ADM' | 'OWNER' | 'USER'
 
   *Para realizar autenticação:
-  > Acesse a rota **`/sessions`** com email e senha válidos no corpo da requisição.
-  > A resposta retornada é o token JWT e informações do usuário.
+  >  -  Acesse a rota **`/sessions`** com email e senha válidos no corpo da requisição.
+  >  -  A resposta retornada é o token JWT e informações do usuário.
+
+
+## Rotas
 
 ### Usuários
   **`/users`**
-  ***A rota de usuário só pode ser acessada por um usuário com cago de ADM**
+
+  ***A rota de usuário só pode ser acessada por um usuário com cargo de ADM**
 
 - **`POST`**: Cria um usuário.
   > Recebe como corpo da resquisição:
