@@ -89,7 +89,7 @@ Back-end para sistema de gestão e locação de materiais.
         "updated_at": "2021-01-07T22:02:43.921Z"
       }
 
-- **`GET`**: Lista todos os produtos.
+- **`GET`**: Lista todos os produtos em ordem alfabética.
 
 **`/products/:id`**
 
@@ -106,3 +106,43 @@ Back-end para sistema de gestão e locação de materiais.
       }
 
 - **`DELETE`**: Deleta um produto específico com base no ID recebido pela rota.
+
+### Clientes
+  **`/customers`**
+
+- **`POST`**: Cria um cliente.
+  > Recebe como corpo da resquisição:
+
+      {
+        "name": "John Doe",
+        "whatsapp": "12345678901",
+        "cpf": "01234567890"
+      }
+
+  > Retorna:
+
+      {
+        "name": "John Doe",
+        "whatsapp": "12345678901",
+        "cpf": "01234567890",
+        "id": "4bae1ed5-e4f8-4a7a-b1e4-bd93050ef50e",
+        "created_at": "2021-02-01T21:28:48.096Z",
+        "updated_at": "2021-02-01T21:28:48.096Z"
+      }
+
+- **`GET`**: Lista todos os clientes em ordem alfabética.
+
+**`/customers/:id`**
+
+- **`GET`**: Retorna as informações de um cliente específico com base no ID recebido pela rota.
+
+- **`PUT`**: Atualiza as informações de um cliente específico.
+  > Recebe como corpo da resquisição:
+
+      {
+        "name": "John Doe",
+        "whatsapp": "12345678901",
+        "cpf": "01234567890"
+      }
+
+- **`DELETE`**: Deleta um cliente específico com base no ID recebido pela rota.
