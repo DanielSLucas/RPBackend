@@ -40,6 +40,7 @@ export default class UsersController {
     });
 
     delete user.password;
+    delete user.role;
 
     return response.json(user);
   }
