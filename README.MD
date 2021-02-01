@@ -146,3 +146,86 @@ Back-end para sistema de gestão e locação de materiais.
       }
 
 - **`DELETE`**: Deleta um cliente específico com base no ID recebido pela rota.
+
+### Endereços
+  **`/addresses`**
+
+- **`POST`**: Cria um endereço.
+  > Recebe como corpo da resquisição:
+
+  > *a propriedade `customer_id` é opcional, um endereço não precisa estar relacionado a um usuário.
+
+  > *address_type: 'Cobrança' | 'Salão' | 'Entrega' | 'Busca' ("busca" só deve ser utlizado para o endereço da empresa/casa onde os clientes buscarão as mercadorias)
+
+      {
+        "customer_id": "4bae1ed5-e4f8-4a7a-b1e4-bd93050ef50e",
+        "description": "John's house",
+        "postal_code": "12345-678",
+        "city": "Springfield",
+        "neighborhood": "friendly neighborhood",
+        "street": "friendly street",
+        "number": "1234",
+        "address_type": "Cobrança"
+      }
+
+  > Retorna:
+
+      {
+        "description": "John's house",
+        "postal_code": "12345-678",
+        "city": "Springfield",
+        "neighborhood": "friendly neighborhood",
+        "street": "friendly street",
+        "number": "1234",
+        "address_type": "Cobrança"
+        "id": "52fbac28-582d-411d-b420-82a6c0d8bc49",
+        "created_at": "2021-02-01T19:41:50.165Z",
+        "updated_at": "2021-02-01T19:41:50.165Z"
+      }
+
+- **`GET`**: Lista todos os endereços.
+  > Essa rota pode receber no copo da requisição o tipo de endereço (`address_type`), para que sejam listados apenas endereços de um tipo específico.
+
+      {
+        "address_type": "Cobrança"
+      }
+
+**`/addresses/:id`**
+
+- **`GET`**: Retorna as informações de um endereço específico com base no ID recebido pela rota.
+
+- **`PUT`**: Atualiza as informações de um endereço específico.
+  > Recebe como corpo da resquisição:
+
+      {
+        "name": "John Doe",
+        "whatsapp": "12345678901",
+        "cpf": "01234567890"
+      }
+
+- **`DELETE`**: Deleta um endereço específico com base no ID recebido pela rota.
+
+**`/addresses/customers/:id`**
+
+- **`GET`**: Retorna as informações do endereço de um cliente específico com base no ID recebido pela rota.
+  > Com base no id do usuário rebido a seguinte resposta é retornada:
+
+      {
+        "id": "cc677afc-806f-45c0-ac3f-3b5b7e4dfff6",
+        "address_id": "52fbac28-582d-411d-b420-82a6c0d8bc49",
+        "customer_id": "4bae1ed5-e4f8-4a7a-b1e4-bd93050ef50e",
+        "created_at": "2021-02-01T19:41:50.185Z",
+        "updated_at": "2021-02-01T19:41:50.185Z",
+        "address": {
+          "id": "52fbac28-582d-411d-b420-82a6c0d8bc49",
+          "description": "John's house",
+          "postal_code": "12345-678",
+          "city": "Springfield",
+          "neighborhood": "friendly neighborhood",
+          "street": "friendly street",
+          "number": "1234",
+          "address_type": "Cobrança"
+          "created_at": "2021-02-01T19:41:50.165Z",
+          "updated_at": "2021-02-01T19:41:50.165Z"
+        }
+      }
