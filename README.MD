@@ -8,7 +8,7 @@ Back-end para sistema de gestão e locação de materiais.
 
   Além disso, algumas rotas requerem permissões atreladas ao cargo do usuário.
 
-  Cargos: 'ADM' | 'OWNER' | 'USER'
+  Cargos: **'ADM'** | **'OWNER'** | **'USER'**
 
   *Para realizar autenticação:
   >  -  Acesse a rota **`/sessions`** com email e senha válidos no corpo da requisição.
@@ -153,10 +153,6 @@ Back-end para sistema de gestão e locação de materiais.
 - **`POST`**: Cria um endereço.
   > Recebe como corpo da resquisição:
 
-  > *a propriedade `customer_id` é opcional, um endereço não precisa estar relacionado a um usuário.
-
-  > *address_type: 'Cobrança' | 'Salão' | 'Entrega' | 'Busca' ("busca" só deve ser utlizado para o endereço da empresa/casa onde os clientes buscarão as mercadorias)
-
       {
         "customer_id": "4bae1ed5-e4f8-4a7a-b1e4-bd93050ef50e",
         "description": "John's house",
@@ -167,6 +163,11 @@ Back-end para sistema de gestão e locação de materiais.
         "number": "1234",
         "address_type": "Cobrança"
       }
+
+      *a propriedade `customer_id` é opcional, um endereço não precisa estar relacionado a um usuário.
+
+      *address_type: **'Cobrança'** | **'Salão'** | **'Entrega'** | **'Busca'** ("busca" só deve ser utlizado para o endereço da empresa/casa onde os clientes buscarão as mercadorias)
+
 
   > Retorna:
 
@@ -208,7 +209,7 @@ Back-end para sistema de gestão e locação de materiais.
 **`/addresses/customers/:id`**
 
 - **`GET`**: Retorna as informações do endereço de um cliente específico com base no ID recebido pela rota.
-  > Com base no id do usuário rebido a seguinte resposta é retornada:
+  > Com base no id do usuário a seguinte resposta é retornada:
 
       {
         "id": "cc677afc-806f-45c0-ac3f-3b5b7e4dfff6",
