@@ -11,13 +11,15 @@ Back-end para sistema de gestão e locação de materiais.
   Cargos: **'ADM'** | **'OWNER'** | **'USER'**
 
   *Para realizar autenticação:
-    -  Acesse a rota **`/sessions`** com email e senha válidos no corpo da requisição.
-    -  A resposta retornada é o token JWT e informações do usuário.
+
+    -   Acesse a rota **`/sessions`** com email e senha válidos no corpo da requisição.
+
+    -   A resposta retornada é o token JWT e informações do usuário.
 
 
 ## Rotas
 
-### - Usuários
+### Usuários
   **`/users`**
 
   ***A rota de usuário só pode ser acessada por um usuário com cargo de ADM**
@@ -64,7 +66,7 @@ Back-end para sistema de gestão e locação de materiais.
 - **`DELETE`**: Deleta um usuário específico com base no ID recebido pela rota.
 
 
-### - Produtos
+### Produtos
   **`/products`**
 
 - **`POST`**: Cria um produto.
@@ -107,7 +109,7 @@ Back-end para sistema de gestão e locação de materiais.
 
 - **`DELETE`**: Deleta um produto específico com base no ID recebido pela rota.
 
-### - Clientes
+### Clientes
   **`/customers`**
 
 - **`POST`**: Cria um cliente.
@@ -147,7 +149,7 @@ Back-end para sistema de gestão e locação de materiais.
 
 - **`DELETE`**: Deleta um cliente específico com base no ID recebido pela rota.
 
-### - Endereços
+### Endereços
   **`/addresses`**
 
 - **`POST`**: Cria um endereço.
