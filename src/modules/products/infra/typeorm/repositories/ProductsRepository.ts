@@ -21,7 +21,7 @@ class ProductsRepository implements IProductsRepository {
   }
 
   public async findAll(): Promise<Product[]> {
-    const products = await this.ormRepository.find();
+    const products = await this.ormRepository.find({ order: { name: 'ASC' } });
 
     return products;
   }
