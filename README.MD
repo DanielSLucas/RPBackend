@@ -12,9 +12,9 @@ Back-end para sistema de gestão e locação de materiais.
 
   *Para realizar autenticação:
 
-    -   Acesse a rota **`/sessions`** com email e senha válidos no corpo da requisição.
+- Acesse a rota **`/sessions`** com email e senha válidos no corpo da requisição.
 
-    -   A resposta retornada é o token JWT e informações do usuário.
+- A resposta retornada é o token JWT e informações do usuário.
 
 
 ## Rotas
