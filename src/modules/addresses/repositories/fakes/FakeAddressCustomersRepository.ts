@@ -24,6 +24,16 @@ class AddressCustomersRepository implements IAddressCustomersRepository {
     return addressCustomer;
   }
 
+  public async findByCustomer(
+    id: string,
+  ): Promise<AddressCustomers | undefined> {
+    const addressCustomer = this.addressCustomers.find(
+      item => item.customer_id === id,
+    );
+
+    return addressCustomer;
+  }
+
   // public async update(
   //   customer: Customer,
   //   customerInfo: ICreateCustomerDTO,
@@ -43,12 +53,6 @@ class AddressCustomersRepository implements IAddressCustomersRepository {
   //   );
 
   //   this.customers.splice(customerIndex, 1);
-  // }
-
-  // public async findById(id: string): Promise<Customer | undefined> {
-  //   const customer = this.customers.find(item => item.id === id);
-
-  //   return customer;
   // }
 
   // public async findByCFP(cpf: string): Promise<Customer | undefined> {

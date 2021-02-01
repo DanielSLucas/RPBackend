@@ -25,13 +25,16 @@ class AddressCustomersRepository implements IAddressCustomersRepository {
     return addressCustomer;
   }
 
-  // public async findById(id: string): Promise<Address | undefined> {
-  //   const findProduct = await this.ormRepository.findOne({
-  //     where: { id },
-  //   });
+  public async findByCustomer(
+    customer_id: string,
+  ): Promise<AddressCustomers | undefined> {
+    const findCustomerAddress = await this.ormRepository.findOne({
+      where: { customer_id },
+      relations: ['address'],
+    });
 
-  //   return findProduct || undefined;
-  // }
+    return findCustomerAddress;
+  }
 
   // public async findAll(): Promise<Address[]> {
   //   const products = await this.ormRepository.find();
