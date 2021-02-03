@@ -22,7 +22,7 @@ class ProductsRepository implements IProductsRepository {
 
   public async findByIds(ids: string[]): Promise<Product[]> {
     const rentalItems = await this.ormRepository.find({
-      where: { rent_id: In(ids) },
+      where: { id: In(ids) },
     });
 
     return rentalItems;
