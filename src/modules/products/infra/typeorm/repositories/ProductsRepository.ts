@@ -1,4 +1,4 @@
-import { EntityRepository, getRepository, Repository } from 'typeorm';
+import { EntityRepository, getRepository, In, Repository } from 'typeorm';
 import ICreateProductDTO from '../../../dtos/ICreateProductDTO';
 import IProductsRepository from '../../../repositories/IProductsRepository';
 
@@ -18,6 +18,14 @@ class ProductsRepository implements IProductsRepository {
     });
 
     return findProduct || undefined;
+  }
+
+  public async findByIds(ids: string[]): Promise<Product[]> {
+    const rentalItems = await this.ormRepository.find({
+      where: { rent_id: In(ids) },
+    });
+
+    return rentalItems;
   }
 
   public async findAll(): Promise<Product[]> {

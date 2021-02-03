@@ -14,6 +14,19 @@ class ProductRepository implements IProductRepository {
     return findProduct;
   }
 
+  public async findByIds(ids: string[]): Promise<Product[]> {
+    const foundProducts = [];
+
+    // eslint-disable-next-line no-plusplus
+    for (let i = 0; i < ids.length; i++) {
+      const matchedItems = this.products.filter(item => item.id === ids[i]);
+
+      foundProducts.push(...matchedItems);
+    }
+
+    return foundProducts;
+  }
+
   public async findAll(): Promise<Product[]> {
     return this.products;
   }
