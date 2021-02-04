@@ -329,7 +329,7 @@ describe('CreateRent', () => {
     ).rejects.toBeInstanceOf(AppError);
   });
 
-  it("should be able to create a two rent for the same product, since it's available in stock", async () => {
+  it("should be able to create a more than one rent for the same product, since it's available in stock", async () => {
     const customer = await createCustomer.execute({
       name: 'Daniel Lucas',
       whatsapp: '12981025796',
@@ -348,12 +348,28 @@ describe('CreateRent', () => {
 
     const product = await createProduct.execute({
       name: 'Bolo normal',
-      quantity: 2,
+      quantity: 3,
       value: 60,
       product_type: 'Bolos',
     });
 
     const rent_date = new Date(2021, 1, 11);
+
+    await createRent.execute({
+      customer_id: customer.id,
+      address_id: address.id,
+      rent_date,
+      rental_items: [
+        {
+          product_id: product.id,
+          quantity: 1,
+          value: 60,
+        },
+      ],
+      payment_status: 'Pago',
+      payment_way: 'Dinheiro',
+      total_value: 60,
+    });
 
     await createRent.execute({
       customer_id: customer.id,
@@ -388,5 +404,98 @@ describe('CreateRent', () => {
         total_value: 60,
       }),
     ).resolves;
+  });
+
+  it("should not be able to create a more than one rent for the same product, if it's not available in stock", async () => {
+    const customer = await createCustomer.execute({
+      name: 'Daniel Lucas',
+      whatsapp: '12981025796',
+      cpf: '46479951867',
+    });
+
+    const address = await createAddress.execute({
+      description: 'Casa do Douglas de Souza',
+      postal_code: '12605-390',
+      city: 'Lorena',
+      neighborhood: 'Vila Passos',
+      street: 'Mario P de Aquino Filho',
+      number: '529',
+      address_type: 'Cobrança',
+    });
+
+    const product = await createProduct.execute({
+      name: 'Bolo normal',
+      quantity: 3,
+      value: 60,
+      product_type: 'Bolos',
+    });
+
+    const rent_date = new Date(2021, 1, 11);
+
+    await createRent.execute({
+      customer_id: customer.id,
+      address_id: address.id,
+      rent_date,
+      rental_items: [
+        {
+          product_id: product.id,
+          quantity: 1,
+          value: 60,
+        },
+      ],
+      payment_status: 'Pago',
+      payment_way: 'Dinheiro',
+      total_value: 60,
+    });
+
+    await createRent.execute({
+      customer_id: customer.id,
+      address_id: address.id,
+      rent_date,
+      rental_items: [
+        {
+          product_id: product.id,
+          quantity: 1,
+          value: 60,
+        },
+      ],
+      payment_status: 'Pago',
+      payment_way: 'Dinheiro',
+      total_value: 60,
+    });
+
+    await createRent.execute({
+      customer_id: customer.id,
+      address_id: address.id,
+      rent_date,
+      rental_items: [
+        {
+          product_id: product.id,
+          quantity: 1,
+          value: 60,
+        },
+      ],
+      payment_status: 'Pago',
+      payment_way: 'Dinheiro',
+      total_value: 60,
+    });
+
+    await expect(
+      createRent.execute({
+        customer_id: customer.id,
+        address_id: address.id,
+        rent_date,
+        rental_items: [
+          {
+            product_id: product.id,
+            quantity: 1,
+            value: 60,
+          },
+        ],
+        payment_status: 'Pago',
+        payment_way: 'Dinheiro',
+        total_value: 60,
+      }),
+    ).rejects.toBeInstanceOf(AppError);
   });
 });

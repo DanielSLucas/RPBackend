@@ -17,7 +17,7 @@ import RentalItem from '../infra/typeorm/entities/RentalItem';
 interface Request {
   customer_id: string;
   address_id: string;
-  rent_date: string;
+  rent_date: Date;
   payment_way: 'Dinheiro' | 'Transferência';
   payment_status: 'Pago' | 'Pendente' | 'Parcial';
   total_value: number;
@@ -64,9 +64,9 @@ class CreateAddressService {
       throw new AppError("Address doesn't exist.", 400);
     }
 
-    const parsedDate = parseISO(rent_date);
+    // const parsedDate = parseISO(rent_date);
 
-    if (isBefore(parsedDate, Date.now())) {
+    if (isBefore(rent_date, Date.now())) {
       throw new AppError("You can't create a rent in a past date");
     }
 
@@ -85,7 +85,7 @@ class CreateAddressService {
       }
     }
 
-    const rentsInThisDay = await this.rentsRepository.findByDate(parsedDate);
+    const rentsInThisDay = await this.rentsRepository.findByDate(rent_date);
 
     if (rentsInThisDay.length !== 0) {
       const rentsInThisDayIDs = rentsInThisDay.map(rent => rent.id);
@@ -111,43 +111,35 @@ class CreateAddressService {
         }
       });
 
-      for (let i = 0; i < consolidatedRentedItemsInThisDay.length; i++) {
-        for (let j = 0; j < rental_items.length; j++) {
-          console.log(`i = ${i} XX j = ${j}`);
-
-          if (
-            consolidatedRentedItemsInThisDay[i].product_id ===
-            rental_items[j].product_id
-          ) {
+      consolidatedRentedItemsInThisDay.forEach(consolidatedRentedItem => {
+        rental_items.forEach(rentalItem => {
+          if (consolidatedRentedItem.product_id === rentalItem.product_id) {
             const product = rentedProducts.find(
-              // eslint-disable-next-line no-loop-func
-              item =>
-                item.id === consolidatedRentedItemsInThisDay[i].product_id,
+              item => item.id === consolidatedRentedItem.product_id,
             );
 
             if (product) {
-              if (
-                consolidatedRentedItemsInThisDay[i].quantity ===
-                product.quantity
-              ) {
+              // A quantidade alugada nessse dia é igual a disponível em estoque?
+              if (consolidatedRentedItem.quantity === product.quantity) {
                 throw new AppError('All units of this product are rented', 400);
               }
 
-              if (rental_items[j].quantity > product.quantity) {
+              const quantityAvailableInStock =
+                product.quantity - consolidatedRentedItem.quantity;
+
+              if (rentalItem.quantity > quantityAvailableInStock) {
                 throw new AppError('Not enough products', 400);
               }
             }
           }
-          j += 1;
-        }
-        i += 1;
-      }
+        });
+      });
     }
 
     const rent = await this.rentsRepository.create({
       customer_id,
       address_id,
-      rent_date: parsedDate,
+      rent_date,
       payment_way,
       payment_status,
       total_value,
