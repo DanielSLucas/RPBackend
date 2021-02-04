@@ -9,7 +9,7 @@ const rentsController = new RentsController();
 const rentsRouter = Router();
 
 // rentsRouter.get('/', adressesController.index);
-// rentsRouter.get('/:id', adressesController.show);
+rentsRouter.get('/:id', rentsController.show);
 // rentsRouter.get('/customers/:id', adressCustomerController.show);
 rentsRouter.post('/', rentsController.create);
 // rentsRouter.put('/:id', adressesController.update);

@@ -29,7 +29,7 @@ class RentalItemsRepository implements IRentalItemsRepository {
     return newRentalItems;
   }
 
-  public async findByRent(rentsIds: string[]): Promise<RentalItem[]> {
+  public async findByRents(rentsIds: string[]): Promise<RentalItem[]> {
     const rentalItems = [];
 
     // eslint-disable-next-line no-plusplus
@@ -40,6 +40,14 @@ class RentalItemsRepository implements IRentalItemsRepository {
 
       rentalItems.push(...matchedItems);
     }
+
+    return rentalItems;
+  }
+
+  public async findByRent(rent_id: string): Promise<RentalItem[]> {
+    const rentalItems = this.rentedItems.filter(
+      item => item.rent_id === rent_id,
+    );
 
     return rentalItems;
   }

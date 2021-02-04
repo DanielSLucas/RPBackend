@@ -42,18 +42,19 @@ class RentsRepository implements IRentsRepository {
     return rents;
   }
 
+  public async findById(rent_id: string): Promise<Rent | undefined> {
+    const findRent = await this.ormRepository.findOne({
+      where: { id: rent_id },
+      relations: ['customer', 'address'],
+    });
+
+    return findRent || undefined;
+  }
+
   // public async findAll(): Promise<Address[]> {
   //   const addresses = await this.ormRepository.find();
 
   //   return addresses;
-  // }
-
-  // public async findById(address_id: string): Promise<Address | undefined> {
-  //   const findProduct = await this.ormRepository.findOne({
-  //     where: { id: address_id },
-  //   });
-
-  //   return findProduct || undefined;
   // }
 
   // public async findByType(address_type: AddressType): Promise<Address[]> {

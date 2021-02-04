@@ -2,6 +2,7 @@ import { container } from 'tsyringe';
 import { Request, Response } from 'express';
 
 import CreateRentService from '../../../services/CreateRentService';
+import ShowRentService from '../../../services/ShowRentService';
 
 export default class RentsController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -43,15 +44,15 @@ export default class RentsController {
   //   return response.json(addresses);
   // }
 
-  // public async show(request: Request, response: Response): Promise<Response> {
-  //   const { id } = request.params;
+  public async show(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
 
-  //   const showAddress = container.resolve(ShowAddressService);
+    const showRent = container.resolve(ShowRentService);
 
-  //   const address = await showAddress.execute(id);
+    const rent = await showRent.execute(id);
 
-  //   return response.json(address);
-  // }
+    return response.json(rent);
+  }
 
   // public async update(request: Request, response: Response): Promise<Response> {
   //   const { id } = request.params;

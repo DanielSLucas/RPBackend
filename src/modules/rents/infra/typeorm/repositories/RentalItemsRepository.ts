@@ -32,9 +32,18 @@ class RentalItemsRepository implements IRentalItemsRepository {
     return newRentalItems;
   }
 
-  public async findByRent(rentsIds: string[]): Promise<RentalItem[]> {
+  public async findByRents(rentsIds: string[]): Promise<RentalItem[]> {
     const rentalItems = await this.ormRepository.find({
       where: { rent_id: In(rentsIds) },
+    });
+
+    return rentalItems;
+  }
+
+  public async findByRent(rent_id: string): Promise<RentalItem[]> {
+    const rentalItems = await this.ormRepository.find({
+      where: { rent_id },
+      relations: ['product'],
     });
 
     return rentalItems;

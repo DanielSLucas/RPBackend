@@ -90,7 +90,7 @@ class CreateAddressService {
     if (rentsInThisDay.length !== 0) {
       const rentsInThisDayIDs = rentsInThisDay.map(rent => rent.id);
 
-      const rentedItemsInThisDay = await this.rentalItemsRepository.findByRent(
+      const rentedItemsInThisDay = await this.rentalItemsRepository.findByRents(
         rentsInThisDayIDs,
       );
 
