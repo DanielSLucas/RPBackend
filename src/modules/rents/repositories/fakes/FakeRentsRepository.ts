@@ -33,9 +33,9 @@ class RentsRepository implements IRentsRepository {
     return rent;
   }
 
-  // public async findAll(): Promise<Address[]> {
-  //   return this.addresses;
-  // }
+  public async findAll(): Promise<Rent[]> {
+    return this.rents;
+  }
 
   // public async findById(address_id: string): Promise<Address | undefined> {
   //   const address = this.addresses.find(item => item.id === address_id);

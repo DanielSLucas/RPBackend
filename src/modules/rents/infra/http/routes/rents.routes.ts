@@ -8,7 +8,7 @@ const rentsController = new RentsController();
 
 const rentsRouter = Router();
 
-// rentsRouter.get('/', adressesController.index);
+rentsRouter.get('/', rentsController.index);
 rentsRouter.get('/:id', rentsController.show);
 // rentsRouter.get('/customers/:id', adressCustomerController.show);
 rentsRouter.post('/', rentsController.create);

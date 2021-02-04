@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 
 import CreateRentService from '../../../services/CreateRentService';
 import ShowRentService from '../../../services/ShowRentService';
+import ListRentsService from '../../../services/ListRentsService';
 
 export default class RentsController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -35,14 +36,13 @@ export default class RentsController {
     }
   }
 
-  // public async index(request: Request, response: Response): Promise<Response> {
-  //   const { address_type } = request.body;
-  //   const listAddresses = container.resolve(ListAddressesByTypeService);
+  public async index(request: Request, response: Response): Promise<Response> {
+    const listRents = container.resolve(ListRentsService);
 
-  //   const addresses = await listAddresses.execute(address_type || undefined);
+    const addresses = await listRents.execute();
 
-  //   return response.json(addresses);
-  // }
+    return response.json(addresses);
+  }
 
   public async show(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;

@@ -51,11 +51,14 @@ class RentsRepository implements IRentsRepository {
     return findRent || undefined;
   }
 
-  // public async findAll(): Promise<Address[]> {
-  //   const addresses = await this.ormRepository.find();
+  public async findAll(): Promise<Rent[]> {
+    const rents = await this.ormRepository.find({
+      order: { rent_date: 'DESC' },
+      relations: ['customer'],
+    });
 
-  //   return addresses;
-  // }
+    return rents;
+  }
 
   // public async findByType(address_type: AddressType): Promise<Address[]> {
   //   const addresses = await this.ormRepository.find({
