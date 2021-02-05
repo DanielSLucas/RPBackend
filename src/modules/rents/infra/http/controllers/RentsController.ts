@@ -1,6 +1,7 @@
 import { container } from 'tsyringe';
 import { Request, Response } from 'express';
 
+import { parseISO } from 'date-fns';
 import CreateRentService from '../../../services/CreateRentService';
 import ShowRentService from '../../../services/ShowRentService';
 import ListRentsService from '../../../services/ListRentsService';
@@ -18,12 +19,14 @@ export default class RentsController {
         total_value,
       } = request.body;
 
+      const parsedDate = parseISO(rent_date);
+
       const createAddress = container.resolve(CreateRentService);
 
       const rent = await createAddress.execute({
         customer_id,
         address_id,
-        rent_date,
+        rent_date: parsedDate,
         rental_items,
         payment_status,
         payment_way,
@@ -39,9 +42,9 @@ export default class RentsController {
   public async index(request: Request, response: Response): Promise<Response> {
     const listRents = container.resolve(ListRentsService);
 
-    const addresses = await listRents.execute();
+    const rents = await listRents.execute();
 
-    return response.json(addresses);
+    return response.json(rents);
   }
 
   public async show(request: Request, response: Response): Promise<Response> {

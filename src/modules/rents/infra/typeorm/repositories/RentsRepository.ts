@@ -1,4 +1,4 @@
-import { EntityRepository, getRepository, Repository } from 'typeorm';
+import { Between, EntityRepository, getRepository, Repository } from 'typeorm';
 import ICreateRentDTO from '../../../dtos/ICreateRentDTO';
 import IRentsRepository from '../../../repositories/IRentsRepository';
 
@@ -37,6 +37,18 @@ class RentsRepository implements IRentsRepository {
   public async findByDate(rentDate: Date): Promise<Rent[]> {
     const rents = await this.ormRepository.find({
       where: { rent_date: rentDate },
+    });
+
+    return rents;
+  }
+
+  public async findBetweenDates(
+    startDate: Date,
+    finishDate: Date,
+  ): Promise<Rent[]> {
+    const rents = await this.ormRepository.find({
+      where: { rent_date: Between(startDate, finishDate) },
+      relations: ['customer'],
     });
 
     return rents;

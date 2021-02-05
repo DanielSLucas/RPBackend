@@ -1,6 +1,6 @@
 /* eslint-disable no-plusplus */
 import { inject, injectable } from 'tsyringe';
-import { isBefore, parseISO } from 'date-fns';
+import { isBefore } from 'date-fns';
 import AppError from '../../../shared/errors/AppError';
 
 import Rent from '../infra/typeorm/entities/Rent';
@@ -63,8 +63,6 @@ class CreateAddressService {
     if (!addressExists) {
       throw new AppError("Address doesn't exist.", 400);
     }
-
-    // const parsedDate = parseISO(rent_date);
 
     if (isBefore(rent_date, Date.now())) {
       throw new AppError("You can't create a rent in a past date");

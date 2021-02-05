@@ -27,6 +27,17 @@ class RentsRepository implements IRentsRepository {
     return rents;
   }
 
+  public async findBetweenDates(
+    startDate: Date,
+    finishDate: Date,
+  ): Promise<Rent[]> {
+    const rents = this.rents.filter(
+      rent => rent.rent_date >= startDate && rent.rent_date <= finishDate,
+    );
+
+    return rents;
+  }
+
   public async findById(rent_id: string): Promise<Rent | undefined> {
     const rent = this.rents.find(item => item.id === rent_id);
 

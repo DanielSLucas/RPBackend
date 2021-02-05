@@ -1,16 +1,16 @@
 import { Router } from 'express';
 
 import RentsController from '../controllers/RentsController';
-// import AddressCustomerController from '../controllers/AddressCustomerController';
+import RentsForTheWeekController from '../controllers/RentsForTheWeekController';
 
 const rentsController = new RentsController();
-// const adressCustomerController = new AddressCustomerController();
+const rentsForTheWeekController = new RentsForTheWeekController();
 
 const rentsRouter = Router();
 
 rentsRouter.get('/', rentsController.index);
+rentsRouter.get('/week/', rentsForTheWeekController.index);
 rentsRouter.get('/:id', rentsController.show);
-// rentsRouter.get('/customers/:id', adressCustomerController.show);
 rentsRouter.post('/', rentsController.create);
 // rentsRouter.put('/:id', adressesController.update);
 // rentsRouter.delete('/:id', adressesController.delete);

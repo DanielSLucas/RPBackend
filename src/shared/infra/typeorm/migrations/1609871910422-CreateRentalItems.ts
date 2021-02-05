@@ -49,7 +49,7 @@ export default class CreateRentalItems1609871910422
             referencedTableName: 'products',
             referencedColumnNames: ['id'],
             columnNames: ['product_id'],
-            onDelete: 'SET NULL',
+            onDelete: 'CASCADE',
             onUpdate: 'CASCADE',
           },
           {
@@ -57,7 +57,7 @@ export default class CreateRentalItems1609871910422
             referencedTableName: 'rents',
             referencedColumnNames: ['id'],
             columnNames: ['rent_id'],
-            onDelete: 'SET NULL',
+            onDelete: 'CASCADE',
             onUpdate: 'CASCADE',
           },
         ],
