@@ -6,6 +6,9 @@ export default interface IRentalItemsRepository {
   findByRent(rent_id: string): Promise<RentalItem[]>;
   create(rentalItems: RentItem[], rent_id: string): Promise<RentalItem[]>;
   // findAll(): Promise<Product[]>;
-  // update(product: Product, productInfo: ICreateProductDTO): Promise<Product>;
+  update(
+    oldRentalItems: RentalItem[],
+    updatedRentalItems: RentItem[],
+  ): Promise<RentalItem[]>;
   // delete(product: Product): Promise<void>;
 }

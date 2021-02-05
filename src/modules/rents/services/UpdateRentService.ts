@@ -25,7 +25,7 @@ interface Request {
 }
 
 @injectable()
-class CreateRentService {
+class UpdateRentService {
   constructor(
     @inject('CustomersRepository')
     private customersRepository: ICustomersRepository,
@@ -43,15 +43,24 @@ class CreateRentService {
     private rentalItemsRepository: IRentalItemsRepository,
   ) {}
 
-  public async execute({
-    customer_id,
-    address_id,
-    rent_date,
-    rental_items,
-    payment_status,
-    payment_way,
-    total_value,
-  }: Request): Promise<Rent> {
+  public async execute(
+    rent_id: string,
+    {
+      customer_id,
+      address_id,
+      rent_date,
+      rental_items,
+      payment_status,
+      payment_way,
+      total_value,
+    }: Request,
+  ): Promise<Rent> {
+    const rentExists = await this.rentsRepository.findById(rent_id);
+
+    if (!rentExists) {
+      throw new AppError("Rent doesn't exist.", 400);
+    }
+
     const customerExists = await this.customersRepository.findById(customer_id);
 
     if (!customerExists) {
@@ -134,7 +143,11 @@ class CreateRentService {
       });
     }
 
-    const rent = await this.rentsRepository.create({
+    const rentedItems = await this.rentalItemsRepository.findByRent(
+      rentExists.id,
+    );
+
+    const rent = await this.rentsRepository.update(rentExists, {
       customer_id,
       address_id,
       rent_date,
@@ -143,10 +156,10 @@ class CreateRentService {
       total_value,
     });
 
-    await this.rentalItemsRepository.create(rental_items, rent.id);
+    await this.rentalItemsRepository.update(rentedItems, rental_items);
 
     return rent;
   }
 }
 
-export default CreateRentService;
+export default UpdateRentService;

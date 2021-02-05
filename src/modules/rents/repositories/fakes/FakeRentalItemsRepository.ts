@@ -52,36 +52,36 @@ class RentalItemsRepository implements IRentalItemsRepository {
     return rentalItems;
   }
 
-  // public async update(
-  //   customer: Customer,
-  //   customerInfo: ICreateCustomerDTO,
-  // ): Promise<Customer> {
-  //   const customerIndex = this.customers.findIndex(
-  //     iten => iten.id === customer.id,
-  //   );
+  public async update(
+    oldRentalItems: RentalItem[],
+    updatedRentalItems: RentItem[],
+  ): Promise<RentalItem[]> {
+    const { rent_id } = oldRentalItems[0];
 
-  //   Object.assign(this.customers[customerIndex], customerInfo);
+    oldRentalItems.forEach(item => {
+      const rentedItemIndex = this.rentedItems.findIndex(
+        iten => iten.id === item.id,
+      );
 
-  //   return this.customers[customerIndex];
-  // }
+      this.rentedItems.splice(rentedItemIndex, 1);
+    });
 
-  // public async delete(customer: Customer): Promise<void> {
-  //   const customerIndex = this.customers.findIndex(
-  //     iten => iten.id === customer.id,
-  //   );
+    const newRentalItems = updatedRentalItems.map(item => {
+      const rentalItem = new RentalItem();
 
-  //   this.customers.splice(customerIndex, 1);
-  // }
+      Object.assign(rentalItem, {
+        id: v4(),
+        rent_id,
+        ...item,
+      });
 
-  // public async findByCFP(cpf: string): Promise<Customer | undefined> {
-  //   const customer = this.customers.find(item => item.cpf === cpf);
+      return rentalItem;
+    });
 
-  //   return customer;
-  // }
+    this.rentedItems.push(...newRentalItems);
 
-  // public async findAll(): Promise<Customer[]> {
-  //   return this.customers;
-  // }
+    return newRentalItems;
+  }
 }
 
 export default RentalItemsRepository;

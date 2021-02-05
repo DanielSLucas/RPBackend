@@ -12,7 +12,7 @@ rentsRouter.get('/', rentsController.index);
 rentsRouter.get('/week/', rentsForTheWeekController.index);
 rentsRouter.get('/:id', rentsController.show);
 rentsRouter.post('/', rentsController.create);
-// rentsRouter.put('/:id', adressesController.update);
+rentsRouter.put('/:id', rentsController.update);
 rentsRouter.delete('/:id', rentsController.delete);
 
 export default rentsRouter;

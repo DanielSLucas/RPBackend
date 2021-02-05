@@ -76,32 +76,30 @@ class RentsRepository implements IRentsRepository {
     await this.ormRepository.remove(rent);
   }
 
-  // public async update(
-  //   address: Address,
-  //   {
-  //     description,
-  //     postal_code,
-  //     city,
-  //     neighborhood,
-  //     street,
-  //     number,
-  //     address_type,
-  //   }: ICreateAddressDTO,
-  // ): Promise<Address> {
-  //   Object.assign(address, {
-  //     description,
-  //     postal_code,
-  //     city,
-  //     neighborhood,
-  //     street,
-  //     number,
-  //     address_type,
-  //   });
+  public async update(
+    rent: Rent,
+    {
+      customer_id,
+      address_id,
+      rent_date,
+      payment_way,
+      payment_status,
+      total_value,
+    }: ICreateRentDTO,
+  ): Promise<Rent> {
+    Object.assign(rent, {
+      customer_id,
+      address_id,
+      rent_date,
+      payment_way,
+      payment_status,
+      total_value,
+    });
 
-  //   await this.ormRepository.save(address);
+    await this.ormRepository.save(rent);
 
-  //   return address;
-  // }
+    return rent;
+  }
 }
 
 export default RentsRepository;

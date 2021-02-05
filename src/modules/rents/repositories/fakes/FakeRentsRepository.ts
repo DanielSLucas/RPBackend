@@ -54,26 +54,13 @@ class RentsRepository implements IRentsRepository {
     this.rents.splice(rentIndex, 1);
   }
 
-  // public async findByType(address_type: AddressType): Promise<Address[]> {
-  //   const filteredAddresses = this.addresses.filter(
-  //     address => address.address_type === address_type,
-  //   );
+  public async update(rent: Rent, rentInfo: ICreateRentDTO): Promise<Rent> {
+    const rentIndex = this.rents.findIndex(iten => iten.id === rent.id);
 
-  //   return filteredAddresses;
-  // }
+    Object.assign(this.rents[rentIndex], rentInfo);
 
-  // public async update(
-  //   address: Address,
-  //   addressInfo: ICreateAddressDTO,
-  // ): Promise<Address> {
-  //   const addressIndex = this.addresses.findIndex(
-  //     iten => iten.id === address.id,
-  //   );
-
-  //   Object.assign(this.addresses[addressIndex], addressInfo);
-
-  //   return this.addresses[addressIndex];
-  // }
+    return this.rents[rentIndex];
+  }
 }
 
 export default RentsRepository;

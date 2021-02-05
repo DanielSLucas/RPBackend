@@ -49,42 +49,29 @@ class RentalItemsRepository implements IRentalItemsRepository {
     return rentalItems;
   }
 
-  // public async findByCustomer(
-  //   customer_id: string,
-  // ): Promise<AddressCustomers | undefined> {
-  //   const findCustomerAddress = await this.ormRepository.findOne({
-  //     where: { customer_id },
-  //     relations: ['address'],
-  //   });
+  public async update(
+    oldRentalItems: RentalItem[],
+    updatedRentalItems: RentItem[],
+  ): Promise<RentalItem[]> {
+    const { rent_id } = oldRentalItems[0];
 
-  //   return findCustomerAddress;
-  // }
+    await this.ormRepository.remove(oldRentalItems);
 
-  // public async findAll(): Promise<Address[]> {
-  //   const products = await this.ormRepository.find();
+    const serializedRentalItems = updatedRentalItems.map(item => {
+      return {
+        ...item,
+        rent_id,
+      };
+    });
 
-  //   return products;
-  // }
+    const newRentalItems = await this.ormRepository.create(
+      serializedRentalItems,
+    );
 
-  // public async update(
-  //   product: Address,
-  //   { name, quantity, value, product_type }: ICreateAddressDTO,
-  // ): Promise<Address> {
-  //   Object.assign(product, {
-  //     name,
-  //     quantity,
-  //     value,
-  //     product_type,
-  //   });
+    await this.ormRepository.save(newRentalItems);
 
-  //   await this.ormRepository.save(product);
-
-  //   return product;
-  // }
-
-  // public async delete(product: Address): Promise<void> {
-  //   await this.ormRepository.remove(product);
-  // }
+    return newRentalItems;
+  }
 }
 
 export default RentalItemsRepository;

@@ -8,6 +8,6 @@ export default interface IRentsRepository {
   findById(rent_id: string): Promise<Rent | undefined>;
   findAll(): Promise<Rent[]>;
   // findByType(address_type: AddressType): Promise<Address[]>;
-  // update(address: Address, addressInfo: ICreateAddressDTO): Promise<Address>;
+  update(rent: Rent, rentInfo: ICreateRentDTO): Promise<Rent>;
   delete(rent: Rent): Promise<void>;
 }

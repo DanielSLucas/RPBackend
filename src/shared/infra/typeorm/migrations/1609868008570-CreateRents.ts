@@ -34,10 +34,12 @@ export default class CreateRents1609868008570 implements MigrationInterface {
           {
             name: 'customer_id',
             type: 'uuid',
+            isNullable: true,
           },
           {
             name: 'address_id',
             type: 'uuid',
+            isNullable: true,
           },
           {
             name: 'created_at',
