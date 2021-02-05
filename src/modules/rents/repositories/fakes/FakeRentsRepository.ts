@@ -48,11 +48,11 @@ class RentsRepository implements IRentsRepository {
     return this.rents;
   }
 
-  // public async findById(address_id: string): Promise<Address | undefined> {
-  //   const address = this.addresses.find(item => item.id === address_id);
+  public async delete(rent: Rent): Promise<void> {
+    const rentIndex = this.rents.findIndex(iten => iten.id === rent.id);
 
-  //   return address;
-  // }
+    this.rents.splice(rentIndex, 1);
+  }
 
   // public async findByType(address_type: AddressType): Promise<Address[]> {
   //   const filteredAddresses = this.addresses.filter(
@@ -73,14 +73,6 @@ class RentsRepository implements IRentsRepository {
   //   Object.assign(this.addresses[addressIndex], addressInfo);
 
   //   return this.addresses[addressIndex];
-  // }
-
-  // public async delete(address: Address): Promise<void> {
-  //   const addressIndex = this.addresses.findIndex(
-  //     iten => iten.id === address.id,
-  //   );
-
-  //   this.addresses.splice(addressIndex, 1);
   // }
 }
 

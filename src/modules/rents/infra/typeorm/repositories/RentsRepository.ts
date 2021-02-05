@@ -72,13 +72,9 @@ class RentsRepository implements IRentsRepository {
     return rents;
   }
 
-  // public async findByType(address_type: AddressType): Promise<Address[]> {
-  //   const addresses = await this.ormRepository.find({
-  //     where: { address_type },
-  //   });
-
-  //   return addresses;
-  // }
+  public async delete(rent: Rent): Promise<void> {
+    await this.ormRepository.remove(rent);
+  }
 
   // public async update(
   //   address: Address,
@@ -105,10 +101,6 @@ class RentsRepository implements IRentsRepository {
   //   await this.ormRepository.save(address);
 
   //   return address;
-  // }
-
-  // public async delete(address: Address): Promise<void> {
-  //   await this.ormRepository.remove(address);
   // }
 }
 

@@ -5,6 +5,7 @@ import { parseISO } from 'date-fns';
 import CreateRentService from '../../../services/CreateRentService';
 import ShowRentService from '../../../services/ShowRentService';
 import ListRentsService from '../../../services/ListRentsService';
+import DeleteRentService from '../../../services/DeleteRentService';
 
 export default class RentsController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -57,6 +58,16 @@ export default class RentsController {
     return response.json(rent);
   }
 
+  public async delete(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
+
+    const deleteAddress = container.resolve(DeleteRentService);
+
+    await deleteAddress.execute(id);
+
+    return response.json({ message: 'Address deleted!' });
+  }
+
   // public async update(request: Request, response: Response): Promise<Response> {
   //   const { id } = request.params;
   //   const {
@@ -82,15 +93,5 @@ export default class RentsController {
   //   });
 
   //   return response.json(address);
-  // }
-
-  // public async delete(request: Request, response: Response): Promise<Response> {
-  //   const { id } = request.params;
-
-  //   const deleteAddress = container.resolve(DeleteAddressService);
-
-  //   await deleteAddress.execute(id);
-
-  //   return response.json({ message: 'Address deleted!' });
   // }
 }

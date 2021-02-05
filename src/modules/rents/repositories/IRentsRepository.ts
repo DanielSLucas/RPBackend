@@ -9,5 +9,5 @@ export default interface IRentsRepository {
   findAll(): Promise<Rent[]>;
   // findByType(address_type: AddressType): Promise<Address[]>;
   // update(address: Address, addressInfo: ICreateAddressDTO): Promise<Address>;
-  // delete(address: Address): Promise<void>;
+  delete(rent: Rent): Promise<void>;
 }
