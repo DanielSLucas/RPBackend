@@ -23,6 +23,8 @@ Back-end para sistema de gestão e locação de materiais.
 - [Produtos](#produtos)
 - [Clientes](#clientes)
 - [Endereços](#endereços)
+- [Aluguéis](#aluguéis)
+
 
 ### Usuários
   **`/users`**
