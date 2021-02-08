@@ -59,6 +59,12 @@ class RentsRepository implements IRentsRepository {
     return rents;
   }
 
+  public async findByCustomer(customer_id: string): Promise<Rent[]> {
+    const rents = this.rents.filter(item => item.customer_id === customer_id);
+
+    return rents;
+  }
+
   public async findAll(): Promise<Rent[]> {
     return this.rents;
   }

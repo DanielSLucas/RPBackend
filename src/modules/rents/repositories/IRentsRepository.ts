@@ -7,6 +7,7 @@ export default interface IRentsRepository {
   findBetweenDates(startDate: Date, finishDate: Date): Promise<Rent[]>;
   findById(rent_id: string): Promise<Rent | undefined>;
   findByIds(rentsIds: string[]): Promise<Rent[]>;
+  findByCustomer(customer_id: string): Promise<Rent[]>;
   findAll(): Promise<Rent[]>;
   update(rent: Rent, rentInfo: ICreateRentDTO): Promise<Rent>;
   delete(rent: Rent): Promise<void>;

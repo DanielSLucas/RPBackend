@@ -77,6 +77,12 @@ class RentsRepository implements IRentsRepository {
     return rents;
   }
 
+  public async findByCustomer(customer_id: string): Promise<Rent[]> {
+    const rents = await this.ormRepository.find({ where: { customer_id } });
+
+    return rents;
+  }
+
   public async findAll(): Promise<Rent[]> {
     const rents = await this.ormRepository.find({
       order: { rent_date: 'DESC' },
