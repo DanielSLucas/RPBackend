@@ -52,6 +52,14 @@ class RentalItemsRepository implements IRentalItemsRepository {
     return rentalItems;
   }
 
+  public async findByProduct(product_id: string): Promise<RentalItem[]> {
+    const rentalItems = this.rentedItems.filter(
+      item => item.product_id === product_id,
+    );
+
+    return rentalItems;
+  }
+
   public async update(
     oldRentalItems: RentalItem[],
     updatedRentalItems: RentItem[],

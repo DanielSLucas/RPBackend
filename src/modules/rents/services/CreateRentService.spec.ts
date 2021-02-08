@@ -44,7 +44,6 @@ describe('CreateRent', () => {
     createRent = new CreateRentService(
       fakeCustomersRepository,
       fakeAddressesRepository,
-      fakeProductRepository,
       fakeRentsRepository,
       fakeRentalItemsRepository,
     );

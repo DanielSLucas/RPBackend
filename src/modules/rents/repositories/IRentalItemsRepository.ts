@@ -5,7 +5,7 @@ export default interface IRentalItemsRepository {
   findByRents(rentsIds: string[]): Promise<RentalItem[]>;
   findByRent(rent_id: string): Promise<RentalItem[]>;
   create(rentalItems: RentItem[], rent_id: string): Promise<RentalItem[]>;
-  // findAll(): Promise<Product[]>;
+  findByProduct(product_id: string): Promise<RentalItem[]>;
   update(
     oldRentalItems: RentalItem[],
     updatedRentalItems: RentItem[],

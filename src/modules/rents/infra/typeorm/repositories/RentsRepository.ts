@@ -1,4 +1,10 @@
-import { Between, EntityRepository, getRepository, Repository } from 'typeorm';
+import {
+  Between,
+  EntityRepository,
+  getRepository,
+  In,
+  Repository,
+} from 'typeorm';
 import ICreateRentDTO from '../../../dtos/ICreateRentDTO';
 import IRentsRepository from '../../../repositories/IRentsRepository';
 
@@ -61,6 +67,14 @@ class RentsRepository implements IRentsRepository {
     });
 
     return findRent || undefined;
+  }
+
+  public async findByIds(rentsIDs: string[]): Promise<Rent[]> {
+    const rents = await this.ormRepository.find({
+      where: { id: In(rentsIDs) },
+    });
+
+    return rents;
   }
 
   public async findAll(): Promise<Rent[]> {

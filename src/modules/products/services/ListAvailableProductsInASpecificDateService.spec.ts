@@ -45,7 +45,6 @@ describe('ListAvailableProductsByDate', () => {
     createRent = new CreateRentService(
       fakeCustomersRepository,
       fakeAddressesRepository,
-      fakeProductRepository,
       fakeRentsRepository,
       fakeRentalItemsRepository,
     );

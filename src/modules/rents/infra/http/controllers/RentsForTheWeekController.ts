@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import { parseISO } from 'date-fns';
 import ListRentsForTheWeekService from '../../../services/ListRentsForTheWeekService';
 
-export default class RentsController {
+export default class RentsForTheWeekController {
   public async index(request: Request, response: Response): Promise<Response> {
     const { date } = request.body;
 

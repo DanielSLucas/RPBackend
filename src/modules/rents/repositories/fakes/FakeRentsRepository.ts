@@ -44,6 +44,21 @@ class RentsRepository implements IRentsRepository {
     return rent;
   }
 
+  public async findByIds(rentsIds: string[]): Promise<Rent[]> {
+    const rents: Rent[] = [];
+
+    // eslint-disable-next-line no-plusplus
+    for (let i = 0; i < rentsIds.length; i++) {
+      const matchedItem = this.rents.find(rent => rent.id === rentsIds[i]);
+
+      if (matchedItem) {
+        rents.push(matchedItem);
+      }
+    }
+
+    return rents;
+  }
+
   public async findAll(): Promise<Rent[]> {
     return this.rents;
   }
