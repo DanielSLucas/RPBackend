@@ -1,10 +1,13 @@
 import { Router } from 'express';
 import ProductsController from '../controllers/ProductsController';
+import ProductsByDateController from '../controllers/ProductsByDateController';
 
 const productsRouter = Router();
 
 const productsController = new ProductsController();
+const productsByDateController = new ProductsByDateController();
 
+productsRouter.get('/available', productsByDateController.index);
 productsRouter.get('/', productsController.index);
 productsRouter.get('/:id', productsController.show);
 productsRouter.post('/', productsController.create);
