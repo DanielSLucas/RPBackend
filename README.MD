@@ -321,3 +321,10 @@ Back-end para sistema de gestão e locação de materiais.
         "date": "2021-02-13T03:00:00.000Z",
       }
 
+**`/rents/products/:id`**
+
+- **`GET`**: Lista todos os aluguéis que contenham o produto especificado.
+
+**`/rents/customers/:id`**
+
+- **`GET`**: Lista todos os aluguéis que pertencem a um cliente especificado.
