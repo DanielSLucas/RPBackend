@@ -19,6 +19,11 @@ Back-end para sistema de gestão e locação de materiais.
 
 ## Rotas
 
+- [Usuários](#usuários)
+- [Produtos](#produtos)
+- [Clientes](#clientes)
+- [Endereços](#endereços)
+
 ### Usuários
   **`/users`**
 
@@ -109,6 +114,15 @@ Back-end para sistema de gestão e locação de materiais.
 
 - **`DELETE`**: Deleta um produto específico com base no ID recebido pela rota.
 
+**`/products/available`**
+
+- **`GET`**: Retorna as informações dos produtos disponíveis em uma data específica.
+> Recebe como corpo da resquisição a data desejada:
+
+      {
+        "date": "2021-02-13T03:00:00.000Z",
+      }
+
 ### Clientes
   **`/customers`**
 
@@ -166,9 +180,9 @@ Back-end para sistema de gestão e locação de materiais.
         "address_type": "Cobrança"
       }
 
-      *a propriedade `customer_id` é opcional, um endereço não precisa estar relacionado a um usuário.
+    *a propriedade `customer_id` é opcional, um endereço não precisa estar relacionado a um usuário.
 
-      *address_type: **'Cobrança'** | **'Salão'** | **'Entrega'** | **'Busca'** ("busca" só deve ser utlizado para o endereço da empresa/casa onde os clientes buscarão as mercadorias)
+    *address_type: **'Cobrança'** | **'Salão'** | **'Entrega'** | **'Busca'** ("busca" só deve ser utlizado para o endereço da empresa/casa onde os clientes buscarão as mercadorias)
 
 
   > Retorna:
@@ -232,3 +246,76 @@ Back-end para sistema de gestão e locação de materiais.
           "updated_at": "2021-02-01T19:41:50.165Z"
         }
       }
+
+### Aluguéis
+  **`/rents`**
+
+- **`POST`**: Cria um aluguel.
+  > Recebe como corpo da resquisição:
+
+      {
+        "customer_id": "3db95a0a-28f7-477b-823f-8357f7600854",
+        "address_id": "3af636fe-0410-4a7d-95a0-2d189318317d",
+        "rent_date": "2021-02-14T00:26:57.197Z",
+        "rental_items": [{
+          "product_id": "b7dc845d-8a12-49a6-8383-efd0d07c21d8",
+          "quantity": 1,
+          "value": 50
+        }],
+        "payment_status": "Pendente",
+        "payment_way": "Dinheiro",
+        "total_value": 50
+      }
+
+    *payment_way: **'Dinheiro'** | **'Transferência'**;
+
+    *payment_status: **'Pago'** | **'Pendente'** | **'Parcial'**;
+
+  > Retorna:
+
+      {
+        "rent_date": "2021-02-14T00:26:57.197Z",
+        "total_value": 50,
+        "payment_way": "Dinheiro",
+        "payment_status": "Pago",
+        "customer_id": "3db95a0a-28f7-477b-823f-8357f7600854",
+        "address_id": "3af636fe-0410-4a7d-95a0-2d189318317d",
+        "id": "432156ce-544b-44a7-b286-53da34f47698",
+        "created_at": "2021-02-08T19:13:54.533Z",
+        "updated_at": "2021-02-08T19:13:54.533Z"
+      }
+
+- **`GET`**: Lista todos os aluguéis e as informações do cliente solicitante.
+
+**`/rents/:id`**
+
+- **`GET`**: Retorna todas as informações de um aluguel específico (com base no ID recebido pela rota) e todos seus relacionamentos.
+
+- **`PUT`**: Atualiza as informações de um aluguel específico.
+  > Recebe como corpo da resquisição:
+
+      {
+        "customer_id": "3db95a0a-28f7-477b-823f-8357f7600855",
+        "address_id": "3af636fe-0410-4a7d-95a0-2d189318318d",
+        "rent_date": "2021-02-14T00:26:57.197Z",
+        "rental_items": [{
+          "product_id": "b7dc845d-8a12-49a6-8383-efd0d07c21d9",
+          "quantity": 1,
+          "value": 50
+        }],
+        "payment_status": "Pago",
+        "payment_way": "Dinheiro",
+        "total_value": 60
+      }
+
+- **`DELETE`**: Deleta um aluguel específico com base no ID recebido pela rota.
+
+**`/rents/week`**
+
+- **`GET`**: Lista todos os aluguéis (e as informações do cliente solicitante) num período de 7 dias a partir da data especificada.
+  > Recebe como corpo da resquisição a data desejada:
+
+      {
+        "date": "2021-02-13T03:00:00.000Z",
+      }
+
