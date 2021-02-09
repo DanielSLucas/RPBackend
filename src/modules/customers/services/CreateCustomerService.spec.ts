@@ -37,7 +37,7 @@ describe('CreateCustomer', () => {
 
     await expect(
       createCustomer.execute({
-        name: 'Daniel Lucas',
+        name: 'Lucas Daniel',
         whatsapp: '12981025796',
         cpf: '46479951867',
       }),

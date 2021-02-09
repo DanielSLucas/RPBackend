@@ -10,5 +10,4 @@ export default interface IRentalItemsRepository {
     oldRentalItems: RentalItem[],
     updatedRentalItems: RentItem[],
   ): Promise<RentalItem[]>;
-  // delete(product: Product): Promise<void>;
 }

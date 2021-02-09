@@ -33,37 +33,6 @@ class AddressCustomersRepository implements IAddressCustomersRepository {
 
     return addressCustomer;
   }
-
-  // public async update(
-  //   customer: Customer,
-  //   customerInfo: ICreateCustomerDTO,
-  // ): Promise<Customer> {
-  //   const customerIndex = this.customers.findIndex(
-  //     iten => iten.id === customer.id,
-  //   );
-
-  //   Object.assign(this.customers[customerIndex], customerInfo);
-
-  //   return this.customers[customerIndex];
-  // }
-
-  // public async delete(customer: Customer): Promise<void> {
-  //   const customerIndex = this.customers.findIndex(
-  //     iten => iten.id === customer.id,
-  //   );
-
-  //   this.customers.splice(customerIndex, 1);
-  // }
-
-  // public async findByCFP(cpf: string): Promise<Customer | undefined> {
-  //   const customer = this.customers.find(item => item.cpf === cpf);
-
-  //   return customer;
-  // }
-
-  // public async findAll(): Promise<Customer[]> {
-  //   return this.customers;
-  // }
 }
 
 export default AddressCustomersRepository;

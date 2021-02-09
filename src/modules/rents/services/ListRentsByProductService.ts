@@ -8,7 +8,7 @@ import Rent from '../infra/typeorm/entities/Rent';
 import AppError from '../../../shared/errors/AppError';
 
 @injectable()
-class ListRentsService {
+class ListRentsByProductService {
   constructor(
     @inject('ProductsRepository')
     private productsRepository: IProductsRepository,
@@ -39,4 +39,4 @@ class ListRentsService {
   }
 }
 
-export default ListRentsService;
+export default ListRentsByProductService;

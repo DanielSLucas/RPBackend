@@ -10,7 +10,7 @@ import CreateCustomerService from '../../customers/services/CreateCustomerServic
 import CreateAddressService from '../../addresses/services/CreateAddressService';
 import CreateProductService from '../../products/services/CreateProductService';
 import CreateRentService from './CreateRentService';
-import ListRentsByCustomer from './ListRentsByCustomer';
+import ListRentsByProductService from './ListRentsByProductService';
 
 let fakeAddressCustomersRepository: FakeAddressCustomersRepository;
 let fakeAddressesRepository: FakeAddressesRepository;
@@ -23,9 +23,9 @@ let createAddress: CreateAddressService;
 let createCustomer: CreateCustomerService;
 let createProduct: CreateProductService;
 let createRent: CreateRentService;
-let listRentsByCustomer: ListRentsByCustomer;
+let listRentsByProduct: ListRentsByProductService;
 
-describe('ListRentsByCustomer', () => {
+describe('ListRentsByProduct', () => {
   beforeEach(() => {
     fakeAddressCustomersRepository = new FakeAddressCustomersRepository();
     fakeAddressesRepository = new FakeAddressesRepository();
@@ -50,23 +50,18 @@ describe('ListRentsByCustomer', () => {
       fakeRentalItemsRepository,
     );
 
-    listRentsByCustomer = new ListRentsByCustomer(
-      fakeCustomersRepository,
+    listRentsByProduct = new ListRentsByProductService(
+      fakeProductRepository,
       fakeRentsRepository,
+      fakeRentalItemsRepository,
     );
   });
 
-  it('should be able to list rents that belongs to a specified customer', async () => {
-    const customer1 = await createCustomer.execute({
+  it('should be able to list rents that contains a specified product', async () => {
+    const customer = await createCustomer.execute({
       name: 'Daniel Lucas',
       whatsapp: '12981025796',
       cpf: '46479951867',
-    });
-
-    const customer2 = await createCustomer.execute({
-      name: 'Daniel Lucas',
-      whatsapp: '12981025796',
-      cpf: '46479951868',
     });
 
     const address = await createAddress.execute({
@@ -86,10 +81,33 @@ describe('ListRentsByCustomer', () => {
       product_type: 'Bolos',
     });
 
+    const product2 = await createProduct.execute({
+      name: 'Bolo anormal',
+      quantity: 1,
+      value: 6000,
+      product_type: 'Bolos',
+    });
+
     const rent_date = new Date(2021, 1, 11);
 
     const rent1 = await createRent.execute({
-      customer_id: customer1.id,
+      customer_id: customer.id,
+      address_id: address.id,
+      rent_date,
+      rental_items: [
+        {
+          product_id: product1.id,
+          quantity: 1,
+          value: 60,
+        },
+      ],
+      payment_status: 'Pago',
+      payment_way: 'Dinheiro',
+      total_value: 60,
+    });
+
+    const rent2 = await createRent.execute({
+      customer_id: customer.id,
       address_id: address.id,
       rent_date,
       rental_items: [
@@ -105,12 +123,12 @@ describe('ListRentsByCustomer', () => {
     });
 
     await createRent.execute({
-      customer_id: customer2.id,
+      customer_id: customer.id,
       address_id: address.id,
       rent_date,
       rental_items: [
         {
-          product_id: product1.id,
+          product_id: product2.id,
           quantity: 1,
           value: 60,
         },
@@ -120,14 +138,14 @@ describe('ListRentsByCustomer', () => {
       total_value: 60,
     });
 
-    const rents = await listRentsByCustomer.execute(customer1.id);
+    const rents = await listRentsByProduct.execute(product1.id);
 
-    expect(rents).toEqual([rent1]);
+    expect(rents).toEqual([rent1, rent2]);
   });
 
-  it('should not be able to list rents by a nonexistent customer', async () => {
+  it('should not be able to list rents by a nonexistent product', async () => {
     await expect(
-      listRentsByCustomer.execute('nonexistent-customer-id'),
+      listRentsByProduct.execute('nonexistent-product-id'),
     ).rejects.toBeInstanceOf(AppError);
   });
 });

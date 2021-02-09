@@ -9,35 +9,31 @@ import DeleteAddressService from '../../../services/DeleteAddressService';
 
 export default class AdressesController {
   public async create(request: Request, response: Response): Promise<Response> {
-    try {
-      const {
-        customer_id,
-        description,
-        postal_code,
-        city,
-        neighborhood,
-        street,
-        number,
-        address_type,
-      } = request.body;
+    const {
+      customer_id,
+      description,
+      postal_code,
+      city,
+      neighborhood,
+      street,
+      number,
+      address_type,
+    } = request.body;
 
-      const createAddress = container.resolve(CreateAddressService);
+    const createAddress = container.resolve(CreateAddressService);
 
-      const address = await createAddress.execute({
-        customer_id: customer_id || undefined,
-        description,
-        postal_code,
-        city,
-        neighborhood,
-        street,
-        number,
-        address_type,
-      });
+    const address = await createAddress.execute({
+      customer_id: customer_id || undefined,
+      description,
+      postal_code,
+      city,
+      neighborhood,
+      street,
+      number,
+      address_type,
+    });
 
-      return response.json(address);
-    } catch (err) {
-      return response.json(err);
-    }
+    return response.json(address);
   }
 
   public async index(request: Request, response: Response): Promise<Response> {

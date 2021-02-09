@@ -10,35 +10,31 @@ import UpdateRentService from '../../../services/UpdateRentService';
 
 export default class RentsController {
   public async create(request: Request, response: Response): Promise<Response> {
-    try {
-      const {
-        customer_id,
-        address_id,
-        rent_date,
-        rental_items,
-        payment_status,
-        payment_way,
-        total_value,
-      } = request.body;
+    const {
+      customer_id,
+      address_id,
+      rent_date,
+      rental_items,
+      payment_status,
+      payment_way,
+      total_value,
+    } = request.body;
 
-      const parsedDate = parseISO(rent_date);
+    const parsedDate = parseISO(rent_date);
 
-      const createRent = container.resolve(CreateRentService);
+    const createRent = container.resolve(CreateRentService);
 
-      const rent = await createRent.execute({
-        customer_id,
-        address_id,
-        rent_date: parsedDate,
-        rental_items,
-        payment_status,
-        payment_way,
-        total_value,
-      });
+    const rent = await createRent.execute({
+      customer_id,
+      address_id,
+      rent_date: parsedDate,
+      rental_items,
+      payment_status,
+      payment_way,
+      total_value,
+    });
 
-      return response.json(rent);
-    } catch (err) {
-      return response.json(err);
-    }
+    return response.json(rent);
   }
 
   public async index(request: Request, response: Response): Promise<Response> {
@@ -66,7 +62,7 @@ export default class RentsController {
 
     await deleteRent.execute(id);
 
-    return response.json({ message: 'Address deleted!' });
+    return response.json({ message: 'Rent deleted!' });
   }
 
   public async update(request: Request, response: Response): Promise<Response> {

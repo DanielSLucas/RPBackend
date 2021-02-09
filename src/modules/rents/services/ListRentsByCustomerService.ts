@@ -7,7 +7,7 @@ import AppError from '../../../shared/errors/AppError';
 import ICustomersRepository from '../../customers/repositories/ICustomersRepository';
 
 @injectable()
-class ListRentsService {
+class ListRentsByCustomerService {
   constructor(
     @inject('CustomersRepository')
     private customersRepository: ICustomersRepository,
@@ -29,4 +29,4 @@ class ListRentsService {
   }
 }
 
-export default ListRentsService;
+export default ListRentsByCustomerService;

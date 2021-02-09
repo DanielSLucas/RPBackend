@@ -51,8 +51,6 @@ describe('UpdateRent', () => {
     );
 
     updateRent = new UpdateRentService(
-      fakeCustomersRepository,
-      fakeAddressesRepository,
       fakeRentsRepository,
       fakeRentalItemsRepository,
     );

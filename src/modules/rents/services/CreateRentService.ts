@@ -1,4 +1,3 @@
-/* eslint-disable no-plusplus */
 import { inject, injectable } from 'tsyringe';
 import { isBefore } from 'date-fns';
 import AppError from '../../../shared/errors/AppError';
@@ -11,7 +10,6 @@ import ICustomersRepository from '../../customers/repositories/ICustomersReposit
 import IAddressesRepository from '../../addresses/repositories/IAddressesRepository';
 
 import { RentItem } from '../dtos/ICreateRentDTO';
-// import RentalItem from '../infra/typeorm/entities/RentalItem';
 
 interface Request {
   customer_id: string;

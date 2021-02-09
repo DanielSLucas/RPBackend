@@ -7,8 +7,6 @@ import Rent from '../infra/typeorm/entities/Rent';
 
 import IRentsRepository from '../repositories/IRentsRepository';
 import IRentalItemsRepository from '../repositories/IRentalItemsRepository';
-import ICustomersRepository from '../../customers/repositories/ICustomersRepository';
-import IAddressesRepository from '../../addresses/repositories/IAddressesRepository';
 
 import { RentItem } from '../dtos/ICreateRentDTO';
 
@@ -25,12 +23,6 @@ interface Request {
 @injectable()
 class UpdateRentService {
   constructor(
-    @inject('CustomersRepository')
-    private customersRepository: ICustomersRepository,
-
-    @inject('AddressesRepository')
-    private addressesRepository: IAddressesRepository,
-
     @inject('RentsRepository')
     private rentsRepository: IRentsRepository,
 

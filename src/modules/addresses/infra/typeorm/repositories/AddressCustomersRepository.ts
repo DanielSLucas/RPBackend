@@ -35,32 +35,6 @@ class AddressCustomersRepository implements IAddressCustomersRepository {
 
     return findCustomerAddress;
   }
-
-  // public async findAll(): Promise<Address[]> {
-  //   const products = await this.ormRepository.find();
-
-  //   return products;
-  // }
-
-  // public async update(
-  //   product: Address,
-  //   { name, quantity, value, product_type }: ICreateAddressDTO,
-  // ): Promise<Address> {
-  //   Object.assign(product, {
-  //     name,
-  //     quantity,
-  //     value,
-  //     product_type,
-  //   });
-
-  //   await this.ormRepository.save(product);
-
-  //   return product;
-  // }
-
-  // public async delete(product: Address): Promise<void> {
-  //   await this.ormRepository.remove(product);
-  // }
 }
 
 export default AddressCustomersRepository;
