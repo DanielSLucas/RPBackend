@@ -1,5 +1,26 @@
-# Sistema Ruth Pessoa bolos fakes e arranjos (back-end)
-Back-end para sistema de gestão e locação de materiais.
+# Sistema para locação de materias (back-end)
+
+Esse sistema tem o intuito de facilitar a gestão de uma empresa de locação de materiais para festas.
+
+O usuário desse sistema não será o cliente final (locador), mas sim o gestor e/ou funcionário responsável
+pelo agendamento dos aluguéis.
+
+Dentre as funções:
+
+- Estoque de produtos;
+- Relação de clientes e endereços;
+- Usuários com diferentes cargos;
+- Listagem dos aluguéis.
+- Criação de um aluguel:
+  - O aluguel acontece em uma data específica, por tanto os produtos alugados só ficam indisponíveis no dia específicado.
+  - O aluguel pertence a um cliente.
+  - O aluguel pode conter um endereço de entrega, ou utilizar o mesmo endereço do cliente. Caso o contrário será
+    considereado que os produtos serão buscados na empresa responsável pelo aluguel.
+  - Com base na data recebida, os produtos disponíveis são listados com a quantidade disponível.
+  - O produto possui um preço no momento em que é cadastrado no banco, porém o preço para um aluguel pode variar, então
+    além da quantidade, é possivel definir o preço do produto na hora de adiciona-lo ao pedido.
+  - O valor final, o status de pagamento e o método de pagamento também devem ser definidos na criação de um aluguel.
+
 
 
 ## Autenticação
