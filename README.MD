@@ -2,8 +2,8 @@
 
 Esse sistema tem o intuito de facilitar a gestão de uma empresa de locação de materiais para festas.
 
-O usuário desse sistema não será o cliente final (locador), mas sim o gestor e/ou funcionário responsável
-pelo agendamento dos aluguéis.
+***O usuário desse sistema não será o cliente final (locador), mas sim o gestor e/ou funcionário responsável**
+**pelo agendamento dos aluguéis.**
 
 Dentre as funções:
 
