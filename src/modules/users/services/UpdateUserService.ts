@@ -1,7 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 
 import AppError from '../../../shared/errors/AppError';
-import User from '../infra/typeorm/entities/User';
+import User, { UsersRoles } from '../infra/typeorm/entities/User';
 import IUsersRepository from '../repositories/IUsersRepository';
 import IHashProvider from '../providers/hashProvider/models/IHashProvider';
 
@@ -11,7 +11,7 @@ interface Request {
   email: string;
   whatsapp: string;
   password: string;
-  role: 'ADM' | 'OWNER' | 'USER';
+  role: UsersRoles;
 }
 
 @injectable()

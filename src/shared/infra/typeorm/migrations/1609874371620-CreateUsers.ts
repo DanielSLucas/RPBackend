@@ -33,7 +33,8 @@ export default class CreateUsers1609874371620 implements MigrationInterface {
           },
           {
             name: 'role',
-            type: 'varchar',
+            type: 'enum',
+            enum: ['ADM', 'OWNER', 'USER'],
           },
           {
             name: 'created_at',

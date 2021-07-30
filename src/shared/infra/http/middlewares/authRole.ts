@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
+import { UsersRoles } from '../../../../modules/users/infra/typeorm/entities/User';
 import AppError from '../../../errors/AppError';
-
-type roles = 'ADM' | 'OWNER' | 'USER';
 
 type returnedFunction = (
   request: Request,
@@ -9,7 +8,7 @@ type returnedFunction = (
   next: NextFunction,
 ) => void;
 
-export default function authRole(role: roles): returnedFunction {
+export default function authRole(role: UsersRoles): returnedFunction {
   return (request: Request, response: Response, next: NextFunction): void => {
     const loggedUserRole = request.user.role;
 

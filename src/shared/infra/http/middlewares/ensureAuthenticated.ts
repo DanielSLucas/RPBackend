@@ -3,9 +3,10 @@ import { verify } from 'jsonwebtoken';
 import AppError from '../../../errors/AppError';
 
 import authConfig from '../../../../config/auth';
+import { UsersRoles } from 'modules/users/infra/typeorm/entities/User';
 
 interface TokenPayload {
-  role: 'ADM' | 'OWNER' | 'USER';
+  role: UsersRoles;
   iat: number;
   exp: number;
   sub: string;

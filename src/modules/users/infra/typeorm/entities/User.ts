@@ -6,6 +6,13 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
+// eslint-disable-next-line no-shadow
+export enum UsersRoles {
+  ADM = 'ADM',
+  OWNER = 'OWNER',
+  USER = 'USER',
+}
+
 @Entity('users')
 class User {
   @PrimaryGeneratedColumn('uuid')
@@ -24,7 +31,7 @@ class User {
   password: string;
 
   @Column()
-  role: 'ADM' | 'OWNER' | 'USER';
+  role: UsersRoles;
 
   @CreateDateColumn()
   created_at: Date;
