@@ -2,9 +2,9 @@
   "type": "postgres",
   "host": "localhost",
   "port": 5432,
-  "username": "postgres",
+  "username": "docker",
   "password": "docker",
-  "database": "postgres",
+  "database": "rp_database",
   "entities": [
     "./src/modules/**/entities/*.ts"
   ],
