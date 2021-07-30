@@ -1,4 +1,5 @@
 import AppError from '../../../shared/errors/AppError';
+import { UsersRoles } from '../infra/typeorm/entities/User';
 import FakeHashProvider from '../providers/hashProvider/fakes/FakeHashProvider';
 import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
 import CreateUserService from './CreateUserService';
@@ -28,7 +29,7 @@ describe('UpdateUser', () => {
       email: 'daniellucas-pms@hotmail.com',
       password: '123456',
       whatsapp: '12981025796',
-      role: 'ADM',
+      role: UsersRoles.ADM,
     });
 
     const updatedUser = await updateUser.execute({
@@ -37,7 +38,7 @@ describe('UpdateUser', () => {
       email: 'daniellucas-pms@hotmail.com',
       password: 'ddll9000',
       whatsapp: '12981025796',
-      role: 'ADM',
+      role: UsersRoles.ADM,
     });
 
     expect(updatedUser).toEqual({
@@ -58,7 +59,7 @@ describe('UpdateUser', () => {
         email: 'daniellucas-pms@hotmail.com',
         password: 'ddll9000',
         whatsapp: '12981025796',
-        role: 'ADM',
+        role: UsersRoles.ADM,
       }),
     ).rejects.toBeInstanceOf(AppError);
   });

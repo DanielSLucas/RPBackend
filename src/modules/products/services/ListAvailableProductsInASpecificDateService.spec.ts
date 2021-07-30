@@ -10,6 +10,7 @@ import CreateAddressService from '../../addresses/services/CreateAddressService'
 import CreateRentService from '../../rents/services/CreateRentService';
 import CreateProductService from './CreateProductService';
 import ListAvailableProductsInASpecificDateService from './ListAvailableProductsInASpecificDateService';
+import { add } from 'date-fns';
 
 let fakeAddressCustomersRepository: FakeAddressCustomersRepository;
 let fakeAddressesRepository: FakeAddressesRepository;
@@ -87,7 +88,7 @@ describe('ListAvailableProductsByDate', () => {
       product_type: 'Bolos',
     });
 
-    const rent_date = new Date(2021, 1, 11);
+    const rent_date = add(new Date(), { days: 1 });
 
     await createRent.execute({
       customer_id: customer.id,
@@ -149,7 +150,7 @@ describe('ListAvailableProductsByDate', () => {
       product_type: 'Bolos',
     });
 
-    const rent_date = new Date(2021, 1, 11);
+    const rent_date = add(new Date(), { days: 1 });
 
     const availableProducts = await listAvailableProductsInASpecificDateService.execute(
       rent_date,

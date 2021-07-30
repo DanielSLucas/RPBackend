@@ -3,6 +3,7 @@ import FakeHashProvider from '../providers/hashProvider/fakes/FakeHashProvider';
 import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
 import CreateUserService from './CreateUserService';
 import AuthenticateUserService from './AuthenticateUserService';
+import { UsersRoles } from '../infra/typeorm/entities/User';
 
 let fakeUsersRepository: FakeUsersRepository;
 let fakeHashProvider: FakeHashProvider;
@@ -29,7 +30,7 @@ describe('AuthenticateUser', () => {
       email: 'daniellucas-pms@hotmail.com',
       password: 'ddll9000',
       whatsapp: '12981025796',
-      role: 'ADM',
+      role: UsersRoles.ADM,
     });
 
     const response = await authenticateUser.execute({
@@ -47,7 +48,7 @@ describe('AuthenticateUser', () => {
       email: 'daniellucas-pms@hotmail.com',
       password: 'ddll9000',
       whatsapp: '12981025796',
-      role: 'ADM',
+      role: UsersRoles.ADM,
     });
 
     await expect(
@@ -64,7 +65,7 @@ describe('AuthenticateUser', () => {
       email: 'daniellucas-pms@hotmail.com',
       password: 'ddll9000',
       whatsapp: '12981025796',
-      role: 'ADM',
+      role: UsersRoles.ADM,
     });
 
     await expect(

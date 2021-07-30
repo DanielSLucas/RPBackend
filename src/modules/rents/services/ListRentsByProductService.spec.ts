@@ -1,3 +1,5 @@
+import { add } from 'date-fns';
+
 import AppError from '../../../shared/errors/AppError';
 import FakeRentsRepository from '../repositories/fakes/FakeRentsRepository';
 import FakeRentalItemsRepository from '../repositories/fakes/FakeRentalItemsRepository';
@@ -88,7 +90,7 @@ describe('ListRentsByProduct', () => {
       product_type: 'Bolos',
     });
 
-    const rent_date = new Date(2021, 1, 11);
+    const rent_date = add(new Date(), { days: 1 });
 
     const rent1 = await createRent.execute({
       customer_id: customer.id,

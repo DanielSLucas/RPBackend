@@ -1,4 +1,5 @@
 import AppError from '../../../shared/errors/AppError';
+import { UsersRoles } from '../infra/typeorm/entities/User';
 import FakeHashProvider from '../providers/hashProvider/fakes/FakeHashProvider';
 import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
 import CreateUserService from './CreateUserService';
@@ -27,7 +28,7 @@ describe('ShowUser', () => {
       email: 'daniellucas-pms@hotmail.com',
       password: '123456',
       whatsapp: '12981025796',
-      role: 'ADM',
+      role: UsersRoles.ADM,
     });
 
     const user = await showUser.execute(createdUser.id);

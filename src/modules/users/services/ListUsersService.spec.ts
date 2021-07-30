@@ -1,3 +1,4 @@
+import { UsersRoles } from '../infra/typeorm/entities/User';
 import FakeHashProvider from '../providers/hashProvider/fakes/FakeHashProvider';
 import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
 import CreateUserService from './CreateUserService';
@@ -18,7 +19,7 @@ describe('ListUsers', () => {
       email: 'daniellucas-pms@hotmail.com',
       password: 'ddll9000',
       whatsapp: '12981025796',
-      role: 'ADM',
+      role: UsersRoles.ADM,
     });
 
     const user2 = await createUser.execute({
@@ -26,7 +27,7 @@ describe('ListUsers', () => {
       email: 'lucas-pms@hotmail.com',
       password: 'ddll9000',
       whatsapp: '12981025796',
-      role: 'USER',
+      role: UsersRoles.USER,
     });
 
     const users = await listUsers.execute();

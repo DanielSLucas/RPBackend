@@ -1,3 +1,4 @@
+import { add } from 'date-fns';
 import FakeRentsRepository from '../repositories/fakes/FakeRentsRepository';
 import FakeRentalItemsRepository from '../repositories/fakes/FakeRentalItemsRepository';
 import FakeCustomersRepository from '../../customers/repositories/fakes/FakeCustomersRepository';
@@ -76,9 +77,9 @@ describe('ListRentsForTheWeek', () => {
       product_type: 'Bolos',
     });
 
-    const rent_date1 = new Date(2021, 1, 10);
-    const rent_date2 = new Date(2021, 1, 15);
-    const rent_date3 = new Date(2021, 1, 20);
+    const rent_date1 = add(new Date(), { days: 1 });
+    const rent_date2 = add(new Date(), { days: 6 });
+    const rent_date3 = add(new Date(), { days: 11 });
 
     const rent1 = await createRent.execute({
       customer_id: customer.id,

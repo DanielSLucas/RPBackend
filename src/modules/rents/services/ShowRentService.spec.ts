@@ -11,6 +11,7 @@ import CreateAddressService from '../../addresses/services/CreateAddressService'
 import CreateProductService from '../../products/services/CreateProductService';
 import CreateRentService from './CreateRentService';
 import ShowRentService from './ShowRentService';
+import { add } from 'date-fns';
 
 let fakeAddressCustomersRepository: FakeAddressCustomersRepository;
 let fakeAddressesRepository: FakeAddressesRepository;
@@ -80,7 +81,7 @@ describe('ShowRent', () => {
       product_type: 'Bolos',
     });
 
-    const rent_date = new Date(2021, 1, 11);
+    const rent_date = add(new Date(), { days: 1 });
 
     const createdRent = await createRent.execute({
       customer_id: customer.id,

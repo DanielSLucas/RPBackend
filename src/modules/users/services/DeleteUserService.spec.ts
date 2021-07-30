@@ -1,4 +1,5 @@
 import AppError from '../../../shared/errors/AppError';
+import { UsersRoles } from '../infra/typeorm/entities/User';
 import FakeHashProvider from '../providers/hashProvider/fakes/FakeHashProvider';
 import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
 import CreateUserService from './CreateUserService';
@@ -29,7 +30,7 @@ describe('DeleteUser', () => {
       email: 'daniellucas-pms@hotmail.com',
       password: 'ddll9000',
       whatsapp: '12981025796',
-      role: 'ADM',
+      role: UsersRoles.ADM,
     });
 
     const user2 = await createUser.execute({
@@ -37,7 +38,7 @@ describe('DeleteUser', () => {
       email: 'lucas-pms@hotmail.com',
       password: '123456',
       whatsapp: '12981025796',
-      role: 'ADM',
+      role: UsersRoles.ADM,
     });
 
     await deleteUser.execute(user1.id);
