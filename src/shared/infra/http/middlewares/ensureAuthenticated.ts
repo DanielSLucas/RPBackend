@@ -1,9 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
 import { verify } from 'jsonwebtoken';
+import { UsersRoles } from 'modules/users/infra/typeorm/entities/User';
 import AppError from '../../../errors/AppError';
 
 import authConfig from '../../../../config/auth';
-import { UsersRoles } from 'modules/users/infra/typeorm/entities/User';
 
 interface TokenPayload {
   role: UsersRoles;

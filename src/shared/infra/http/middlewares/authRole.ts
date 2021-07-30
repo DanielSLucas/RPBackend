@@ -13,7 +13,7 @@ export default function authRole(role: UsersRoles): returnedFunction {
     const loggedUserRole = request.user.role;
 
     if (loggedUserRole !== role) {
-      throw new AppError('Not allowed', 401);
+      throw new AppError(`You should be ${role} to access this route`, 401);
     }
 
     next();
