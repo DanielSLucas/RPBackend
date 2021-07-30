@@ -2,12 +2,13 @@
 import 'reflect-metadata';
 import express, { Request, Response, NextFunction } from 'express';
 import 'express-async-errors';
-import '../typeorm';
+import createConnection from '../typeorm';
 import '../../container';
 import routes from './routes';
 import AppError from '../../errors/AppError';
 
 const app = express();
+createConnection();
 
 app.use(express.json());
 app.use(routes);
