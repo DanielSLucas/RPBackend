@@ -6,7 +6,7 @@ async function create() {
   const connection = await createConnection();
 
   const id = uuidV4();
-  const password = await hash('ddll9000', 8);
+  const password = await hash('123456', 8);
 
   await connection.query(
     `INSERT INTO USERS(id, name, email, password, whatsapp, role, created_at, updated_at)

@@ -36,7 +36,7 @@ describe('UpdateUser', () => {
       user_id: user.id,
       name: 'Daniel Lucas P M Santos',
       email: 'daniellucas-pms@hotmail.com',
-      password: 'ddll9000',
+      password: '123456',
       whatsapp: '12981025796',
       role: UsersRoles.ADM,
     });
@@ -45,7 +45,6 @@ describe('UpdateUser', () => {
       id: user.id,
       name: 'Daniel Lucas P M Santos',
       email: 'daniellucas-pms@hotmail.com',
-      password: 'ddll9000',
       whatsapp: '12981025796',
       role: 'ADM',
     });
@@ -57,10 +56,10 @@ describe('UpdateUser', () => {
         user_id: 'nonexistent-user-id',
         name: 'Daniel Lucas P M Santos',
         email: 'daniellucas-pms@hotmail.com',
-        password: 'ddll9000',
+        password: '123456',
         whatsapp: '12981025796',
         role: UsersRoles.ADM,
       }),
-    ).rejects.toBeInstanceOf(AppError);
+    ).rejects.toEqual(new AppError("User doesn't exist"));
   });
 });

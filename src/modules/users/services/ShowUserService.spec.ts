@@ -37,8 +37,8 @@ describe('ShowUser', () => {
   });
 
   it('should not be able to show a nonexistent user', async () => {
-    await expect(
-      showUser.execute('a-nonexistent-user-id'),
-    ).rejects.toBeInstanceOf(AppError);
+    await expect(showUser.execute('a-nonexistent-user-id')).rejects.toEqual(
+      new AppError('User not found', 404),
+    );
   });
 });

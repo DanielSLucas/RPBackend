@@ -14,7 +14,7 @@ describe('Session Controller', () => {
     await connection.runMigrations();
 
     const id = uuidV4();
-    const password = await hash('ddll9000', 8);
+    const password = await hash('123456', 8);
 
     await connection.query(
       `INSERT INTO USERS(id, name, email, password, whatsapp, role, created_at, updated_at)
@@ -31,11 +31,37 @@ describe('Session Controller', () => {
   it('Should be able to authenticate', async () => {
     const response = await request(app).post('/sessions').send({
       email: 'daniellucas-pms@hotmail.com',
-      password: 'ddll9000',
+      password: '123456',
     });
 
     expect(response.status).toBe(200);
     expect(response.body).toHaveProperty('token');
     expect(response.body).toHaveProperty('user');
+  });
+
+  it('Should not be able to authenticate with wrong email', async () => {
+    const response = await request(app).post('/sessions').send({
+      email: 'wrong@email.com',
+      password: '123456',
+    });
+
+    expect(response.status).toBe(401);
+    expect(response.body).toHaveProperty('status');
+    expect(response.body.status).toBe('error');
+    expect(response.body).toHaveProperty('message');
+    expect(response.body.message).toBe('Wrong email/password combination.');
+  });
+
+  it('Should not be able to authenticate with wrong password', async () => {
+    const response = await request(app).post('/sessions').send({
+      email: 'daniellucas-pms@hotmail.com',
+      password: 'wrongPassword',
+    });
+
+    expect(response.status).toBe(401);
+    expect(response.body).toHaveProperty('status');
+    expect(response.body.status).toBe('error');
+    expect(response.body).toHaveProperty('message');
+    expect(response.body.message).toBe('Wrong email/password combination.');
   });
 });

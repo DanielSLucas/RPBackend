@@ -28,14 +28,14 @@ describe('AuthenticateUser', () => {
     const user = await createUser.execute({
       name: 'Daniel Lucas',
       email: 'daniellucas-pms@hotmail.com',
-      password: 'ddll9000',
+      password: '123456',
       whatsapp: '12981025796',
       role: UsersRoles.ADM,
     });
 
     const response = await authenticateUser.execute({
       email: 'daniellucas-pms@hotmail.com',
-      password: 'ddll9000',
+      password: '123456',
     });
 
     expect(response).toHaveProperty('token');
@@ -46,7 +46,7 @@ describe('AuthenticateUser', () => {
     await createUser.execute({
       name: 'Daniel Lucas',
       email: 'daniellucas-pms@hotmail.com',
-      password: 'ddll9000',
+      password: '123456',
       whatsapp: '12981025796',
       role: UsersRoles.ADM,
     });
@@ -54,16 +54,16 @@ describe('AuthenticateUser', () => {
     await expect(
       authenticateUser.execute({
         email: 'anInvalidUser@email.com',
-        password: 'ddll9000',
+        password: '123456',
       }),
-    ).rejects.toBeInstanceOf(AppError);
+    ).rejects.toEqual(new AppError('Wrong email/password combination.', 401));
   });
 
   it('should not be able to authenticate with wrong password', async () => {
     await createUser.execute({
       name: 'Daniel Lucas',
       email: 'daniellucas-pms@hotmail.com',
-      password: 'ddll9000',
+      password: '123456',
       whatsapp: '12981025796',
       role: UsersRoles.ADM,
     });
@@ -73,6 +73,6 @@ describe('AuthenticateUser', () => {
         email: 'daniellucas-pms@hotmail.com',
         password: 'wrongPassword',
       }),
-    ).rejects.toBeInstanceOf(AppError);
+    ).rejects.toEqual(new AppError('Wrong email/password combination.', 401));
   });
 });

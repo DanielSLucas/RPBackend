@@ -28,7 +28,7 @@ describe('DeleteUser', () => {
     const user1 = await createUser.execute({
       name: 'Daniel Lucas',
       email: 'daniellucas-pms@hotmail.com',
-      password: 'ddll9000',
+      password: '123456',
       whatsapp: '12981025796',
       role: UsersRoles.ADM,
     });
@@ -49,8 +49,8 @@ describe('DeleteUser', () => {
   });
 
   it('should not be able to delete a nonexistent user', async () => {
-    await expect(
-      deleteUser.execute('a-nonexistent-user-id'),
-    ).rejects.toBeInstanceOf(AppError);
+    await expect(deleteUser.execute('a-nonexistent-user-id')).rejects.toEqual(
+      new AppError('User not found', 404),
+    );
   });
 });

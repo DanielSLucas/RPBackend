@@ -23,7 +23,7 @@ describe('CreateUser', () => {
     const user = await createUser.execute({
       name: 'Daniel Lucas',
       email: 'daniellucas-pms@hotmail.com',
-      password: 'ddll9000',
+      password: '123456',
       whatsapp: '12981025796',
       role: UsersRoles.ADM,
     });
@@ -33,7 +33,6 @@ describe('CreateUser', () => {
       id: user.id,
       name: 'Daniel Lucas',
       email: 'daniellucas-pms@hotmail.com',
-      password: 'ddll9000',
       whatsapp: '12981025796',
       role: 'ADM',
     });
@@ -43,7 +42,7 @@ describe('CreateUser', () => {
     await createUser.execute({
       name: 'Daniel Lucas',
       email: 'daniellucas-pms@hotmail.com',
-      password: 'ddll9000',
+      password: '123456',
       whatsapp: '12981025796',
       role: UsersRoles.ADM,
     });
@@ -52,10 +51,10 @@ describe('CreateUser', () => {
       createUser.execute({
         name: 'Lucas Daniel',
         email: 'daniellucas-pms@hotmail.com',
-        password: 'ddll9000',
+        password: '123456',
         whatsapp: '12981025796',
         role: UsersRoles.ADM,
       }),
-    ).rejects.toBeInstanceOf(AppError);
+    ).rejects.toEqual(new AppError('Email address already used'));
   });
 });

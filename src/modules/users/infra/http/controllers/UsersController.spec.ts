@@ -14,7 +14,7 @@ describe('Users Controller', () => {
     await connection.runMigrations();
 
     const id = uuidV4();
-    const password = await hash('ddll9000', 8);
+    const password = await hash('123456', 8);
 
     await connection.query(
       `INSERT INTO USERS(id, name, email, password, whatsapp, role, created_at, updated_at)
@@ -31,7 +31,7 @@ describe('Users Controller', () => {
   it('Should be able to create a new user', async () => {
     const authResponse = await request(app).post('/sessions').send({
       email: 'daniellucas-pms@hotmail.com',
-      password: 'ddll9000',
+      password: '123456',
     });
 
     const { token } = authResponse.body;
@@ -54,8 +54,7 @@ describe('Users Controller', () => {
     expect(response.body).toHaveProperty('email');
     expect(response.body).toHaveProperty('whatsapp');
     expect(response.body).toHaveProperty('id');
-    expect(response.body).toHaveProperty('created_at');
-    expect(response.body).toHaveProperty('updated_at');
+    expect(response.body).toHaveProperty('role');
   });
 
   it('Should not be able to create a new user if not authenticated with an ADM user', async () => {
@@ -91,7 +90,7 @@ describe('Users Controller', () => {
   it('Should be able to show a user info by his id', async () => {
     const authResponse = await request(app).post('/sessions').send({
       email: 'daniellucas-pms@hotmail.com',
-      password: 'ddll9000',
+      password: '123456',
     });
 
     const { token } = authResponse.body;
@@ -112,14 +111,13 @@ describe('Users Controller', () => {
     expect(response.body).toHaveProperty('email');
     expect(response.body).toHaveProperty('whatsapp');
     expect(response.body).toHaveProperty('id');
-    expect(response.body).toHaveProperty('created_at');
-    expect(response.body).toHaveProperty('updated_at');
+    expect(response.body).toHaveProperty('role');
   });
 
   it('Should be able to list all users', async () => {
     const authResponse = await request(app).post('/sessions').send({
       email: 'daniellucas-pms@hotmail.com',
-      password: 'ddll9000',
+      password: '123456',
     });
 
     const { token } = authResponse.body;
@@ -137,14 +135,13 @@ describe('Users Controller', () => {
     expect(response.body[0]).toHaveProperty('email');
     expect(response.body[0]).toHaveProperty('whatsapp');
     expect(response.body[0]).toHaveProperty('id');
-    expect(response.body[0]).toHaveProperty('created_at');
-    expect(response.body[0]).toHaveProperty('updated_at');
+    expect(response.body[0]).toHaveProperty('role');
   });
 
   it('Should be able to update user info', async () => {
     const authResponse = await request(app).post('/sessions').send({
       email: 'daniellucas-pms@hotmail.com',
-      password: 'ddll9000',
+      password: '123456',
     });
 
     const { token } = authResponse.body;
@@ -172,14 +169,13 @@ describe('Users Controller', () => {
     expect(response.body).toHaveProperty('email');
     expect(response.body).toHaveProperty('whatsapp');
     expect(response.body).toHaveProperty('id');
-    expect(response.body).toHaveProperty('created_at');
-    expect(response.body).toHaveProperty('updated_at');
+    expect(response.body).toHaveProperty('role');
   });
 
   it('Should be able to delete an user', async () => {
     const authResponse = await request(app).post('/sessions').send({
       email: 'daniellucas-pms@hotmail.com',
-      password: 'ddll9000',
+      password: '123456',
     });
 
     const { token } = authResponse.body;

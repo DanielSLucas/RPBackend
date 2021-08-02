@@ -17,7 +17,7 @@ describe('ListUsers', () => {
     const user1 = await createUser.execute({
       name: 'Daniel Lucas',
       email: 'daniellucas-pms@hotmail.com',
-      password: 'ddll9000',
+      password: '123456',
       whatsapp: '12981025796',
       role: UsersRoles.ADM,
     });
@@ -25,7 +25,7 @@ describe('ListUsers', () => {
     const user2 = await createUser.execute({
       name: 'Lucas',
       email: 'lucas-pms@hotmail.com',
-      password: 'ddll9000',
+      password: '123456',
       whatsapp: '12981025796',
       role: UsersRoles.USER,
     });
