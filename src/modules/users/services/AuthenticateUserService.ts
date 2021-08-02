@@ -2,11 +2,12 @@ import { inject, injectable } from 'tsyringe';
 import { sign } from 'jsonwebtoken';
 
 import AppError from '../../../shared/errors/AppError';
-import User from '../infra/typeorm/entities/User';
 import IUsersRepository from '../repositories/IUsersRepository';
 
 import authConfig from '../../../config/auth';
 import IHashProvider from '../providers/hashProvider/models/IHashProvider';
+import { UserMapper } from '../mapper/UserMapper';
+import { IUserResponseDTO } from '../dtos/IUserResponseDTO';
 
 interface Request {
   email: string;
@@ -15,7 +16,7 @@ interface Request {
 
 interface Response {
   token: string;
-  user: User;
+  user: IUserResponseDTO;
 }
 
 @injectable()
@@ -51,7 +52,9 @@ class AuthenticateUserService {
       expiresIn,
     });
 
-    return { token, user };
+    const formattedUser = UserMapper.toDTO(user);
+
+    return { token, user: formattedUser };
   }
 }
 

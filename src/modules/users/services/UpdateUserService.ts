@@ -1,9 +1,11 @@
 import { inject, injectable } from 'tsyringe';
 
 import AppError from '../../../shared/errors/AppError';
-import User, { UsersRoles } from '../infra/typeorm/entities/User';
 import IUsersRepository from '../repositories/IUsersRepository';
 import IHashProvider from '../providers/hashProvider/models/IHashProvider';
+import { UserMapper } from '../mapper/UserMapper';
+import { IUserResponseDTO } from '../dtos/IUserResponseDTO';
+import { UsersRoles } from '../infra/typeorm/entities/User';
 
 interface Request {
   user_id: string;
@@ -31,7 +33,7 @@ class UpdateUserService {
     whatsapp,
     password,
     role,
-  }: Request): Promise<User> {
+  }: Request): Promise<IUserResponseDTO> {
     const user = await this.usersRepository.findById(user_id);
 
     if (!user) {
@@ -48,7 +50,9 @@ class UpdateUserService {
       role,
     });
 
-    return updatedUser;
+    const formattedUpdatedUser = UserMapper.toDTO(updatedUser);
+
+    return formattedUpdatedUser;
   }
 }
 
