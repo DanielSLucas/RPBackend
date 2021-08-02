@@ -13,6 +13,7 @@ import CreateAddressService from '../../addresses/services/CreateAddressService'
 import CreateProductService from '../../products/services/CreateProductService';
 import CreateRentService from './CreateRentService';
 import ListRentsByProductService from './ListRentsByProductService';
+import { DatefnsDateProvider } from '../providers/dateProvider/implementations/DatefnsDateProvider';
 
 let fakeAddressCustomersRepository: FakeAddressCustomersRepository;
 let fakeAddressesRepository: FakeAddressesRepository;
@@ -20,6 +21,7 @@ let fakeCustomersRepository: FakeCustomersRepository;
 let fakeProductRepository: FakeProductRepository;
 let fakeRentsRepository: FakeRentsRepository;
 let fakeRentalItemsRepository: FakeRentalItemsRepository;
+let dateProvider: DatefnsDateProvider;
 
 let createAddress: CreateAddressService;
 let createCustomer: CreateCustomerService;
@@ -35,6 +37,7 @@ describe('ListRentsByProduct', () => {
     fakeProductRepository = new FakeProductRepository();
     fakeRentsRepository = new FakeRentsRepository();
     fakeRentalItemsRepository = new FakeRentalItemsRepository();
+    dateProvider = new DatefnsDateProvider();
 
     createAddress = new CreateAddressService(
       fakeAddressesRepository,
@@ -50,6 +53,7 @@ describe('ListRentsByProduct', () => {
       fakeAddressesRepository,
       fakeRentsRepository,
       fakeRentalItemsRepository,
+      dateProvider,
     );
 
     listRentsByProduct = new ListRentsByProductService(

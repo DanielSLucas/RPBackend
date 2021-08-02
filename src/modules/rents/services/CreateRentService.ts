@@ -1,5 +1,4 @@
 import { inject, injectable } from 'tsyringe';
-import { isBefore } from 'date-fns';
 import AppError from '../../../shared/errors/AppError';
 
 import Rent from '../infra/typeorm/entities/Rent';
@@ -10,6 +9,7 @@ import ICustomersRepository from '../../customers/repositories/ICustomersReposit
 import IAddressesRepository from '../../addresses/repositories/IAddressesRepository';
 
 import { RentItem } from '../dtos/ICreateRentDTO';
+import { IDateProvider } from '../providers/dateProvider/IDateProvider';
 
 interface Request {
   customer_id: string;
@@ -35,6 +35,9 @@ class CreateRentService {
 
     @inject('RentalItemsRepository')
     private rentalItemsRepository: IRentalItemsRepository,
+
+    @inject('DateProvider')
+    private dateProvider: IDateProvider,
   ) {}
 
   public async execute({
@@ -58,7 +61,7 @@ class CreateRentService {
       throw new AppError("Address doesn't exist.", 400);
     }
 
-    if (isBefore(rent_date, Date.now())) {
+    if (this.dateProvider.isPastDate(rent_date)) {
       throw new AppError("You can't create a rent in a past date");
     }
 

@@ -1,6 +1,4 @@
-/* eslint-disable no-plusplus */
 import { inject, injectable } from 'tsyringe';
-import { isBefore } from 'date-fns';
 import AppError from '../../../shared/errors/AppError';
 
 import Rent from '../infra/typeorm/entities/Rent';
@@ -9,6 +7,7 @@ import IRentsRepository from '../repositories/IRentsRepository';
 import IRentalItemsRepository from '../repositories/IRentalItemsRepository';
 
 import { RentItem } from '../dtos/ICreateRentDTO';
+import { IDateProvider } from '../providers/dateProvider/IDateProvider';
 
 interface Request {
   customer_id: string;
@@ -28,6 +27,9 @@ class UpdateRentService {
 
     @inject('RentalItemsRepository')
     private rentalItemsRepository: IRentalItemsRepository,
+
+    @inject('DateProvider')
+    private dateProvider: IDateProvider,
   ) {}
 
   public async execute(
@@ -48,7 +50,7 @@ class UpdateRentService {
       throw new AppError("Rent doesn't exist.", 400);
     }
 
-    if (isBefore(rent_date, Date.now())) {
+    if (this.dateProvider.isPastDate(rent_date)) {
       throw new AppError("You can't create a rent in a past date");
     }
 

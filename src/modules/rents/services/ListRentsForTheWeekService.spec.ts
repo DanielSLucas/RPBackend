@@ -11,6 +11,7 @@ import CreateAddressService from '../../addresses/services/CreateAddressService'
 import CreateProductService from '../../products/services/CreateProductService';
 import CreateRentService from './CreateRentService';
 import ListRentsForTheWeekService from './ListRentsForTheWeekService';
+import { DatefnsDateProvider } from '../providers/dateProvider/implementations/DatefnsDateProvider';
 
 let fakeAddressCustomersRepository: FakeAddressCustomersRepository;
 let fakeAddressesRepository: FakeAddressesRepository;
@@ -18,6 +19,7 @@ let fakeCustomersRepository: FakeCustomersRepository;
 let fakeProductRepository: FakeProductRepository;
 let fakeRentsRepository: FakeRentsRepository;
 let fakeRentalItemsRepository: FakeRentalItemsRepository;
+let dateProvider: DatefnsDateProvider;
 
 let createAddress: CreateAddressService;
 let createCustomer: CreateCustomerService;
@@ -33,6 +35,7 @@ describe('ListRentsForTheWeek', () => {
     fakeProductRepository = new FakeProductRepository();
     fakeRentsRepository = new FakeRentsRepository();
     fakeRentalItemsRepository = new FakeRentalItemsRepository();
+    dateProvider = new DatefnsDateProvider();
 
     createAddress = new CreateAddressService(
       fakeAddressesRepository,
@@ -48,9 +51,13 @@ describe('ListRentsForTheWeek', () => {
       fakeAddressesRepository,
       fakeRentsRepository,
       fakeRentalItemsRepository,
+      dateProvider,
     );
 
-    listRentsForTheWeek = new ListRentsForTheWeekService(fakeRentsRepository);
+    listRentsForTheWeek = new ListRentsForTheWeekService(
+      fakeRentsRepository,
+      dateProvider,
+    );
   });
 
   it('should be able to list all rents between the provided date and the next seven days', async () => {

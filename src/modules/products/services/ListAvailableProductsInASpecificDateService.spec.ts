@@ -1,3 +1,5 @@
+import { add } from 'date-fns';
+import { DatefnsDateProvider } from '../../rents/providers/dateProvider/implementations/DatefnsDateProvider';
 import FakeRentsRepository from '../../rents/repositories/fakes/FakeRentsRepository';
 import FakeRentalItemsRepository from '../../rents/repositories/fakes/FakeRentalItemsRepository';
 import FakeCustomersRepository from '../../customers/repositories/fakes/FakeCustomersRepository';
@@ -10,7 +12,6 @@ import CreateAddressService from '../../addresses/services/CreateAddressService'
 import CreateRentService from '../../rents/services/CreateRentService';
 import CreateProductService from './CreateProductService';
 import ListAvailableProductsInASpecificDateService from './ListAvailableProductsInASpecificDateService';
-import { add } from 'date-fns';
 
 let fakeAddressCustomersRepository: FakeAddressCustomersRepository;
 let fakeAddressesRepository: FakeAddressesRepository;
@@ -18,6 +19,7 @@ let fakeCustomersRepository: FakeCustomersRepository;
 let fakeProductRepository: FakeProductRepository;
 let fakeRentsRepository: FakeRentsRepository;
 let fakeRentalItemsRepository: FakeRentalItemsRepository;
+let dateProvider: DatefnsDateProvider;
 
 let createAddress: CreateAddressService;
 let createCustomer: CreateCustomerService;
@@ -33,6 +35,7 @@ describe('ListAvailableProductsByDate', () => {
     fakeProductRepository = new FakeProductRepository();
     fakeRentsRepository = new FakeRentsRepository();
     fakeRentalItemsRepository = new FakeRentalItemsRepository();
+    dateProvider = new DatefnsDateProvider();
 
     createAddress = new CreateAddressService(
       fakeAddressesRepository,
@@ -48,13 +51,15 @@ describe('ListAvailableProductsByDate', () => {
       fakeAddressesRepository,
       fakeRentsRepository,
       fakeRentalItemsRepository,
+      dateProvider,
     );
 
-    listAvailableProductsInASpecificDateService = new ListAvailableProductsInASpecificDateService(
-      fakeProductRepository,
-      fakeRentsRepository,
-      fakeRentalItemsRepository,
-    );
+    listAvailableProductsInASpecificDateService =
+      new ListAvailableProductsInASpecificDateService(
+        fakeProductRepository,
+        fakeRentsRepository,
+        fakeRentalItemsRepository,
+      );
   });
 
   it('should be able to list available products in a specifc date', async () => {
@@ -122,9 +127,8 @@ describe('ListAvailableProductsByDate', () => {
       total_value: 60,
     });
 
-    const availableProducts = await listAvailableProductsInASpecificDateService.execute(
-      rent_date,
-    );
+    const availableProducts =
+      await listAvailableProductsInASpecificDateService.execute(rent_date);
 
     expect(availableProducts).toEqual([
       product1,
@@ -152,9 +156,8 @@ describe('ListAvailableProductsByDate', () => {
 
     const rent_date = add(new Date(), { days: 1 });
 
-    const availableProducts = await listAvailableProductsInASpecificDateService.execute(
-      rent_date,
-    );
+    const availableProducts =
+      await listAvailableProductsInASpecificDateService.execute(rent_date);
 
     expect(availableProducts).toEqual([product1, product2]);
   });

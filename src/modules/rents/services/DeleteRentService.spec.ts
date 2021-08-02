@@ -1,3 +1,4 @@
+import { add } from 'date-fns';
 import AppError from '../../../shared/errors/AppError';
 import FakeRentsRepository from '../repositories/fakes/FakeRentsRepository';
 import FakeRentalItemsRepository from '../repositories/fakes/FakeRentalItemsRepository';
@@ -12,7 +13,7 @@ import CreateProductService from '../../products/services/CreateProductService';
 import CreateRentService from './CreateRentService';
 import DeleteRentService from './DeleteRentService';
 import ListRentsService from './ListRentsService';
-import { add } from 'date-fns';
+import { DatefnsDateProvider } from '../providers/dateProvider/implementations/DatefnsDateProvider';
 
 let fakeAddressCustomersRepository: FakeAddressCustomersRepository;
 let fakeAddressesRepository: FakeAddressesRepository;
@@ -20,6 +21,7 @@ let fakeCustomersRepository: FakeCustomersRepository;
 let fakeProductRepository: FakeProductRepository;
 let fakeRentsRepository: FakeRentsRepository;
 let fakeRentalItemsRepository: FakeRentalItemsRepository;
+let dateProvider: DatefnsDateProvider;
 
 let createAddress: CreateAddressService;
 let createCustomer: CreateCustomerService;
@@ -35,6 +37,7 @@ describe('DeleteRent', () => {
     fakeProductRepository = new FakeProductRepository();
     fakeRentsRepository = new FakeRentsRepository();
     fakeRentalItemsRepository = new FakeRentalItemsRepository();
+    dateProvider = new DatefnsDateProvider();
 
     createAddress = new CreateAddressService(
       fakeAddressesRepository,
@@ -50,6 +53,7 @@ describe('DeleteRent', () => {
       fakeAddressesRepository,
       fakeRentsRepository,
       fakeRentalItemsRepository,
+      dateProvider,
     );
 
     deleteRent = new DeleteRentService(fakeRentsRepository);

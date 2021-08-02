@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 /* eslint-disable no-console */
 import 'reflect-metadata';
 import express, { Request, Response, NextFunction } from 'express';
