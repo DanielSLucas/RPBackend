@@ -127,8 +127,8 @@ describe('DeleteRent', () => {
   });
 
   it('should not be able to delete a nonexistent rent', async () => {
-    await expect(
-      deleteRent.execute('nonexistent-rent-id'),
-    ).rejects.toBeInstanceOf(AppError);
+    await expect(deleteRent.execute('nonexistent-rent-id')).rejects.toEqual(
+      new AppError("Rent doesn't exist."),
+    );
   });
 });

@@ -37,8 +37,8 @@ describe('DeleteCustomer', () => {
   });
 
   it('should not be able to delete a nonexistent customer', async () => {
-    await expect(
-      deleteCustomer.execute('nonexistent-user-id'),
-    ).rejects.toBeInstanceOf(AppError);
+    await expect(deleteCustomer.execute('nonexistent-user-id')).rejects.toEqual(
+      new AppError("Customer doesn't exists.", 400),
+    );
   });
 });

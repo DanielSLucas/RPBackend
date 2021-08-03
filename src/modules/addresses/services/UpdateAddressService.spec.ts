@@ -70,6 +70,6 @@ describe('UpdateAddress', () => {
         number: '529',
         address_type: 'Cobrança',
       }),
-    ).rejects.toBeInstanceOf(AppError);
+    ).rejects.toEqual(new AppError("Address doesn't exist.", 400));
   });
 });

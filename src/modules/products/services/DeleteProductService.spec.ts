@@ -43,6 +43,6 @@ describe('DeleteProduct', () => {
   it('should not be able to delete a nonexistent product', async () => {
     await expect(
       deleteProduct.execute('a-nonexistent-product-id'),
-    ).rejects.toBeInstanceOf(AppError);
+    ).rejects.toEqual(new AppError('Product not found', 404));
   });
 });

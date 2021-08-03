@@ -173,7 +173,7 @@ describe('UpdateRent', () => {
         payment_way: 'Dinheiro',
         total_value: 120,
       }),
-    ).rejects.toBeInstanceOf(AppError);
+    ).rejects.toEqual(new AppError("Rent doesn't exist.", 400));
   });
 
   it('should not be able to update a rent in a past date', async () => {
@@ -236,6 +236,6 @@ describe('UpdateRent', () => {
         payment_way: 'Dinheiro',
         total_value: 120,
       }),
-    ).rejects.toBeInstanceOf(AppError);
+    ).rejects.toEqual(new AppError("You can't create a rent in a past date"));
   });
 });

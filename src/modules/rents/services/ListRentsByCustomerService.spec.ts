@@ -133,6 +133,6 @@ describe('ListRentsByCustomer', () => {
   it('should not be able to list rents by a nonexistent customer', async () => {
     await expect(
       listRentsByCustomer.execute('nonexistent-customer-id'),
-    ).rejects.toBeInstanceOf(AppError);
+    ).rejects.toEqual(new AppError("Customer doesn't exist.", 400));
   });
 });

@@ -152,6 +152,6 @@ describe('ListRentsByProduct', () => {
   it('should not be able to list rents by a nonexistent product', async () => {
     await expect(
       listRentsByProduct.execute('nonexistent-product-id'),
-    ).rejects.toBeInstanceOf(AppError);
+    ).rejects.toEqual(new AppError("Product doesn't exist.", 400));
   });
 });

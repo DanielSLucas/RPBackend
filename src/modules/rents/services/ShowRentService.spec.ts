@@ -110,8 +110,8 @@ describe('ShowRent', () => {
   });
 
   it('should not be able to show a nonexistent rent', async () => {
-    await expect(
-      showRent.execute('nonexistent-rent-id'),
-    ).rejects.toBeInstanceOf(AppError);
+    await expect(showRent.execute('nonexistent-rent-id')).rejects.toEqual(
+      new AppError("Rent doesn't exist."),
+    );
   });
 });

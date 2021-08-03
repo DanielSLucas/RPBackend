@@ -93,6 +93,6 @@ describe('CreateAddress', () => {
         number: '529',
         address_type: 'Cobrança',
       }),
-    ).rejects.toBeInstanceOf(AppError);
+    ).rejects.toEqual(new AppError("Customer doesn't exist.", 400));
   });
 });

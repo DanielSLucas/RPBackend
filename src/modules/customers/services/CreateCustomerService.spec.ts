@@ -41,6 +41,6 @@ describe('CreateCustomer', () => {
         whatsapp: '12981025796',
         cpf: '46479951867',
       }),
-    ).rejects.toBeInstanceOf(AppError);
+    ).rejects.toEqual(new AppError('User with this cpf already exists.', 400));
   });
 });

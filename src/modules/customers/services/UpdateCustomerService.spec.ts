@@ -42,6 +42,6 @@ describe('UpdateCustomer', () => {
         whatsapp: '12981025796',
         cpf: '46479951867',
       }),
-    ).rejects.toBeInstanceOf(AppError);
+    ).rejects.toEqual(new AppError("Customer doesn't exist.", 400));
   });
 });

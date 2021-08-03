@@ -53,9 +53,8 @@ class ListAvailableProductsInASpecificDateService {
       }
     });
 
-    const consolidatedRentedItemsInThisDayIDs = consolidatedRentedItemsInThisDay.map(
-      item => item.product_id,
-    );
+    const consolidatedRentedItemsInThisDayIDs =
+      consolidatedRentedItemsInThisDay.map(item => item.product_id);
 
     const rentedProducts = await this.productsRepository.findByIds(
       consolidatedRentedItemsInThisDayIDs,

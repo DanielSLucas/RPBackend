@@ -144,7 +144,7 @@ describe('CreateRent', () => {
         payment_way: 'Dinheiro',
         total_value: 60,
       }),
-    ).rejects.toBeInstanceOf(AppError);
+    ).rejects.toEqual(new AppError("Customer doesn't exist.", 400));
   });
 
   it('should not be able to create a new rent with a nonexistent address', async () => {
@@ -179,7 +179,7 @@ describe('CreateRent', () => {
         payment_way: 'Dinheiro',
         total_value: 60,
       }),
-    ).rejects.toBeInstanceOf(AppError);
+    ).rejects.toEqual(new AppError("Address doesn't exist.", 400));
   });
 
   it('should not be able to create a new rent in a past date', async () => {
@@ -224,6 +224,6 @@ describe('CreateRent', () => {
         payment_way: 'Dinheiro',
         total_value: 60,
       }),
-    ).rejects.toBeInstanceOf(AppError);
+    ).rejects.toEqual(new AppError("You can't create a rent in a past date"));
   });
 });

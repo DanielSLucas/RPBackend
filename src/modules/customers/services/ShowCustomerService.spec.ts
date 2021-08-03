@@ -34,6 +34,6 @@ describe('ShowCustomer', () => {
   it('should not be able to show a nonexistent customer', async () => {
     await expect(
       showCustomer.execute('nonexistent-customer-id'),
-    ).rejects.toBeInstanceOf(AppError);
+    ).rejects.toEqual(new AppError('Customer not found', 404));
   });
 });

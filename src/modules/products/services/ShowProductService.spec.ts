@@ -31,6 +31,6 @@ describe('ShowProduct', () => {
   it('should not be able to show a nonexistent product', async () => {
     await expect(
       showProduct.execute('a-nonexistent-product-id'),
-    ).rejects.toBeInstanceOf(AppError);
+    ).rejects.toEqual(new AppError('Product not found', 404));
   });
 });

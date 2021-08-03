@@ -43,8 +43,8 @@ describe('ShowAddress', () => {
   });
 
   it('should not be able to show a nonexistent address', async () => {
-    await expect(
-      showAddress.execute('nonexistent-address-id'),
-    ).rejects.toBeInstanceOf(AppError);
+    await expect(showAddress.execute('nonexistent-address-id')).rejects.toEqual(
+      new AppError("Address doesn't exist."),
+    );
   });
 });

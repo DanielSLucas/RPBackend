@@ -62,7 +62,7 @@ describe('CreateAddress', () => {
   it('should not be able to show the address of a nonexistent customer', async () => {
     await expect(
       showCustomerAddress.execute('nonexistent-customer-id'),
-    ).rejects.toBeInstanceOf(AppError);
+    ).rejects.toEqual(new AppError("Customer doesn't exist.", 400));
   });
 
   it('should not be able to show a nonexistent address', async () => {
@@ -72,8 +72,8 @@ describe('CreateAddress', () => {
       cpf: '46479951867',
     });
 
-    await expect(
-      showCustomerAddress.execute(customer.id),
-    ).rejects.toBeInstanceOf(AppError);
+    await expect(showCustomerAddress.execute(customer.id)).rejects.toEqual(
+      new AppError('Customer address not found.', 404),
+    );
   });
 });

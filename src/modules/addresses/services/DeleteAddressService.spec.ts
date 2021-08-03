@@ -62,6 +62,6 @@ describe('DeleteAddress', () => {
   it('should not be able to delete a nonexistent address', async () => {
     await expect(
       deleteAddress.execute('nonexistent-address-id'),
-    ).rejects.toBeInstanceOf(AppError);
+    ).rejects.toEqual(new AppError("Address doesn't exists.", 400));
   });
 });

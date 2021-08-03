@@ -49,6 +49,6 @@ describe('UpdateProduct', () => {
         value: 150,
         product_type: 'Bolos',
       }),
-    ).rejects.toBeInstanceOf(AppError);
+    ).rejects.toEqual(new AppError('Product not found', 404));
   });
 });
