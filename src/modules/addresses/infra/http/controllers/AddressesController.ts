@@ -2,7 +2,9 @@ import { container } from 'tsyringe';
 import { Request, Response } from 'express';
 
 import CreateAddressService from '../../../services/CreateAddressService';
-import ListAddressesByTypeService from '../../../services/ListAddressesByTypeService';
+import ListAddressesByTypeService, {
+  AddressType,
+} from '../../../services/ListAddressesByTypeService';
 import ShowAddressService from '../../../services/ShowAddressService';
 import UpdateAddressService from '../../../services/UpdateAddressService';
 import DeleteAddressService from '../../../services/DeleteAddressService';
@@ -37,10 +39,12 @@ export default class AdressesController {
   }
 
   public async index(request: Request, response: Response): Promise<Response> {
-    const { address_type } = request.body;
+    const { type } = request.query;
     const listAddresses = container.resolve(ListAddressesByTypeService);
 
-    const addresses = await listAddresses.execute(address_type || undefined);
+    const addresses = await listAddresses.execute(
+      (type as AddressType) || undefined,
+    );
 
     return response.json(addresses);
   }

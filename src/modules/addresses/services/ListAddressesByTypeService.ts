@@ -4,7 +4,7 @@ import IAddressRepository from '../repositories/IAddressesRepository';
 
 import Address from '../infra/typeorm/entities/Address';
 
-type AddressType = 'Cobrança' | 'Salão' | 'Entrega' | 'Busca';
+export type AddressType = 'Cobrança' | 'Salão' | 'Entrega' | 'Busca';
 
 @injectable()
 class ListAddressesByTypeService {
