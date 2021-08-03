@@ -33,7 +33,7 @@ export default class AdressesController {
       address_type,
     });
 
-    return response.json(address);
+    return response.status(201).json(address);
   }
 
   public async index(request: Request, response: Response): Promise<Response> {

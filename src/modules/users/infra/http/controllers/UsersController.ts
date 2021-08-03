@@ -39,7 +39,7 @@ export default class UsersController {
       role,
     });
 
-    return response.json(user);
+    return response.status(201).json(user);
   }
 
   public async update(request: Request, response: Response): Promise<Response> {

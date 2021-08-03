@@ -49,7 +49,7 @@ describe('Users Controller', () => {
         Authorization: `Bearer ${token}`,
       });
 
-    expect(response.status).toBe(200);
+    expect(response.status).toBe(201);
     expect(response.body).toHaveProperty('name');
     expect(response.body).toHaveProperty('email');
     expect(response.body).toHaveProperty('whatsapp');
@@ -78,7 +78,7 @@ describe('Users Controller', () => {
         Authorization: `Bearer ${regularUsertoken}`,
       });
 
-    expect(response.status).toBe(401);
+    expect(response.status).toBe(403);
     expect(response.body).toHaveProperty('status');
     expect(response.body.status).toBe('error');
     expect(response.body).toHaveProperty('message');

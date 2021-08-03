@@ -34,7 +34,7 @@ export default class RentsController {
       total_value,
     });
 
-    return response.json(rent);
+    return response.status(201).json(rent);
   }
 
   public async index(request: Request, response: Response): Promise<Response> {
