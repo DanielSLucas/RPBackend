@@ -5,6 +5,7 @@ import FakeCustomersRepository from '../../customers/repositories/fakes/FakeCust
 import CreateCustomerService from '../../customers/services/CreateCustomerService';
 import CreateAddressService from './CreateAddressService';
 import ShowCustomerAddressService from './ShowCustomerAddressService';
+import { AddressTypes } from '../infra/typeorm/entities/Address';
 
 let fakeAddressCustomersRepository: FakeAddressCustomersRepository;
 let fakeAddressesRepository: FakeAddressesRepository;
@@ -49,7 +50,7 @@ describe('CreateAddress', () => {
       neighborhood: 'Vila Passos',
       street: 'Mario P de Aquino Filho',
       number: '529',
-      address_type: 'Cobrança',
+      address_type: AddressTypes.PERSONAL,
     });
 
     const addressCustomer = await showCustomerAddress.execute(customer.id);

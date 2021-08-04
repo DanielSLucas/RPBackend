@@ -1,4 +1,5 @@
 import { add } from 'date-fns';
+import { AddressTypes } from '../../addresses/infra/typeorm/entities/Address';
 import FakeRentsRepository from '../repositories/fakes/FakeRentsRepository';
 import FakeRentalItemsRepository from '../repositories/fakes/FakeRentalItemsRepository';
 import FakeCustomersRepository from '../../customers/repositories/fakes/FakeCustomersRepository';
@@ -71,7 +72,7 @@ describe('ListsRents', () => {
       neighborhood: 'Vila Passos',
       street: 'Mario P de Aquino Filho',
       number: '529',
-      address_type: 'Cobrança',
+      address_type: AddressTypes.PERSONAL,
     });
 
     const product = await createProduct.execute({

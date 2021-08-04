@@ -1,4 +1,5 @@
 import { add } from 'date-fns';
+import { AddressTypes } from '../../addresses/infra/typeorm/entities/Address';
 import AppError from '../../../shared/errors/AppError';
 import FakeRentsRepository from '../repositories/fakes/FakeRentsRepository';
 import FakeRentalItemsRepository from '../repositories/fakes/FakeRentalItemsRepository';
@@ -76,7 +77,7 @@ describe('UpdateRent', () => {
       neighborhood: 'Vila Passos',
       street: 'Mario P de Aquino Filho',
       number: '529',
-      address_type: 'Cobrança',
+      address_type: AddressTypes.PERSONAL,
     });
 
     const product = await createProduct.execute({
@@ -145,7 +146,7 @@ describe('UpdateRent', () => {
       neighborhood: 'Vila Passos',
       street: 'Mario P de Aquino Filho',
       number: '529',
-      address_type: 'Cobrança',
+      address_type: AddressTypes.PERSONAL,
     });
 
     const product = await createProduct.execute({
@@ -190,7 +191,7 @@ describe('UpdateRent', () => {
       neighborhood: 'Vila Passos',
       street: 'Mario P de Aquino Filho',
       number: '529',
-      address_type: 'Cobrança',
+      address_type: AddressTypes.PERSONAL,
     });
 
     const product = await createProduct.execute({

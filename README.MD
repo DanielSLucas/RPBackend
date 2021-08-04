@@ -200,12 +200,12 @@ Dentre as funções:
         "neighborhood": "friendly neighborhood",
         "street": "friendly street",
         "number": "1234",
-        "address_type": "Cobrança"
+        "address_type": "PERSONAL"
       }
 
     *a propriedade `customer_id` é opcional, um endereço não precisa estar relacionado a um usuário.
 
-    *address_type: **'Cobrança'** | **'Salão'** | **'Entrega'** | **'Busca'** ("busca" só deve ser utlizado para o endereço da empresa/casa onde os clientes buscarão as mercadorias)
+    *address_type: **'PERSONAL'** | **'PARTYROOM'** | **'DELIVERY'** | **'PICKUP'** ("PICKUP" só deve ser utlizado para o endereço da empresa/casa onde os clientes buscarão as mercadorias)
 
 
   > Retorna:
@@ -217,7 +217,7 @@ Dentre as funções:
         "neighborhood": "friendly neighborhood",
         "street": "friendly street",
         "number": "1234",
-        "address_type": "Cobrança"
+        "address_type": "PERSONAL"
         "id": "52fbac28-582d-411d-b420-82a6c0d8bc49",
         "created_at": "2021-02-01T19:41:50.165Z",
         "updated_at": "2021-02-01T19:41:50.165Z"
@@ -227,7 +227,7 @@ Dentre as funções:
   > Essa rota pode receber no copo da requisição o tipo de endereço (`address_type`), para que sejam listados apenas endereços de um tipo específico.
 
       {
-        "address_type": "Cobrança"
+        "address_type": "PERSONAL"
       }
 
 **`/addresses/:id`**
@@ -264,7 +264,7 @@ Dentre as funções:
           "neighborhood": "friendly neighborhood",
           "street": "friendly street",
           "number": "1234",
-          "address_type": "Cobrança"
+          "address_type": "PERSONAL"
           "created_at": "2021-02-01T19:41:50.165Z",
           "updated_at": "2021-02-01T19:41:50.165Z"
         }

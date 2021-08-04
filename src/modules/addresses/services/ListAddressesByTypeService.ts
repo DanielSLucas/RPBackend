@@ -2,9 +2,7 @@ import { inject, injectable } from 'tsyringe';
 
 import IAddressRepository from '../repositories/IAddressesRepository';
 
-import Address from '../infra/typeorm/entities/Address';
-
-export type AddressType = 'Cobrança' | 'Salão' | 'Entrega' | 'Busca';
+import Address, { AddressTypes } from '../infra/typeorm/entities/Address';
 
 @injectable()
 class ListAddressesByTypeService {
@@ -13,7 +11,7 @@ class ListAddressesByTypeService {
     private addressesRepository: IAddressRepository,
   ) {}
 
-  public async execute(address_type?: AddressType): Promise<Address[]> {
+  public async execute(address_type?: AddressTypes): Promise<Address[]> {
     let addresses: Address[];
 
     if (address_type) {

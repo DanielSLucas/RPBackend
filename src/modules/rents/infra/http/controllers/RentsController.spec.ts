@@ -58,7 +58,7 @@ describe('Rents Controller', () => {
         neighborhood: 'Vila Passos',
         street: 'Mario P de Aquino Filho',
         number: '529',
-        address_type: 'Cobrança',
+        address_type: 'PERSONAL',
       })
       .set({
         Authorization: `Bearer ${authToken}`,

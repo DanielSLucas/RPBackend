@@ -1,7 +1,8 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
 export default class CreateAddresses1609866045715
-  implements MigrationInterface {
+  implements MigrationInterface
+{
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"');
 
@@ -42,7 +43,8 @@ export default class CreateAddresses1609866045715
           },
           {
             name: 'address_type',
-            type: 'varchar',
+            type: 'enum',
+            enum: ['PERSONAL', 'PARTYROOM', 'DELIVERY', 'PICKUP'],
           },
           {
             name: 'created_at',

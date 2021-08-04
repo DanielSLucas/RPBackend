@@ -4,6 +4,7 @@ import FakeAddressesRepository from '../repositories/fakes/FakeAddressesReposito
 import FakeCustomersRepository from '../../customers/repositories/fakes/FakeCustomersRepository';
 import CreateAddressService from './CreateAddressService';
 import ShowAddressService from './ShowAddressService';
+import { AddressTypes } from '../infra/typeorm/entities/Address';
 
 let fakeAddressCustomersRepository: FakeAddressCustomersRepository;
 let fakeAddressesRepository: FakeAddressesRepository;
@@ -28,13 +29,13 @@ describe('ShowAddress', () => {
 
   it('should be able to show an address', async () => {
     const createdAddress = await createAddress.execute({
-      description: 'Endereço de cobrança',
+      description: 'Endereço de PERSONAL',
       postal_code: '12605-390',
       city: 'Lorena',
       neighborhood: 'Vila Passos',
       street: 'Mario P de Aquino Filho',
       number: '529',
-      address_type: 'Cobrança',
+      address_type: AddressTypes.PERSONAL,
     });
 
     const address = await showAddress.execute(createdAddress.id);

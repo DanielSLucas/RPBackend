@@ -1,4 +1,5 @@
 import { add } from 'date-fns';
+import { AddressTypes } from '../../addresses/infra/typeorm/entities/Address';
 import { DatefnsDateProvider } from '../../rents/providers/dateProvider/implementations/DatefnsDateProvider';
 import FakeRentsRepository from '../../rents/repositories/fakes/FakeRentsRepository';
 import FakeRentalItemsRepository from '../../rents/repositories/fakes/FakeRentalItemsRepository';
@@ -76,7 +77,7 @@ describe('ListAvailableProductsByDate', () => {
       neighborhood: 'Vila Passos',
       street: 'Mario P de Aquino Filho',
       number: '529',
-      address_type: 'Cobrança',
+      address_type: AddressTypes.PERSONAL,
     });
 
     const product1 = await createProduct.execute({

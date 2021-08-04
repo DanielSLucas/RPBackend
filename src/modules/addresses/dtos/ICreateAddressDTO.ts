@@ -1,3 +1,5 @@
+import { AddressTypes } from '../infra/typeorm/entities/Address';
+
 export default interface ICreateAddressDTO {
   description: string;
 
@@ -11,5 +13,5 @@ export default interface ICreateAddressDTO {
 
   number: string;
 
-  address_type: 'Cobrança' | 'Salão' | 'Entrega' | 'Busca';
+  address_type: AddressTypes;
 }

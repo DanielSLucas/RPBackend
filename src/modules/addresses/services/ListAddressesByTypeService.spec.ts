@@ -3,6 +3,7 @@ import FakeAddressesRepository from '../repositories/fakes/FakeAddressesReposito
 import FakeCustomersRepository from '../../customers/repositories/fakes/FakeCustomersRepository';
 import CreateAddressService from './CreateAddressService';
 import ListAddressesByTypeService from './ListAddressesByTypeService';
+import { AddressTypes } from '../infra/typeorm/entities/Address';
 
 let fakeAddressCustomersRepository: FakeAddressCustomersRepository;
 let fakeAddressesRepository: FakeAddressesRepository;
@@ -27,13 +28,13 @@ describe('ListAddress', () => {
 
   it('should be able to list all addresses', async () => {
     const address1 = await createAddress.execute({
-      description: 'Endereço de cobrança',
+      description: 'Endereço de PERSONAL',
       postal_code: '12605-390',
       city: 'Lorena',
       neighborhood: 'Vila Passos',
       street: 'Mario P de Aquino Filho',
       number: '529',
-      address_type: 'Cobrança',
+      address_type: AddressTypes.PERSONAL,
     });
 
     const address2 = await createAddress.execute({
@@ -43,7 +44,7 @@ describe('ListAddress', () => {
       neighborhood: 'Vila Passos',
       street: 'Mario P de Aquino Filho',
       number: '529',
-      address_type: 'Salão',
+      address_type: AddressTypes.PARTYROOM,
     });
 
     const addresses = await listAddresses.execute();
@@ -53,13 +54,13 @@ describe('ListAddress', () => {
 
   it('should be able list addresses filtered by type', async () => {
     await createAddress.execute({
-      description: 'Endereço de cobrança',
+      description: 'Endereço de PERSONAL',
       postal_code: '12605-390',
       city: 'Lorena',
       neighborhood: 'Vila Passos',
       street: 'Mario P de Aquino Filho',
       number: '529',
-      address_type: 'Cobrança',
+      address_type: AddressTypes.PERSONAL,
     });
 
     const address2 = await createAddress.execute({
@@ -69,10 +70,10 @@ describe('ListAddress', () => {
       neighborhood: 'Vila Passos',
       street: 'Mario P de Aquino Filho',
       number: '529',
-      address_type: 'Salão',
+      address_type: AddressTypes.PARTYROOM,
     });
 
-    const addresses = await listAddresses.execute('Salão');
+    const addresses = await listAddresses.execute(AddressTypes.PARTYROOM);
 
     expect(addresses).toEqual([address2]);
   });

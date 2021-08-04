@@ -5,6 +5,7 @@ import FakeCustomersRepository from '../../customers/repositories/fakes/FakeCust
 import CreateAddressService from './CreateAddressService';
 import DeleteAddressService from './DeleteAddressService';
 import ListAddressesByTypeService from './ListAddressesByTypeService';
+import { AddressTypes } from '../infra/typeorm/entities/Address';
 
 let fakeAddressCustomersRepository: FakeAddressCustomersRepository;
 let fakeAddressesRepository: FakeAddressesRepository;
@@ -33,23 +34,23 @@ describe('DeleteAddress', () => {
     );
 
     const address1 = await createAddress.execute({
-      description: 'Endereço de cobrança',
+      description: 'Endereço de PERSONAL',
       postal_code: '12605-390',
       city: 'Lorena',
       neighborhood: 'Vila Passos',
       street: 'Mario P de Aquino Filho',
       number: '529',
-      address_type: 'Cobrança',
+      address_type: AddressTypes.PERSONAL,
     });
 
     const address2 = await createAddress.execute({
-      description: 'Segundo endereço de cobrança',
+      description: 'Segundo endereço de PERSONAL',
       postal_code: '12605-390',
       city: 'Lorena',
       neighborhood: 'Vila Passos',
       street: 'Mario P de Aquino Filho',
       number: '529',
-      address_type: 'Cobrança',
+      address_type: AddressTypes.PERSONAL,
     });
 
     await deleteAddress.execute(address1.id);

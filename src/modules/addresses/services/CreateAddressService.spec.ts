@@ -5,6 +5,7 @@ import FakeAddressesRepository from '../repositories/fakes/FakeAddressesReposito
 import FakeCustomersRepository from '../../customers/repositories/fakes/FakeCustomersRepository';
 import CreateAddressService from './CreateAddressService';
 import CreateCustomerService from '../../customers/services/CreateCustomerService';
+import { AddressTypes } from '../infra/typeorm/entities/Address';
 
 let fakeAddressCustomersRepository: FakeAddressCustomersRepository;
 let fakeAddressesRepository: FakeAddressesRepository;
@@ -32,7 +33,7 @@ describe('CreateAddress', () => {
       neighborhood: 'Vila Passos',
       street: 'Mario P de Aquino Filho',
       number: '529',
-      address_type: 'Cobrança',
+      address_type: AddressTypes.PERSONAL,
     });
 
     expect(address).toHaveProperty('id');
@@ -44,7 +45,7 @@ describe('CreateAddress', () => {
       neighborhood: 'Vila Passos',
       street: 'Mario P de Aquino Filho',
       number: '529',
-      address_type: 'Cobrança',
+      address_type: 'PERSONAL',
     });
   });
 
@@ -65,7 +66,7 @@ describe('CreateAddress', () => {
       neighborhood: 'Vila Passos',
       street: 'Mario P de Aquino Filho',
       number: '529',
-      address_type: 'Cobrança',
+      address_type: AddressTypes.PERSONAL,
     });
 
     expect(address).toHaveProperty('id');
@@ -77,7 +78,7 @@ describe('CreateAddress', () => {
       neighborhood: 'Vila Passos',
       street: 'Mario P de Aquino Filho',
       number: '529',
-      address_type: 'Cobrança',
+      address_type: 'PERSONAL',
     });
   });
 
@@ -91,7 +92,7 @@ describe('CreateAddress', () => {
         neighborhood: 'Vila Passos',
         street: 'Mario P de Aquino Filho',
         number: '529',
-        address_type: 'Cobrança',
+        address_type: AddressTypes.PERSONAL,
       }),
     ).rejects.toEqual(new AppError("Customer doesn't exist.", 400));
   });

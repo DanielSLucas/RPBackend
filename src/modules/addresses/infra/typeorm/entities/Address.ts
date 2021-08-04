@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import {
   Entity,
   Column,
@@ -6,6 +7,12 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
+export enum AddressTypes {
+  PERSONAL = 'PERSONAL',
+  PARTYROOM = 'PARTYROOM',
+  DELIVERY = 'DELIVERY',
+  PICKUP = 'PICKUP',
+}
 @Entity('addresses')
 class Address {
   @PrimaryGeneratedColumn('uuid')
@@ -29,8 +36,8 @@ class Address {
   @Column()
   number: string;
 
-  @Column()
-  address_type: 'Cobrança' | 'Salão' | 'Entrega' | 'Busca';
+  @Column({ type: 'enum', enum: AddressTypes })
+  address_type: AddressTypes;
 
   @CreateDateColumn()
   created_at: Date;

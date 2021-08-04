@@ -2,9 +2,7 @@ import { EntityRepository, getRepository, Repository } from 'typeorm';
 import ICreateAddressDTO from '../../../dtos/ICreateAddressDTO';
 import IAddressesRepository from '../../../repositories/IAddressesRepository';
 
-import Address from '../entities/Address';
-
-type AddressType = 'Cobrança' | 'Salão' | 'Entrega' | 'Busca';
+import Address, { AddressTypes } from '../entities/Address';
 
 @EntityRepository(Address)
 class AddressesRepository implements IAddressesRepository {
@@ -28,7 +26,7 @@ class AddressesRepository implements IAddressesRepository {
     return findProduct || undefined;
   }
 
-  public async findByType(address_type: AddressType): Promise<Address[]> {
+  public async findByType(address_type: AddressTypes): Promise<Address[]> {
     const addresses = await this.ormRepository.find({
       where: { address_type },
     });

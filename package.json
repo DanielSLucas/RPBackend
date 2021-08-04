@@ -22,6 +22,7 @@
     "dev:server": "ts-node-dev --inspect --trace-warnings --transpile-only --ignore-watch node_modules src/shared/infra/http/server.ts",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",
     "seed:admin": "ts-node-dev src/shared/infra/typeorm/seed/admin.ts",
+    "seed:address": "ts-node-dev src/shared/infra/typeorm/seed/address.ts",
     "test": "NODE_ENV=test jest --all --detectOpenHandles"
   },
   "devDependencies": {

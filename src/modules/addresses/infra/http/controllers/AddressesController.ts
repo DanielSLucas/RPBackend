@@ -2,12 +2,11 @@ import { container } from 'tsyringe';
 import { Request, Response } from 'express';
 
 import CreateAddressService from '../../../services/CreateAddressService';
-import ListAddressesByTypeService, {
-  AddressType,
-} from '../../../services/ListAddressesByTypeService';
+import ListAddressesByTypeService from '../../../services/ListAddressesByTypeService';
 import ShowAddressService from '../../../services/ShowAddressService';
 import UpdateAddressService from '../../../services/UpdateAddressService';
 import DeleteAddressService from '../../../services/DeleteAddressService';
+import { AddressTypes } from '../../typeorm/entities/Address';
 
 export default class AdressesController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -32,7 +31,7 @@ export default class AdressesController {
       neighborhood,
       street,
       number,
-      address_type,
+      address_type: String(address_type).toUpperCase() as AddressTypes,
     });
 
     return response.status(201).json(address);
@@ -43,7 +42,7 @@ export default class AdressesController {
     const listAddresses = container.resolve(ListAddressesByTypeService);
 
     const addresses = await listAddresses.execute(
-      (type as AddressType) || undefined,
+      (type?.toString().toUpperCase() as AddressTypes) || undefined,
     );
 
     return response.json(addresses);
@@ -80,7 +79,7 @@ export default class AdressesController {
       neighborhood,
       street,
       number,
-      address_type,
+      address_type: String(address_type).toUpperCase() as AddressTypes,
     });
 
     return response.json(address);

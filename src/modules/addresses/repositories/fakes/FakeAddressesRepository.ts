@@ -3,9 +3,8 @@ import { v4 } from 'uuid';
 import ICreateAddressDTO from '../../dtos/ICreateAddressDTO';
 import IAddressesRepository from '../IAddressesRepository';
 
-import Address from '../../infra/typeorm/entities/Address';
+import Address, { AddressTypes } from '../../infra/typeorm/entities/Address';
 
-type AddressType = 'Cobrança' | 'Salão' | 'Entrega' | 'Busca';
 class AddressesRepository implements IAddressesRepository {
   private addresses: Address[] = [];
 
@@ -19,7 +18,7 @@ class AddressesRepository implements IAddressesRepository {
     return address;
   }
 
-  public async findByType(address_type: AddressType): Promise<Address[]> {
+  public async findByType(address_type: AddressTypes): Promise<Address[]> {
     const filteredAddresses = this.addresses.filter(
       address => address.address_type === address_type,
     );
