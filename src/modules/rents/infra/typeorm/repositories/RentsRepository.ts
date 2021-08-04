@@ -26,7 +26,7 @@ class RentsRepository implements IRentsRepository {
     payment_status,
     total_value,
   }: ICreateRentDTO): Promise<Rent> {
-    const rent = await this.ormRepository.create({
+    const rent = this.ormRepository.create({
       customer_id,
       address_id,
       rent_date,

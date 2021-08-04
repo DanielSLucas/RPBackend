@@ -45,7 +45,7 @@ class AddressesRepository implements IAddressesRepository {
     number,
     address_type,
   }: ICreateAddressDTO): Promise<Address> {
-    const address = await this.ormRepository.create({
+    const address = this.ormRepository.create({
       description,
       postal_code,
       city,

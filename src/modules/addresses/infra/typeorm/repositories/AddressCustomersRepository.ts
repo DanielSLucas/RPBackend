@@ -15,7 +15,7 @@ class AddressCustomersRepository implements IAddressCustomersRepository {
     address_id: string,
     customer_id: string,
   ): Promise<AddressCustomers> {
-    const addressCustomer = await this.ormRepository.create({
+    const addressCustomer = this.ormRepository.create({
       address_id,
       customer_id,
     });

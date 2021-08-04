@@ -35,7 +35,7 @@ class CustomersRepository implements ICustomersRepository {
     whatsapp,
     cpf,
   }: ICreateCustomerDTO): Promise<Customer> {
-    const customer = await this.ormRepository.create({
+    const customer = this.ormRepository.create({
       name,
       whatsapp,
       cpf,

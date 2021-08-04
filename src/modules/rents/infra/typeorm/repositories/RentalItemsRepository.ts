@@ -23,9 +23,7 @@ class RentalItemsRepository implements IRentalItemsRepository {
       };
     });
 
-    const newRentalItems = await this.ormRepository.create(
-      serializedRentalItems,
-    );
+    const newRentalItems = this.ormRepository.create(serializedRentalItems);
 
     await this.ormRepository.save(newRentalItems);
 
@@ -72,9 +70,7 @@ class RentalItemsRepository implements IRentalItemsRepository {
       };
     });
 
-    const newRentalItems = await this.ormRepository.create(
-      serializedRentalItems,
-    );
+    const newRentalItems = this.ormRepository.create(serializedRentalItems);
 
     await this.ormRepository.save(newRentalItems);
 

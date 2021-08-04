@@ -19,7 +19,7 @@ class UsersRepository implements IUsersRepository {
     whatsapp,
     role,
   }: ICreateUserDTO): Promise<User> {
-    const user = await this.ormRepository.create({
+    const user = this.ormRepository.create({
       name,
       email,
       password,

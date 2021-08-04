@@ -40,7 +40,7 @@ class ProductsRepository implements IProductsRepository {
     value,
     product_type,
   }: ICreateProductDTO): Promise<Product> {
-    const product = await this.ormRepository.create({
+    const product = this.ormRepository.create({
       name,
       quantity,
       value,
