@@ -9,7 +9,7 @@ import { app } from '../../../../../shared/infra/http/app';
 
 let connection: Connection;
 
-describe('Rents By Cusomer Controller', () => {
+describe('Rents By Customer Controller', () => {
   beforeAll(async () => {
     connection = await createConnection();
     await connection.runMigrations();
@@ -29,7 +29,7 @@ describe('Rents By Cusomer Controller', () => {
     await connection.close();
   });
 
-  it('Should be able to show a rent', async () => {
+  it('Should be able to list all rents from a specific customer', async () => {
     const authResponse = await request(app).post('/sessions').send({
       email: 'daniellucas-pms@hotmail.com',
       password: '123456',
