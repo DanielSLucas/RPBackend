@@ -30,7 +30,7 @@ class User {
   @Column()
   password: string;
 
-  @Column()
+  @Column({ type: 'enum', enum: UsersRoles })
   role: UsersRoles;
 
   @CreateDateColumn()
