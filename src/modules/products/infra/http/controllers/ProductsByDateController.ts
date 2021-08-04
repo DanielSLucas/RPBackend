@@ -5,13 +5,13 @@ import ListAvailableProductsInASpecificDateService from '../../../services/ListA
 
 export default class ProductsController {
   public async index(request: Request, response: Response): Promise<Response> {
-    const { date } = request.body;
+    const { date } = request.query;
 
     const listProduct = container.resolve(
       ListAvailableProductsInASpecificDateService,
     );
 
-    const parsedDate = parseISO(date);
+    const parsedDate = parseISO((date as string) || new Date().toISOString());
 
     const products = await listProduct.execute(parsedDate);
 
