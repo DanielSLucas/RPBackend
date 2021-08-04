@@ -13,7 +13,7 @@ const rentsByCustomerController = new RentsByCustomerController();
 const rentsRouter = Router();
 
 rentsRouter.get('/', rentsController.index);
-rentsRouter.get('/week/', rentsForTheWeekController.index);
+rentsRouter.get('/week', rentsForTheWeekController.index);
 rentsRouter.get('/products/:id', rentsByProductController.index);
 rentsRouter.get('/customers/:id', rentsByCustomerController.index);
 

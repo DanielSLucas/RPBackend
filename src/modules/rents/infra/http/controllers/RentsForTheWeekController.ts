@@ -5,9 +5,9 @@ import ListRentsForTheWeekService from '../../../services/ListRentsForTheWeekSer
 
 export default class RentsForTheWeekController {
   public async index(request: Request, response: Response): Promise<Response> {
-    const { date } = request.body;
+    const { date } = request.query;
 
-    const parsedDate = parseISO(date);
+    const parsedDate = parseISO((date as string) || new Date().toISOString());
 
     const listRentsForTheWeek = container.resolve(ListRentsForTheWeekService);
 
