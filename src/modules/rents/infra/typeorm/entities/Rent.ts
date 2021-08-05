@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import {
   Entity,
   Column,
@@ -12,6 +13,18 @@ import {
 import Address from '../../../../addresses/infra/typeorm/entities/Address';
 import Customer from '../../../../customers/infra/typeorm/entities/Customer';
 
+export enum PaymentWays {
+  CASH = 'CASH',
+  TRANSFER = 'TRANSFER',
+  PIX = 'PIX',
+}
+
+export enum PaymentStatus {
+  PAID = 'PAID',
+  PENDING = 'PENDING',
+  PARTIAL = 'PARTIAL',
+}
+
 @Entity('rents')
 class Rent {
   @PrimaryGeneratedColumn('uuid')
@@ -24,10 +37,10 @@ class Rent {
   total_value: number;
 
   @Column()
-  payment_way: 'Dinheiro' | 'Transferência';
+  payment_way: PaymentWays;
 
   @Column()
-  payment_status: 'Pago' | 'Pendente' | 'Parcial';
+  payment_status: PaymentStatus;
 
   @Column()
   customer_id: string;

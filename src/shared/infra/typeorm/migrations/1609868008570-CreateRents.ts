@@ -25,11 +25,13 @@ export default class CreateRents1609868008570 implements MigrationInterface {
           },
           {
             name: 'payment_way',
-            type: 'varchar',
+            type: 'enum',
+            enum: ['CASH', 'TRANSFER', 'PIX'],
           },
           {
             name: 'payment_status',
-            type: 'varchar',
+            type: 'enum',
+            enum: ['PAID', 'PENDING', 'PARTIAL'],
           },
           {
             name: 'customer_id',

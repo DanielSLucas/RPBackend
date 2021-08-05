@@ -95,8 +95,8 @@ describe('Rents By Customer Controller', () => {
             value: 50,
           },
         ],
-        payment_status: 'Pago',
-        payment_way: 'Dinheiro',
+        payment_status: 'PAID',
+        payment_way: 'CASH',
         total_value: 50,
       })
       .set({
@@ -118,8 +118,8 @@ describe('Rents By Customer Controller', () => {
             value: 50,
           },
         ],
-        payment_status: 'Pago',
-        payment_way: 'Dinheiro',
+        payment_status: 'PAID',
+        payment_way: 'CASH',
         total_value: 50,
       })
       .set({

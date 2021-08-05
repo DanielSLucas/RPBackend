@@ -1,7 +1,10 @@
 import { inject, injectable } from 'tsyringe';
 import AppError from '../../../shared/errors/AppError';
 
-import Rent from '../infra/typeorm/entities/Rent';
+import Rent, {
+  PaymentStatus,
+  PaymentWays,
+} from '../infra/typeorm/entities/Rent';
 
 import IRentsRepository from '../repositories/IRentsRepository';
 import IRentalItemsRepository from '../repositories/IRentalItemsRepository';
@@ -15,8 +18,8 @@ interface Request {
   customer_id: string;
   address_id: string;
   rent_date: Date;
-  payment_way: 'Dinheiro' | 'Transferência';
-  payment_status: 'Pago' | 'Pendente' | 'Parcial';
+  payment_way: PaymentWays;
+  payment_status: PaymentStatus;
   total_value: number;
   rental_items: RentItem[];
 }

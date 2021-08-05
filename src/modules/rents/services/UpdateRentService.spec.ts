@@ -15,6 +15,7 @@ import CreateProductService from '../../products/services/CreateProductService';
 import CreateRentService from './CreateRentService';
 import UpdateRentService from './UpdateRentService';
 import { DatefnsDateProvider } from '../providers/dateProvider/implementations/DatefnsDateProvider';
+import { PaymentStatus, PaymentWays } from '../infra/typeorm/entities/Rent';
 
 let fakeAddressCustomersRepository: FakeAddressCustomersRepository;
 let fakeAddressesRepository: FakeAddressesRepository;
@@ -101,8 +102,8 @@ describe('UpdateRent', () => {
           value: 60,
         },
       ],
-      payment_status: 'Pendente',
-      payment_way: 'Dinheiro',
+      payment_status: PaymentStatus.PAID,
+      payment_way: PaymentWays.CASH,
       total_value: 60,
     });
 
@@ -117,8 +118,8 @@ describe('UpdateRent', () => {
           value: 120,
         },
       ],
-      payment_status: 'Pago',
-      payment_way: 'Dinheiro',
+      payment_status: PaymentStatus.PAID,
+      payment_way: PaymentWays.CASH,
       total_value: 120,
     });
 
@@ -126,8 +127,8 @@ describe('UpdateRent', () => {
       id: rent.id,
       rent_date,
       total_value: 120,
-      payment_status: 'Pago',
-      payment_way: 'Dinheiro',
+      payment_status: 'PAID',
+      payment_way: 'CASH',
       customer_id: customer.id,
       address_id: address.id,
     });
@@ -171,8 +172,8 @@ describe('UpdateRent', () => {
             value: 120,
           },
         ],
-        payment_status: 'Pago',
-        payment_way: 'Dinheiro',
+        payment_status: PaymentStatus.PAID,
+        payment_way: PaymentWays.CASH,
         total_value: 120,
       }),
     ).rejects.toEqual(new AppError("Rent doesn't exist.", 400));
@@ -215,8 +216,8 @@ describe('UpdateRent', () => {
           value: 60,
         },
       ],
-      payment_status: 'Pendente',
-      payment_way: 'Dinheiro',
+      payment_status: PaymentStatus.PAID,
+      payment_way: PaymentWays.CASH,
       total_value: 60,
     });
 
@@ -234,8 +235,8 @@ describe('UpdateRent', () => {
             value: 120,
           },
         ],
-        payment_status: 'Pago',
-        payment_way: 'Dinheiro',
+        payment_status: PaymentStatus.PAID,
+        payment_way: PaymentWays.CASH,
         total_value: 120,
       }),
     ).rejects.toEqual(new AppError("You can't create a rent in a past date"));

@@ -14,6 +14,10 @@ import CreateRentService from '../../rents/services/CreateRentService';
 import CreateProductService from './CreateProductService';
 import ListAvailableProductsInASpecificDateService from './ListAvailableProductsInASpecificDateService';
 import { ProductTypes } from '../infra/typeorm/entities/Product';
+import {
+  PaymentStatus,
+  PaymentWays,
+} from '../../rents/infra/typeorm/entities/Rent';
 
 let fakeAddressCustomersRepository: FakeAddressCustomersRepository;
 let fakeAddressesRepository: FakeAddressesRepository;
@@ -108,8 +112,8 @@ describe('ListAvailableProductsByDate', () => {
           value: 60,
         },
       ],
-      payment_status: 'Pago',
-      payment_way: 'Dinheiro',
+      payment_status: PaymentStatus.PAID,
+      payment_way: PaymentWays.CASH,
       total_value: 60,
     });
 
@@ -124,8 +128,8 @@ describe('ListAvailableProductsByDate', () => {
           value: 60,
         },
       ],
-      payment_status: 'Pago',
-      payment_way: 'Dinheiro',
+      payment_status: PaymentStatus.PAID,
+      payment_way: PaymentWays.CASH,
       total_value: 60,
     });
 

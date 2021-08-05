@@ -285,22 +285,22 @@ Dentre as funções:
           "quantity": 1,
           "value": 50
         }],
-        "payment_status": "Pendente",
-        "payment_way": "Dinheiro",
+        "payment_status": "PENDING",
+        "payment_way": "CASH",
         "total_value": 50
       }
 
-    *payment_way: **'Dinheiro'** | **'Transferência'**;
+    *payment_way: **'CASH'** | **'TRANSFER'** | **'PIX'**;
 
-    *payment_status: **'Pago'** | **'Pendente'** | **'Parcial'**;
+    *payment_status: **'PAID'** | **'PENDING'** | **'PARTIAL'**;
 
   > Retorna:
 
       {
         "rent_date": "2021-02-14T00:26:57.197Z",
         "total_value": 50,
-        "payment_way": "Dinheiro",
-        "payment_status": "Pago",
+        "payment_way": "CASH",
+        "payment_status": "PAID",
         "customer_id": "3db95a0a-28f7-477b-823f-8357f7600854",
         "address_id": "3af636fe-0410-4a7d-95a0-2d189318317d",
         "id": "432156ce-544b-44a7-b286-53da34f47698",
@@ -326,8 +326,8 @@ Dentre as funções:
           "quantity": 1,
           "value": 50
         }],
-        "payment_status": "Pago",
-        "payment_way": "Dinheiro",
+        "payment_status": "PAID",
+        "payment_way": "CASH",
         "total_value": 60
       }
 

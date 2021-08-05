@@ -54,6 +54,7 @@ class RentsRepository implements IRentsRepository {
   ): Promise<Rent[]> {
     const rents = await this.ormRepository.find({
       where: { rent_date: Between(startDate, finishDate) },
+      order: { rent_date: 'ASC' },
       relations: ['customer'],
     });
 

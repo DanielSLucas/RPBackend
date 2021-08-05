@@ -16,6 +16,7 @@ import CreateProductService from '../../products/services/CreateProductService';
 import CreateRentService from './CreateRentService';
 import ListRentsByProductService from './ListRentsByProductService';
 import { DatefnsDateProvider } from '../providers/dateProvider/implementations/DatefnsDateProvider';
+import { PaymentStatus, PaymentWays } from '../infra/typeorm/entities/Rent';
 
 let fakeAddressCustomersRepository: FakeAddressCustomersRepository;
 let fakeAddressesRepository: FakeAddressesRepository;
@@ -109,8 +110,8 @@ describe('ListRentsByProduct', () => {
           value: 60,
         },
       ],
-      payment_status: 'Pago',
-      payment_way: 'Dinheiro',
+      payment_status: PaymentStatus.PAID,
+      payment_way: PaymentWays.CASH,
       total_value: 60,
     });
 
@@ -125,8 +126,8 @@ describe('ListRentsByProduct', () => {
           value: 60,
         },
       ],
-      payment_status: 'Pago',
-      payment_way: 'Dinheiro',
+      payment_status: PaymentStatus.PAID,
+      payment_way: PaymentWays.CASH,
       total_value: 60,
     });
 
@@ -141,8 +142,8 @@ describe('ListRentsByProduct', () => {
           value: 60,
         },
       ],
-      payment_status: 'Pago',
-      payment_way: 'Dinheiro',
+      payment_status: PaymentStatus.PAID,
+      payment_way: PaymentWays.CASH,
       total_value: 60,
     });
 
