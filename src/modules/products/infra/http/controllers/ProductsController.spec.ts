@@ -42,7 +42,7 @@ describe('Products Controller', () => {
         name: 'Bolo normal',
         quantity: '1',
         value: 50,
-        product_type: 'Bolos',
+        product_type: 'CAKES',
       })
       .set({
         Authorization: `Bearer ${token}`,
@@ -70,7 +70,7 @@ describe('Products Controller', () => {
         name: 'Bolo normal',
         quantity: '1',
         value: 50,
-        product_type: 'Bolos',
+        product_type: 'CAKES',
       })
       .set({
         Authorization: `Bearer ${token}`,
@@ -106,7 +106,7 @@ describe('Products Controller', () => {
         name: 'Bolo normal',
         quantity: 1,
         value: 50,
-        product_type: 'Bolos',
+        product_type: 'CAKES',
       })
       .set({
         Authorization: `Bearer ${token}`,
@@ -149,7 +149,7 @@ describe('Products Controller', () => {
         name: 'Bolo normal',
         quantity: '1',
         value: 50,
-        product_type: 'Bolos',
+        product_type: 'CAKES',
       })
       .set({
         Authorization: `Bearer ${token}`,
@@ -163,7 +163,7 @@ describe('Products Controller', () => {
         name: 'Bolo normal',
         quantity: '1',
         value: 100,
-        product_type: 'Bolos',
+        product_type: 'CAKES',
       })
       .set({
         Authorization: `Bearer ${token}`,
@@ -192,7 +192,7 @@ describe('Products Controller', () => {
         name: 'Bolo normal',
         quantity: '1',
         value: 50,
-        product_type: 'Bolos',
+        product_type: 'CAKES',
       })
       .set({
         Authorization: `Bearer ${token}`,

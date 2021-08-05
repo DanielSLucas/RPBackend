@@ -1,4 +1,5 @@
 import { add } from 'date-fns';
+import { ProductTypes } from '../../products/infra/typeorm/entities/Product';
 import { AddressTypes } from '../../addresses/infra/typeorm/entities/Address';
 import AppError from '../../../shared/errors/AppError';
 import FakeRentsRepository from '../repositories/fakes/FakeRentsRepository';
@@ -84,7 +85,7 @@ describe('UpdateRent', () => {
       name: 'Bolo normal',
       quantity: 2,
       value: 60,
-      product_type: 'Bolos',
+      product_type: ProductTypes.CAKES,
     });
 
     const rent_date = add(new Date(), { days: 1 });
@@ -153,7 +154,7 @@ describe('UpdateRent', () => {
       name: 'Bolo normal',
       quantity: 1,
       value: 60,
-      product_type: 'Bolos',
+      product_type: ProductTypes.CAKES,
     });
 
     const rent_date = add(new Date(), { days: 1 });
@@ -198,7 +199,7 @@ describe('UpdateRent', () => {
       name: 'Bolo normal',
       quantity: 1,
       value: 60,
-      product_type: 'Bolos',
+      product_type: ProductTypes.CAKES,
     });
 
     const rent_date = add(new Date(), { days: 1 });

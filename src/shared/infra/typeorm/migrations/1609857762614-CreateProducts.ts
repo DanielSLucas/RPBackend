@@ -29,7 +29,8 @@ export default class CreateProducts1609857762614 implements MigrationInterface {
           },
           {
             name: 'product_type',
-            type: 'varchar',
+            type: 'enum',
+            enum: ['CAKES', 'ARRANGEMENTS', 'OTHERS'],
           },
           {
             name: 'created_at',

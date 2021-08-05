@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import {
   Entity,
   Column,
@@ -5,6 +6,12 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm';
+
+export enum ProductTypes {
+  CAKES = 'CAKES',
+  OTHERS = 'OTHERS',
+  ARRANGEMENTS = 'ARRANGEMENTS',
+}
 
 @Entity('products')
 class Product {
@@ -20,8 +27,8 @@ class Product {
   @Column()
   value: number;
 
-  @Column()
-  product_type: 'Bolos' | 'Arranjos' | 'Outros';
+  @Column({ type: 'enum', enum: ProductTypes })
+  product_type: ProductTypes;
 
   @CreateDateColumn()
   created_at: Date;

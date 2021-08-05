@@ -1,5 +1,6 @@
 import { add } from 'date-fns';
 
+import { ProductTypes } from '../../products/infra/typeorm/entities/Product';
 import { AddressTypes } from '../../addresses/infra/typeorm/entities/Address';
 import AppError from '../../../shared/errors/AppError';
 import FakeRentsRepository from '../repositories/fakes/FakeRentsRepository';
@@ -85,14 +86,14 @@ describe('ListRentsByProduct', () => {
       name: 'Bolo normal',
       quantity: 2,
       value: 60,
-      product_type: 'Bolos',
+      product_type: ProductTypes.CAKES,
     });
 
     const product2 = await createProduct.execute({
       name: 'Bolo anormal',
       quantity: 1,
       value: 6000,
-      product_type: 'Bolos',
+      product_type: ProductTypes.CAKES,
     });
 
     const rent_date = add(new Date(), { days: 1 });

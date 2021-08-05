@@ -42,7 +42,7 @@ describe('Product by date Controller', () => {
         name: 'Bolo normal',
         quantity: 1,
         value: 50,
-        product_type: 'Bolos',
+        product_type: 'CAKES',
       })
       .set({
         Authorization: `Bearer ${token}`,
@@ -63,6 +63,6 @@ describe('Product by date Controller', () => {
     expect(response.body[0].name).toEqual('Bolo normal');
     expect(response.body[0].quantity).toEqual(1);
     expect(response.body[0].value).toEqual(50);
-    expect(response.body[0].product_type).toEqual('Bolos');
+    expect(response.body[0].product_type).toEqual('CAKES');
   });
 });

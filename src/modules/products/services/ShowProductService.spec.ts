@@ -1,4 +1,5 @@
 import AppError from '../../../shared/errors/AppError';
+import { ProductTypes } from '../infra/typeorm/entities/Product';
 import FakeProductsRepository from '../repositories/fakes/FakeProductRepository';
 import CreateProductService from './CreateProductService';
 import ShowProductService from './ShowProductService';
@@ -20,7 +21,7 @@ describe('ShowProduct', () => {
       name: 'Bolo normal',
       quantity: 1,
       value: 60,
-      product_type: 'Bolos',
+      product_type: ProductTypes.CAKES,
     });
 
     const product = await showProduct.execute(product1.id);

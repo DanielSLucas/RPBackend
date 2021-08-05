@@ -3,6 +3,7 @@ import DeleteProductService from './DeleteProductService';
 import CreateProductService from './CreateProductService';
 import ListProductsService from './ListProductsService';
 import AppError from '../../../shared/errors/AppError';
+import { ProductTypes } from '../infra/typeorm/entities/Product';
 
 let fakeProductRepository: FakeProductsRepository;
 
@@ -23,14 +24,14 @@ describe('DeleteProduct', () => {
       name: 'Bolo normal',
       quantity: 1,
       value: 60,
-      product_type: 'Bolos',
+      product_type: ProductTypes.CAKES,
     });
 
     const product2 = await createProduct.execute({
       name: 'Bolo anormal',
       quantity: -1,
       value: 666,
-      product_type: 'Bolos',
+      product_type: ProductTypes.CAKES,
     });
 
     await deleteProduct.execute(product1.id);

@@ -1,12 +1,12 @@
 import { inject, injectable } from 'tsyringe';
-import Product from '../infra/typeorm/entities/Product';
+import Product, { ProductTypes } from '../infra/typeorm/entities/Product';
 import IProductsRepository from '../repositories/IProductsRepository';
 
 interface Request {
   name: string;
   quantity: number;
   value: number;
-  product_type: 'Bolos' | 'Arranjos' | 'Outros';
+  product_type: ProductTypes;
 }
 
 @injectable()

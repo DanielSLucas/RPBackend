@@ -1,5 +1,6 @@
 import { add } from 'date-fns';
 import { AddressTypes } from '../../addresses/infra/typeorm/entities/Address';
+import { ProductTypes } from '../../products/infra/typeorm/entities/Product';
 import AppError from '../../../shared/errors/AppError';
 import FakeRentsRepository from '../repositories/fakes/FakeRentsRepository';
 import FakeRentalItemsRepository from '../repositories/fakes/FakeRentalItemsRepository';
@@ -89,7 +90,7 @@ describe('ListRentsByCustomer', () => {
       name: 'Bolo normal',
       quantity: 2,
       value: 60,
-      product_type: 'Bolos',
+      product_type: ProductTypes.CAKES,
     });
 
     const rent_date = add(new Date(), { days: 1 });

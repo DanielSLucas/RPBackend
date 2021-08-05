@@ -13,6 +13,7 @@ import CreateAddressService from '../../addresses/services/CreateAddressService'
 import CreateRentService from '../../rents/services/CreateRentService';
 import CreateProductService from './CreateProductService';
 import ListAvailableProductsInASpecificDateService from './ListAvailableProductsInASpecificDateService';
+import { ProductTypes } from '../infra/typeorm/entities/Product';
 
 let fakeAddressCustomersRepository: FakeAddressCustomersRepository;
 let fakeAddressesRepository: FakeAddressesRepository;
@@ -84,14 +85,14 @@ describe('ListAvailableProductsByDate', () => {
       name: 'Bolo normal',
       quantity: 1,
       value: 60,
-      product_type: 'Bolos',
+      product_type: ProductTypes.CAKES,
     });
 
     const product2 = await createProduct.execute({
       name: 'Arranjo vermelho GG',
       quantity: 4,
       value: 60,
-      product_type: 'Bolos',
+      product_type: ProductTypes.ARRANGEMENTS,
     });
 
     const rent_date = add(new Date(), { days: 1 });
@@ -145,14 +146,14 @@ describe('ListAvailableProductsByDate', () => {
       name: 'Bolo normal',
       quantity: 1,
       value: 60,
-      product_type: 'Bolos',
+      product_type: ProductTypes.CAKES,
     });
 
     const product2 = await createProduct.execute({
       name: 'Arranjo vermelho GG',
       quantity: 4,
       value: 60,
-      product_type: 'Bolos',
+      product_type: ProductTypes.ARRANGEMENTS,
     });
 
     const rent_date = add(new Date(), { days: 1 });

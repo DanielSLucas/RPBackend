@@ -1,3 +1,4 @@
+import { ProductTypes } from '../infra/typeorm/entities/Product';
 import FakeProductsRepository from '../repositories/fakes/FakeProductRepository';
 import CreateProductService from './CreateProductService';
 
@@ -10,7 +11,7 @@ describe('CreateProduct', () => {
       name: 'Bolo normal',
       quantity: 1,
       value: 60,
-      product_type: 'Bolos',
+      product_type: ProductTypes.CAKES,
     });
 
     expect(product).toHaveProperty('id');
@@ -19,7 +20,7 @@ describe('CreateProduct', () => {
       name: 'Bolo normal',
       quantity: 1,
       value: 60,
-      product_type: 'Bolos',
+      product_type: 'CAKES',
     });
   });
 });

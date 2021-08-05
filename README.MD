@@ -104,7 +104,7 @@ Dentre as funções:
         "name": "Bolo Caro",
         "quantity": 20,
         "value": 2000,
-        "product_type": "Bolos"
+        "product_type": "CAKES"
       }
 
   > Retorna:
@@ -113,7 +113,7 @@ Dentre as funções:
         "name": "Bolo Caro",
         "quantity": 20,
         "value": 2000,
-        "product_type": "Bolos",
+        "product_type": "CAKES",
         "id": "fec6998e-316d-4f86-9ef6-b1dc114f870c",
         "created_at": "2021-01-07T22:02:43.921Z",
         "updated_at": "2021-01-07T22:02:43.921Z"
@@ -132,7 +132,7 @@ Dentre as funções:
         "name": "Bolo Caro",
         "quantity": 20,
         "value": 2000,
-        "product_type": "Bolos"
+        "product_type": "CAKES"
       }
 
 - **`DELETE`**: Deleta um produto específico com base no ID recebido pela rota.

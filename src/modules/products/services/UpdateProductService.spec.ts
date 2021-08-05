@@ -1,4 +1,5 @@
 import AppError from '../../../shared/errors/AppError';
+import { ProductTypes } from '../infra/typeorm/entities/Product';
 import FakeProductsRepository from '../repositories/fakes/FakeProductRepository';
 import CreateProductService from './CreateProductService';
 import UpdateProductService from './UpdateProductService';
@@ -20,7 +21,7 @@ describe('UpdateProduct', () => {
       name: 'Bolo normal',
       quantity: 1,
       value: 60,
-      product_type: 'Bolos',
+      product_type: ProductTypes.CAKES,
     });
 
     const product = await updateProduct.execute({
@@ -28,7 +29,7 @@ describe('UpdateProduct', () => {
       name: 'Bolo não tão normal',
       quantity: 2,
       value: 150,
-      product_type: 'Bolos',
+      product_type: ProductTypes.CAKES,
     });
 
     expect(product).toEqual({
@@ -36,7 +37,7 @@ describe('UpdateProduct', () => {
       name: 'Bolo não tão normal',
       quantity: 2,
       value: 150,
-      product_type: 'Bolos',
+      product_type: ProductTypes.CAKES,
     });
   });
 
@@ -47,7 +48,7 @@ describe('UpdateProduct', () => {
         name: 'Bolo não tão normal',
         quantity: 2,
         value: 150,
-        product_type: 'Bolos',
+        product_type: ProductTypes.CAKES,
       }),
     ).rejects.toEqual(new AppError('Product not found', 404));
   });

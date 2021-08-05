@@ -74,7 +74,7 @@ describe('Rents By Product Controller', () => {
         name: 'Bolo normal',
         quantity: 4,
         value: 50,
-        product_type: 'Bolos',
+        product_type: 'CAKES',
       })
       .set({
         Authorization: `Bearer ${authToken}`,
