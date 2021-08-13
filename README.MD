@@ -83,15 +83,45 @@ Dentre as funções:
 
 - A resposta retornada é o token JWT e informações do usuário.
 
+- Adicionar o token retornado aos headers das outras requisições dessa maneira:
+```js
+  // headers
+  "Authorization": `Bearer ${tokenJWT}`
+```
 
 ## Rotas
 
+- [Login](#sessão)
 - [Usuários](#usuários)
 - [Produtos](#produtos)
 - [Clientes](#clientes)
 - [Endereços](#endereços)
 - [Aluguéis](#aluguéis)
 
+### Login
+**`/sessions`**
+
+- **`POST`**: Cria uma sessão.
+  > Recebe como corpo da resquisição:
+    ```json
+      {
+        "email": "daniellucas-pms@hotmail.com",
+        "password": "123456"
+      }
+    ```
+  > Retorna:
+    ```json
+      {
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiQURNIiwiaWF0IjoxNjI4ODc2NDMwLCJleHAiOjE2Mjg5NjI4MzAsInN1YiI6IjY4YWM3Yzg4LTNlYzUtNDNiMi1hNWU0LTI5Nzc3MTk3YmU2ZSJ9.DeJc7ZXLP7r263NB1ghzSRVyZows01WE-ggwBOIbCcE",
+        "user": {
+          "id": "68ac7c88-3ec5-43b2-a5e4-29777197be6e",
+          "name": "Daniel Lucas",
+          "email": "daniellucas-pms@hotmail.com",
+          "whatsapp": "12981025796",
+          "role": "ADM"
+        }
+      }
+    ```
 
 ### Usuários
   **`/users`**
