@@ -4,25 +4,33 @@ import redis from 'redis';
 
 import AppError from '../../../errors/AppError';
 
-const redisClient = redis.createClient({
-  host: process.env.REDIS_HOST,
-  port: Number(process.env.REDIS_PORT),
-});
+const limiter = () => {
+  const redisClient = redis.createClient({
+    host: process.env.REDIS_HOST,
+    port: Number(process.env.REDIS_PORT),
+  });
 
-const limiter = new RateLimiterRedis({
-  storeClient: redisClient,
-  keyPrefix: 'rateLimiter',
-  points: 10, // 10 requests
-  duration: 5, // per 5 second by IP
-});
+  const limiterInstance = new RateLimiterRedis({
+    storeClient: redisClient,
+    keyPrefix: 'rateLimiter',
+    points: 10, // 10 requests
+    duration: 5, // per 5 second by IP
+  });
+
+  return limiterInstance;
+};
 
 export default async function rateLimiter(
   request: Request,
   response: Response,
   next: NextFunction,
 ): Promise<void> {
+  if (process.env.NODE_ENV === 'test') {
+    return next();
+  }
+
   try {
-    await limiter.consume(request.ip);
+    await limiter().consume(request.ip);
 
     return next();
   } catch (err) {
