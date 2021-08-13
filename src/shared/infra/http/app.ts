@@ -6,10 +6,12 @@ import createConnection from '../typeorm';
 import '../../container';
 import routes from './routes';
 import AppError from '../../errors/AppError';
+import rateLimiter from './middlewares/rateLimiter';
 
 const app = express();
 createConnection();
 
+app.use(rateLimiter);
 app.use(express.json());
 app.use(routes);
 
