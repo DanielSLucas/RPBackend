@@ -21,7 +21,53 @@ Dentre as funções:
     além da quantidade, é possivel definir o preço do produto na hora de adiciona-lo ao pedido.
   - O valor final, o status de pagamento e o método de pagamento também devem ser definidos na criação de um aluguel.
 
+## Running project locally
 
+**To run this project you should have nodejs and docker & docker-compose installed.**
+
+```bash
+  # Clone this project
+  git clone https://github.com/DanielSLucas/RPBackend.git
+
+  # Change to the project directory
+  cd RPBackend
+
+  # Install dependencies
+  npm i
+  # OR
+  yarn
+
+  # Run docker containers
+  docker-compose up -d
+
+  # Run dev script
+  npm run dev:server
+  # OR
+  yarn dev:server
+
+```
+
+## Scripts
+
+```bash
+    # Creates the production version of the API, with all files converted from .ts to .js
+    yarn build
+
+    # To run the application localy
+    yarn dev:server
+
+    # To use typeorm CLI
+    yarn typeorm
+
+    # To create an ADM user in the database
+    yarn seed:admin
+
+    # To create the pickup address in the database
+    yarn seed:address
+
+    # To run all unit/integration tests and create coverage folder (databases should be runnin for this)
+    yarn test
+```
 
 ## Autenticação
 
