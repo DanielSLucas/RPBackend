@@ -31,7 +31,7 @@ export default class AdressesController {
       neighborhood,
       street,
       number,
-      address_type: String(address_type).toUpperCase() as AddressTypes,
+      address_type,
     });
 
     return response.status(201).json(address);
@@ -79,7 +79,7 @@ export default class AdressesController {
       neighborhood,
       street,
       number,
-      address_type: String(address_type).toUpperCase() as AddressTypes,
+      address_type,
     });
 
     return response.json(address);
