@@ -131,24 +131,26 @@ Dentre as funções:
 - **`POST`**: Cria um usuário.
   > Recebe como corpo da resquisição:
 
-      {
-        "name": "John Doe",
-        "email": "johndoe@emai.com",
-        "password": "johnpass",
-        "whatsapp": "12345678901"
-        "role": "user"
-      }
+  ```json
+    {
+      "name": "John Doe",
+      "email": "johndoe@email.com",
+      "password": "johnpass",
+      "whatsapp": "12912345678",
+      "role": "USER"
+    }
+  ```
 
   > Retorna:
-
-      {
-        "name": "Lucas",
-        "email": "lucas-pms@hotmail.com",
-        "whatsapp": "12981025796",
-        "id": "54061932-dbd1-4488-9b2e-ba10469464a4",
-        "created_at": "2021-02-01T22:41:43.691Z",
-        "updated_at": "2021-02-01T22:41:43.691Z"
-      }
+  ```json
+    {
+      "id": "8db96658-1b72-4af2-a733-537d1e9b4f7e",
+      "name": "John Doe",
+      "email": "johndoe@email.com",
+      "whatsapp": "12912345678",
+      "role": "USER"
+    }
+  ```
 
 - **`GET`**: Lista todos os usuários.
 
@@ -158,7 +160,7 @@ Dentre as funções:
 
 - **`PUT`**: Atualiza as informações de um usuário específico.
   > Recebe como corpo da resquisição:
-
+    ```json
       {
         "name": "John Doe",
         "email": "johndoe@emai.com",
@@ -166,6 +168,7 @@ Dentre as funções:
         "whatsapp": "12345678901"
         "role": "user"
       }
+    ```
 
 - **`DELETE`**: Deleta um usuário específico com base no ID recebido pela rota.
 
@@ -175,16 +178,17 @@ Dentre as funções:
 
 - **`POST`**: Cria um produto.
   > Recebe como corpo da resquisição:
-
+    ```json
       {
         "name": "Bolo Caro",
         "quantity": 20,
         "value": 2000,
         "product_type": "CAKES"
       }
+    ```
 
   > Retorna:
-
+    ```json
       {
         "name": "Bolo Caro",
         "quantity": 20,
@@ -194,6 +198,7 @@ Dentre as funções:
         "created_at": "2021-01-07T22:02:43.921Z",
         "updated_at": "2021-01-07T22:02:43.921Z"
       }
+    ```
 
 - **`GET`**: Lista todos os produtos em ordem alfabética.
 
@@ -203,39 +208,38 @@ Dentre as funções:
 
 - **`PUT`**: Atualiza as informações de um produto específico.
   > Recebe como corpo da resquisição:
-
+    ```json
       {
         "name": "Bolo Caro",
         "quantity": 20,
         "value": 2000,
         "product_type": "CAKES"
       }
-
+    ```
 - **`DELETE`**: Deleta um produto específico com base no ID recebido pela rota.
 
 **`/products/available`**
 
 - **`GET`**: Retorna as informações dos produtos disponíveis em uma data específica.
-> Recebe como corpo da resquisição a data desejada:
-
-      {
-        "date": "2021-02-13T03:00:00.000Z",
-      }
+  > Recebe como query param:
+  ```
+    date=2021-08-05T03:00:00.000Z
+  ```
 
 ### Clientes
   **`/customers`**
 
 - **`POST`**: Cria um cliente.
   > Recebe como corpo da resquisição:
-
+    ```json
       {
         "name": "John Doe",
         "whatsapp": "12345678901",
         "cpf": "01234567890"
       }
-
+    ```
   > Retorna:
-
+    ```json
       {
         "name": "John Doe",
         "whatsapp": "12345678901",
@@ -244,7 +248,7 @@ Dentre as funções:
         "created_at": "2021-02-01T21:28:48.096Z",
         "updated_at": "2021-02-01T21:28:48.096Z"
       }
-
+    ```
 - **`GET`**: Lista todos os clientes em ordem alfabética.
 
 **`/customers/:id`**
@@ -253,13 +257,13 @@ Dentre as funções:
 
 - **`PUT`**: Atualiza as informações de um cliente específico.
   > Recebe como corpo da resquisição:
-
+    ```json
       {
         "name": "John Doe",
         "whatsapp": "12345678901",
         "cpf": "01234567890"
       }
-
+    ```
 - **`DELETE`**: Deleta um cliente específico com base no ID recebido pela rota.
 
 ### Endereços
@@ -267,7 +271,7 @@ Dentre as funções:
 
 - **`POST`**: Cria um endereço.
   > Recebe como corpo da resquisição:
-
+    ```json
       {
         "customer_id": "4bae1ed5-e4f8-4a7a-b1e4-bd93050ef50e",
         "description": "John's house",
@@ -278,14 +282,14 @@ Dentre as funções:
         "number": "1234",
         "address_type": "PERSONAL"
       }
-
+    ```
     *a propriedade `customer_id` é opcional, um endereço não precisa estar relacionado a um usuário.
 
     *address_type: **'PERSONAL'** | **'PARTYROOM'** | **'DELIVERY'** | **'PICKUP'** ("PICKUP" só deve ser utlizado para o endereço da empresa/casa onde os clientes buscarão as mercadorias)
 
 
   > Retorna:
-
+    ```json
       {
         "description": "John's house",
         "postal_code": "12345-678",
@@ -293,31 +297,53 @@ Dentre as funções:
         "neighborhood": "friendly neighborhood",
         "street": "friendly street",
         "number": "1234",
-        "address_type": "PERSONAL"
+        "address_type": "PERSONAL",
         "id": "52fbac28-582d-411d-b420-82a6c0d8bc49",
         "created_at": "2021-02-01T19:41:50.165Z",
         "updated_at": "2021-02-01T19:41:50.165Z"
       }
-
+    ```
 - **`GET`**: Lista todos os endereços.
-  > Essa rota pode receber no copo da requisição o tipo de endereço (`address_type`), para que sejam listados apenas endereços de um tipo específico.
+  > Essa rota pode receber como query param o tipo de endereço (`address_type`), para que sejam listados apenas endereços de um tipo específico.
 
-      {
-        "address_type": "PERSONAL"
-      }
+  > Recebe como query param:
+   ```
+    type=PERSONAL or PARTYROOM or DELIVERY or PICKUP
+  ```
 
 **`/addresses/:id`**
 
 - **`GET`**: Retorna as informações de um endereço específico com base no ID recebido pela rota.
 
 - **`PUT`**: Atualiza as informações de um endereço específico.
-  > Recebe como corpo da resquisição:
-
+  > Request:
+    ```json
       {
-        "name": "John Doe",
-        "whatsapp": "12345678901",
-        "cpf": "01234567890"
+        "customer_id": "4bae1ed5-e4f8-4a7a-b1e4-bd93050ef50e",
+        "description": "John's house",
+        "postal_code": "12345-678",
+        "city": "Springfield",
+        "neighborhood": "friendly neighborhood",
+        "street": "friendly street",
+        "number": "1234",
+        "address_type": "PERSONAL"
       }
+    ```
+   > Response:
+    ```json
+      {
+        "description": "John's house",
+        "postal_code": "12345-678",
+        "city": "Springfield",
+        "neighborhood": "friendly neighborhood",
+        "street": "friendly street",
+        "number": "1234",
+        "address_type": "PERSONAL",
+        "id": "52fbac28-582d-411d-b420-82a6c0d8bc49",
+        "created_at": "2021-02-01T19:41:50.165Z",
+        "updated_at": "2021-02-01T19:41:50.165Z"
+      }
+    ```
 
 - **`DELETE`**: Deleta um endereço específico com base no ID recebido pela rota.
 
@@ -325,7 +351,7 @@ Dentre as funções:
 
 - **`GET`**: Retorna as informações do endereço de um cliente específico com base no ID recebido pela rota.
   > Com base no id do usuário a seguinte resposta é retornada:
-
+    ```json
       {
         "id": "cc677afc-806f-45c0-ac3f-3b5b7e4dfff6",
         "address_id": "52fbac28-582d-411d-b420-82a6c0d8bc49",
@@ -340,18 +366,18 @@ Dentre as funções:
           "neighborhood": "friendly neighborhood",
           "street": "friendly street",
           "number": "1234",
-          "address_type": "PERSONAL"
+          "address_type": "PERSONAL",
           "created_at": "2021-02-01T19:41:50.165Z",
           "updated_at": "2021-02-01T19:41:50.165Z"
         }
       }
-
+    ```
 ### Aluguéis
   **`/rents`**
 
 - **`POST`**: Cria um aluguel.
   > Recebe como corpo da resquisição:
-
+    ```json
       {
         "customer_id": "3db95a0a-28f7-477b-823f-8357f7600854",
         "address_id": "3af636fe-0410-4a7d-95a0-2d189318317d",
@@ -365,13 +391,13 @@ Dentre as funções:
         "payment_way": "CASH",
         "total_value": 50
       }
-
+    ```
     *payment_way: **'CASH'** | **'TRANSFER'** | **'PIX'**;
 
     *payment_status: **'PAID'** | **'PENDING'** | **'PARTIAL'**;
 
   > Retorna:
-
+    ```json
       {
         "rent_date": "2021-02-14T00:26:57.197Z",
         "total_value": 50,
@@ -383,7 +409,7 @@ Dentre as funções:
         "created_at": "2021-02-08T19:13:54.533Z",
         "updated_at": "2021-02-08T19:13:54.533Z"
       }
-
+    ```
 - **`GET`**: Lista todos os aluguéis e as informações do cliente solicitante.
 
 **`/rents/:id`**
@@ -392,7 +418,7 @@ Dentre as funções:
 
 - **`PUT`**: Atualiza as informações de um aluguel específico.
   > Recebe como corpo da resquisição:
-
+    ```json
       {
         "customer_id": "3db95a0a-28f7-477b-823f-8357f7600855",
         "address_id": "3af636fe-0410-4a7d-95a0-2d189318318d",
@@ -406,17 +432,16 @@ Dentre as funções:
         "payment_way": "CASH",
         "total_value": 60
       }
-
+    ```
 - **`DELETE`**: Deleta um aluguel específico com base no ID recebido pela rota.
 
 **`/rents/week`**
 
 - **`GET`**: Lista todos os aluguéis (e as informações do cliente solicitante) num período de 7 dias a partir da data especificada.
-  > Recebe como corpo da resquisição a data desejada:
-
-      {
-        "date": "2021-02-13T03:00:00.000Z",
-      }
+  > Recebe como query param:
+  ```
+    date=2021-09-10T16:56:25.422Z
+  ```
 
 **`/rents/products/:id`**
 
